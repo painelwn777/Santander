@@ -1,6 +1,7 @@
 {
-  "name": "PIX DEMO",
-  "short_name": "PIX DEMO",
+  "name": "Santander",
+  "short_name": "Santander",
+  "description": "App Santander Mobile",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -15,7 +16,8 @@
     {
       "src": "icons/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }

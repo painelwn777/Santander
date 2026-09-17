@@ -9,6 +9,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#ec0000">
+<meta name="description" content="App Santander Mobile">
+    
+    <!-- Configurações PWA -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Santander">
+    
+    <title>Santander</title>
+    
+    <!-- Suas bibliotecas (QR Code e html2pdf) continuam aqui embaixo -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <title>Santander</title>
 <!-- QR Code Library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -1669,95 +1685,44 @@ Abra o app do seu banco e escaneie o QR Code
 </div>
 <!-- CONTAINER OCULTO PARA GERAR O PDF -->
 <div id="pdfTemplateContainer" style="display:none;">
-<div style="background: #ffffff; padding: 20px; font-family: Arial, sans-serif; color: #111; max-width: 400px; margin: 0 auto; font-size: 13px; line-height: 1.4;">
-<!-- Logo Santander -->
-<div style="text-align: center; margin-bottom: 15px;">
-<img src="comprovante.png" alt="Santander" style="display: inline-block; width: 100px; height: auto;">
+<div style="background: #ffffff; padding: 25px; font-family: Arial, sans-serif; color: #111; max-width: 400px; margin: 0 auto; font-size: 13px;">
+<div style="text-align: center; margin-bottom: 10px; border: 0; outline: 0; box-shadow: none;">
+<img src="comprovante.png" alt="Santander" style="display: inline-block; width: 120px; height: auto; object-fit: contain;">
 </div>
-<!-- Título -->
-<div style="text-align: center; margin-bottom: 5px; font-size: 18px; font-weight: bold; color: #111;">Comprovante do Pix</div>
-<div style="text-align: center; margin-bottom: 20px; font-size: 11px; color: #666;" id="pdfDataHoraTop">11/09/2026 - 16:41:00</div>
-
-<!-- Valor -->
-<div style="margin-bottom: 15px;">
-<div style="font-size: 11px; color: #666; margin-bottom: 3px;">Valor pago</div>
-<div style="font-size: 16px; font-weight: bold; color: #111;" id="pdfValorPago">R$ 80,00</div>
-</div>
-
-<!-- Forma de pagamento -->
-<div style="margin-bottom: 15px;">
-<div style="font-size: 11px; color: #666; margin-bottom: 3px;">Forma de pagamento</div>
-<div style="font-size: 13px; color: #111;">Ag 3602 Cc 1076279-1</div>
-</div>
-
-<!-- Dados do recebedor -->
-<div style="border-top: 1px solid #e0e0e0; padding-top: 10px; margin-bottom: 15px;">
-<div style="font-size: 11px; color: #666; margin-bottom: 8px;">Dados do recebedor</div>
-<div style="margin-bottom: 8px;">
+<div style="font-size: 29px; font-weight: bold; color: #111; text-align: center; margin-bottom: 12px;" id="pdfDataHoraTop">Comprovante do Pix</div>
+<div style="font-size: 11px; color: #555; text-align: center; margin-bottom: 18px;" id="pdfDataHoraSub">11/09/2026 - 17:48:18</div>
+<div style="font-size: 11px; color: #666; margin-bottom: 3px; text-transform: uppercase;">Valor pago</div>
+<div style="font-size: 20px; font-weight: bold; color: #111; margin-bottom: 15px;" id="pdfValorPago">R$ 90,00</div>
+<div style="font-size: 11px; color: #666; margin-bottom: 3px; text-transform: uppercase;">Forma de pagamento</div>
+<div style="font-size: 13px; color: #111; margin-bottom: 15px;">Ag 3602 Cc 1076279-1</div>
+<div style="font-size: 11px; font-weight: bold; color: #333; margin-bottom: 8px; border-bottom: 1px solid #ddd; padding-bottom: 4px;">Dados do recebedor</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Para</div>
-<div style="font-size: 13px; color: #111; font-weight: 500;" id="pdfRecebedorNome">Gabrielly Cristiny Camargo Bastos</div>
-</div>
-<div style="margin-bottom: 8px;">
+<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 8px;" id="pdfRecebedorNome">Gabrielly Cristiny Camargo Bastos</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">CPF</div>
-<div style="font-size: 13px; color: #111;" id="pdfRecebedorCPF">***.334.497-**</div>
-</div>
-<div style="margin-bottom: 8px;">
+<div style="font-size: 13px; color: #111; margin-bottom: 8px;" id="pdfRecebedorCPF">***.334.497-**</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Chave</div>
-<div style="font-size: 13px; color: #111;" id="pdfRecebedorChave">+55 (21) 98705-2110</div>
-</div>
-<div style="margin-bottom: 8px;">
+<div style="font-size: 13px; color: #111; margin-bottom: 8px;" id="pdfRecebedorChave">+55 (21) 98705-2110</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Instituição</div>
-<div style="font-size: 13px; color: #111;" id="pdfRecebedorInstituicao">CAIXA ECONOMICA FEDERAL</div>
-</div>
-</div>
-
-<!-- Dados do pagador -->
-<div style="border-top: 1px solid #e0e0e0; padding-top: 10px; margin-bottom: 15px;">
-<div style="font-size: 11px; color: #666; margin-bottom: 8px;">Dados do pagador</div>
-<div style="margin-bottom: 8px;">
+<div style="font-size: 13px; color: #111; margin-bottom: 18px;" id="pdfRecebedorInstituicao">CAIXA ECONOMICA FEDERAL</div>
+<div style="font-size: 11px; font-weight: bold; color: #333; margin-bottom: 8px; border-bottom: 1px solid #ddd; padding-bottom: 4px;">Dados do pagador</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">De</div>
-<div style="font-size: 13px; color: #111; font-weight: 500;" id="pdfPagadorNome">Maria Luiza De Oliveira</div>
-</div>
-<div style="margin-bottom: 8px;">
+<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 8px;" id="pdfPagadorNome">Maria Luiza De Oliveira</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">CPF</div>
-<div style="font-size: 13px; color: #111;" id="pdfPagadorCPF">***.567.439-**</div>
-</div>
-<div style="margin-bottom: 8px;">
+<div style="font-size: 13px; color: #111; margin-bottom: 8px;" id="pdfPagadorCPF">***.567.439-**</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Instituição</div>
-<div style="font-size: 13px; color: #111;">BCO SANTANDER (BRASIL) S.A.</div>
-</div>
-</div>
-
-<!-- ID Transação -->
-<div style="margin-bottom: 15px;">
+<div style="font-size: 13px; color: #111; margin-bottom: 18px;">BCO SANTANDER (BRASIL) S.A.</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">ID/Transação</div>
-<div style="font-size: 13px; color: #111; font-family: monospace;" id="pdfIdTransacao">E9040088820260911204869745768666</div>
-</div>
-
-<!-- Data e hora -->
-<div style="margin-bottom: 15px;">
+<div style="font-size: 12px; font-family: monospace; color: #111; margin-bottom: 12px; word-break: break-all;" id="pdfIdTransacao">E9040088820260911204869745768666</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Data e hora da transação</div>
-<div style="font-size: 13px; color: #111;" id="pdfDataHoraTransacao">11/09/2026 - 16:41:00</div>
-</div>
-
-<!-- Código de autenticação -->
-<div style="margin-bottom: 20px;">
+<div style="font-size: 13px; color: #111; margin-bottom: 12px;" id="pdfDataHoraTransacao">11/09/2026 - 17:48:18</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Código de autenticação</div>
-<div style="font-size: 13px; color: #111; font-family: monospace;" id="pdfCodigoAutenticacao">A15A7A176DBCBB8F41992710</div>
-</div>
-
-<!-- Footer -->
-<div style="border-top: 1px solid #e0e0e0; padding-top: 15px; margin-top: 20px; text-align: center; font-size: 10px; color: #666; line-height: 1.6;">
-<div style="font-weight: bold; margin-bottom: 5px;">Central de Atendimento Santander</div>
-<div>4004-3535 (Capitais e Regiões Metropolitanas)</div>
-<div>0800-702-3535 (Demais Localidades)</div>
-<div style="margin-top: 8px;">SAC 0800-762-7777</div>
-<div>Ouvidoria 0800-726-0332</div>
-</div>
-
-<div style="margin-top: 30px; font-size: 10px; color: #999; text-align: center;">
-<span>Comprovante do Pix</span>
-<span style="float: right;">1/2</span>
+<div style="font-size: 12px; font-family: monospace; color: #111; margin-bottom: 25px; word-break: break-all;" id="pdfCodigoAutenticacao">ACF6524760BF1B611992710</div>
+<div style="border-top: 1px solid #ddd; padding-top: 15px; margin-top: 20px; font-size: 10px; color: #666; text-align: center; line-height: 1.4;">
+<b>Central de Atendimento Santander</b><br>
+4004-3535 (Capitais e Regiões Metropolitanas)
+0800-702-3535 (Demais Localidades)
+SAC 0800-762-7777
+Ouvidoria 0800-726-0332
 </div>
 </div>
 </div>
@@ -2020,19 +1985,15 @@ document.getElementById('pdfRecebedorInstituicao').textContent = document.getEle
 document.getElementById('pdfPagadorNome').textContent = config.meuNome;
 document.getElementById('pdfPagadorCPF').textContent = config.meuCPF;
 document.getElementById('pdfIdTransacao').textContent = document.getElementById('simplesIdTransacao').textContent;
-
-const agora = new Date();
-const dataStr = agora.toLocaleDateString('pt-BR');
-const horaStr = agora.toLocaleTimeString('pt-BR');
-document.getElementById('pdfDataHoraTop').textContent = `${dataStr} - ${horaStr}`;
-document.getElementById('pdfDataHoraTransacao').textContent = `${dataStr} - ${horaStr}`;
-document.getElementById('pdfCodigoAutenticacao').textContent = gerarAutenticacao();
+document.getElementById('pdfDataHoraSub').textContent = document.getElementById('simplesDataHora').textContent;
+document.getElementById('pdfDataHoraTransacao').textContent = document.getElementById('simplesDataHora').textContent;
+document.getElementById('pdfCodigoAutenticacao').textContent = document.getElementById('simplesAutenticacao').textContent;
 
 const element = document.getElementById('pdfTemplateContainer');
 element.style.display = 'block';
 
 const opt = {
-margin:       0,
+margin:       10,
 filename:     `comprovante_pix_${Date.now()}.pdf`,
 image:        { type: 'jpeg', quality: 0.98 },
 html2canvas:  { 
@@ -2056,8 +2017,22 @@ html2pdf().from(element).set(opt).save().then(() => {
 element.style.display = 'none';
 }).catch(err => {
 console.error('Erro ao gerar PDF:', err);
-alert('Erro ao gerar PDF. Verifique se as imagens estão na mesma pasta.');
+// Tentar sem a imagem se falhar
+alert('Gerando PDF sem imagem...');
+// Remover temporariamente o logo e tentar novamente
+const logoDiv = element.querySelector('div[style*="text-align: center"]');
+if (logoDiv) {
+logoDiv.style.display = 'none';
+}
+html2pdf().from(element).set(opt).save().then(() => {
 element.style.display = 'none';
+if (logoDiv) logoDiv.style.display = 'block';
+}).catch(err2 => {
+console.error('Erro novamente:', err2);
+alert('Erro ao gerar PDF. Tente usar outro navegador.');
+element.style.display = 'none';
+if (logoDiv) logoDiv.style.display = 'block';
+});
 });
 }
 function preencherComprovanteCompleto() {
@@ -2115,17 +2090,18 @@ el.classList.add('selected');
 }
 </script>
 <script>
-if ('serviceWorker' in navigator) {
-window.addEventListener('load', function () {
-navigator.serviceWorker.register('./sw.js')
-.then(function () {
-console.log('PWA instalado/registrado');
-})
-.catch(function (error) {
-console.log('Erro no PWA:', error);
-});
-});
-}
+    // Registro do Service Worker para PWA
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+            navigator.serviceWorker.register('./sw.js')
+                .then(function (registration) {
+                    console.log('PWA registrado com sucesso:', registration.scope);
+                })
+                .catch(function (error) {
+                    console.log('Falha ao registrar o PWA:', error);
+                });
+        });
+    }
 </script>
 </body>
 </html>
