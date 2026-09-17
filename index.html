@@ -1962,26 +1962,21 @@ Ouvidoria 0800-726-0332
     if (!input) return;
 
     input.addEventListener('input', function(e) {
-        let valor = e.target.value;
+        let numeros = e.target.value.replace(/\D/g, '');
 
-        // Remove tudo que não for número ou vírgula
-        valor = valor.replace(/[^\d,]/g, '');
-
-        // Permite somente uma vírgula
-        const partes = valor.split(',');
-        if (partes.length > 2) {
-            valor = partes[0] + ',' + partes.slice(1).join('');
-        }
-
-        if (valor === '') {
+        if (!numeros) {
             e.target.value = '';
             return;
         }
 
-        e.target.value = 'R$ ' + valor;
+        let valor = parseInt(numeros, 10) / 100;
+
+        e.target.value = valor.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
     });
 }
-
         function carregarConfiguracoes() {
             const saved = localStorage.getItem('santanderConfig');
             if (saved) {
