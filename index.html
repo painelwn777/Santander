@@ -757,7 +757,6 @@ background: #c40000;
 .btn-copy-pix.copied {
 background: #00aa00;
 }
-
 /* ===== TELA DE EXTRATO (estilo da foto) ===== */
 .extrato-screen {
 background: #ffffff;
@@ -1002,7 +1001,6 @@ stroke: #999;
 stroke-width: 2;
 margin-left: 4px;
 }
-
 .settings-screen {
 background: #ec0000;
 min-height: 100vh;
@@ -1377,7 +1375,6 @@ stroke-width:1.6 !important;
 #mainScreen .bottom-nav .nav-item svg{width:22px!important;height:22px!important}
 #mainScreen{padding-bottom:64px!important}
 </style>
-
 <style id="modernizacao-visual">
 /* Modernização visual: mantém o padrão, cores e estrutura existentes */
 html{background:#fff;overflow-x:hidden}
@@ -1400,8 +1397,8 @@ section,.section{background:transparent}
 .bottom-nav .nav-item{font-size:12px!important;font-weight:500!important}
 .bottom-nav .nav-item.active{font-weight:700!important}
 @media(max-width:420px){
- .header-top{height:88px!important}
- .quick-icon{width:62px!important;height:62px!important}
+.header-top{height:88px!important}
+.quick-icon{width:62px!important;height:62px!important}
 }
 </style>
 </head>
@@ -1812,7 +1809,6 @@ Abra o app do seu banco e escaneie o QR Code
 </footer>
 <button class="btn-primary" onclick="showMain()" style="margin-top: 30px;">← Voltar ao início</button>
 </div>
-
 <!-- ===== TELA DE EXTRATO (estilo da foto) ===== -->
 <div id="extratoScreen" class="screen extrato-screen">
 <header class="extrato-header">
@@ -1861,7 +1857,6 @@ Atualizar
 </section>
 </main>
 </div>
-
 <div id="settingsScreen" class="screen settings-screen">
 <header class="settings-header">
 <img src="santander.png" alt="Santander" class="settings-logo" style="width: 120px; height: auto;">
@@ -1895,50 +1890,49 @@ Atualizar
 <style id="pdf-one-page-demo-fix">
 #pdfTemplateContainer{display:none;}
 #pdfTemplateContainer .pdf-page1{
-  width:190mm !important;
-  height:277mm !important;
-  min-height:277mm !important;
-  max-height:277mm !important;
-  box-sizing:border-box !important;
-  margin:0 !important;
-  padding:6mm 10mm 24mm !important;
-  background:#fff !important;
-  overflow:hidden !important;
-  position:relative !important;
+width:190mm !important;
+height:277mm !important;
+min-height:277mm !important;
+max-height:277mm !important;
+box-sizing:border-box !important;
+margin:0 !important;
+padding:6mm 10mm 24mm !important;
+background:#fff !important;
+overflow:hidden !important;
+position:relative !important;
 }
 #pdfTemplateContainer .pdf-page1 .pdf-demo-mark{
-  position:absolute !important; top:4mm !important; right:6mm !important;
-  font:700 7pt Arial,sans-serif !important; color:#999 !important;
-  letter-spacing:.4px !important;
+position:absolute !important; top:4mm !important; right:6mm !important;
+font:700 7pt Arial,sans-serif !important; color:#999 !important;
+letter-spacing:.4px !important;
 }
 #pdfTemplateContainer .pdf-page1 .pdf-attendimento{
-  position:absolute !important;
-  left:10mm !important;
-  right:10mm !important;
-  bottom:5mm !important;
-  border-top:1px solid #ddd !important;
-  padding-top:2mm !important;
-  text-align:center !important;
-  font:7pt/1.3 Arial,sans-serif !important;
-  color:#777 !important;
+position:absolute !important;
+left:10mm !important;
+right:10mm !important;
+bottom:5mm !important;
+border-top:1px solid #ddd !important;
+padding-top:2mm !important;
+text-align:center !important;
+font:7pt/1.3 Arial,sans-serif !important;
+color:#777 !important;
 }
 #pdfTemplateContainer .pdf-page1 .pdf-attendimento b{font-size:10pt !important;color:#333 !important;}
 #pdfTemplateContainer .pdf-page1 .pdf-demo-footer{font-size:7pt !important;color:#999 !important;margin-top:1mm !important;}
 </style>
 <div id="pdfTemplateContainer" style="display:none;">
 <div class="pdf-page1" style="background:#ffffff; padding:25px; font-family:Arial,sans-serif; color:#111; margin:0; font-size:13px;">
+<!-- IMAGEM DO COMPROVANTE ADICIONADA AQUI -->
 <div style="text-align: center; margin-bottom: 15px;">
+<img src="comprovante.png" crossorigin="anonymous" alt="Comprovante" style="max-width: 100%; display: block; margin: 0 auto 15px auto; height: auto;">
 <div style="font-size: 24px; font-weight: 900; color: #ec0000; letter-spacing: -1px; display: inline-block;">Santander</div>
 </div>
 <div style="font-size: 26px; font-weight: bold; color: #111; text-align: center; margin-bottom: 4px;">Comprovante do Pix</div>
 <div style="font-size: 12px; color: #555; text-align: center; margin-bottom: 20px;" id="pdfDataHoraSub">18/09/2026 - 11:03:58</div>
-
 <div style="font-size: 11px; color: #666; margin-bottom: 3px; text-transform: uppercase;">Valor pago</div>
 <div style="font-size: 22px; font-weight: bold; color: #111; margin-bottom: 15px;" id="pdfValorPago">R$ 25,00</div>
-
 <div style="font-size: 11px; color: #666; margin-bottom: 3px; text-transform: uppercase;">Forma de pagamento</div>
 <div style="font-size: 13px; color: #111; margin-bottom: 18px;">Ag 3348 Cc 2055796-4</div>
-
 <div style="font-size: 11px; font-weight: bold; color: #333; margin-bottom: 6px; border-bottom: 1px solid #ddd; padding-bottom: 4px;">Dados do recebedor</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Para</div>
 <div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 6px;" id="pdfRecebedorNome">Gabrielly Cristiny Camargo Bastos</div>
@@ -1948,7 +1942,6 @@ Atualizar
 <div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 6px;" id="pdfRecebedorChave">+55 (21) 98705-2110</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Instituição</div>
 <div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 18px;" id="pdfRecebedorInstituicao">CAIXA ECONOMICA FEDERAL</div>
-
 <div style="font-size: 11px; font-weight: bold; color: #333; margin-bottom: 6px; border-bottom: 1px solid #ddd; padding-bottom: 4px;">Dados do pagador</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">De</div>
 <div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 6px;" id="pdfPagadorNome">Gleicemara Cristiane De Camargo</div>
@@ -1956,20 +1949,16 @@ Atualizar
 <div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 6px;" id="pdfPagadorCPF">***.492.948-**</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Instituição</div>
 <div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 18px;">BCO SANTANDER (BRASIL) S.A.</div>
-
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">ID/Transação</div>
 <div style="font-size: 12px; font-family: monospace; color: #111; margin-bottom: 12px; word-break: break-all;" id="pdfIdTransacao">E9040088820260918140370170323989</div>
-
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Data e hora da transação</div>
 <div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 12px;" id="pdfDataHoraTransacao">18/09/2026 - 11:03:58</div>
-
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Código de autenticação</div>
 <div style="font-size: 12px; font-family: monospace; color: #111; margin-bottom: 25px; word-break: break-all;" id="pdfCodigoAutenticacao">B5B8AAFF7A846F055040809</div>
-
 <div style="border-top: 1px solid #ddd; padding-top: 12px; text-align: center; font-size: 9px; color: #777; line-height: 1.4;">
-  <b>Central de Atendimento Santander</b><br>
-  4004-3535 (Capitais e Regiões Metropolitanas) • 0800-702-3535 (Demais Localidades)<br>
-  SAC 0800-762-7777 • Ouvidoria 0800-726-0332
+<b>Central de Atendimento Santander</b><br>
+4004-3535 (Capitais e Regiões Metropolitanas) • 0800-702-3535 (Demais Localidades)<br>
+SAC 0800-762-7777 • Ouvidoria 0800-726-0332
 </div>
 </div>
 </div>
@@ -2045,33 +2034,32 @@ return 'R$ ' + Number(valor || 0).toLocaleString('pt-BR', {minimumFractionDigits
 function ativarEdicaoDiretaSaldo() {
 const ids = ['mainBalanceAmount', 'saldoConta', 'extratoSaldoDisponivel'];
 ids.forEach(id => {
-  const el = document.getElementById(id);
-  if (!el || el.dataset.saldoDiretoAtivo) return;
-  el.dataset.saldoDiretoAtivo = '1';
-  el.setAttribute('contenteditable', 'true');
-  el.setAttribute('spellcheck', 'false');
-  el.style.cursor = 'text';
-  el.addEventListener('focus', function() {
-    const valor = Number(config.accountBalance || 0).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
-    this.textContent = 'R$ ' + valor;
-    try { const range = document.createRange(); range.selectNodeContents(this); const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range); } catch(e) {}
-  });
-  el.addEventListener('blur', function() {
-    const valor = lerValorMoeda(this.textContent);
-    if (!isNaN(valor)) {
-      config.accountBalance = valor;
-      const campo = document.getElementById('configSaldo');
-      if (campo) campo.value = valor.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-      salvarDadosLocais();
-      atualizarTodasTelas();
-    }
-  });
-  el.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') { e.preventDefault(); this.blur(); }
-  });
+const el = document.getElementById(id);
+if (!el || el.dataset.saldoDiretoAtivo) return;
+el.dataset.saldoDiretoAtivo = '1';
+el.setAttribute('contenteditable', 'true');
+el.setAttribute('spellcheck', 'false');
+el.style.cursor = 'text';
+el.addEventListener('focus', function() {
+const valor = Number(config.accountBalance || 0).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+this.textContent = 'R$ ' + valor;
+try { const range = document.createRange(); range.selectNodeContents(this); const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range); } catch(e) {}
+});
+el.addEventListener('blur', function() {
+const valor = lerValorMoeda(this.textContent);
+if (!isNaN(valor)) {
+config.accountBalance = valor;
+const campo = document.getElementById('configSaldo');
+if (campo) campo.value = valor.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+salvarDadosLocais();
+atualizarTodasTelas();
+}
+});
+el.addEventListener('keydown', function(e) {
+if (e.key === 'Enter') { e.preventDefault(); this.blur(); }
+});
 });
 }
-
 function sincronizarSaldoTelaInicial() {
 // Correção de desempenho: não observar os mesmos elementos que a página atualiza.
 // Os MutationObservers anteriores criavam um ciclo de alterações no saldo e podiam travar o navegador.
@@ -2337,7 +2325,8 @@ res += chars.charAt(Math.floor(Math.random() * chars.length));
 }
 return res;
 }
-function baixarComprovantePDF() {
+// ===== FUNÇÃO CORRIGIDA: aguarda imagens carregarem antes de gerar o PDF =====
+async function baixarComprovantePDF() {
 document.getElementById('pdfValorPago').textContent = document.getElementById('simplesValor').textContent;
 document.getElementById('pdfRecebedorNome').textContent = document.getElementById('simplesNome').textContent;
 document.getElementById('pdfRecebedorCPF').textContent = document.getElementById('simplesCPF').textContent;
@@ -2349,46 +2338,53 @@ document.getElementById('pdfIdTransacao').textContent = document.getElementById(
 document.getElementById('pdfDataHoraSub').textContent = document.getElementById('simplesDataHora').textContent;
 document.getElementById('pdfDataHoraTransacao').textContent = document.getElementById('simplesDataHora').textContent;
 document.getElementById('pdfCodigoAutenticacao').textContent = document.getElementById('simplesAutenticacao').textContent;
+
 const element = document.getElementById('pdfTemplateContainer');
 element.style.display = 'block';
 element.style.width = '190mm';
 element.style.height = '277mm';
+
+// NOVO: Aguarda o carregamento completo de todas as imagens dentro do container
+const images = element.querySelectorAll('img');
+const imagePromises = Array.from(images).map(img => {
+if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+return new Promise(resolve => {
+img.onload = resolve;
+img.onerror = resolve; // Continua mesmo se a imagem falhar
+});
+});
+
+await Promise.all(imagePromises);
+
 const opt = {
 margin: 5,
 filename: `comprovante_pix_${Date.now()}.pdf`,
 image: { type: 'jpeg', quality: 0.98 },
 html2canvas: {
-scale: 1.5,
+scale: 2, // Aumentado para melhor qualidade
 useCORS: true,
+allowTaint: true,
 backgroundColor: '#ffffff',
-logging: false,
-allowTaint: true
+logging: false
 },
 pagebreak: { mode: [] },
 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
 };
+
 if (typeof html2pdf === 'undefined') {
 alert('Erro: Biblioteca PDF não carregada. Tente novamente.');
 element.style.display = 'none';
 return;
 }
-html2pdf().from(element).set(opt).save().then(() => {
-element.style.display = 'none';
-}).catch(err => {
+
+try {
+await html2pdf().from(element).set(opt).save();
+} catch (err) {
 console.error('Erro ao gerar PDF:', err);
-alert('Gerando PDF sem imagem...');
-const logoDiv = element.querySelector('div[style*="text-align: center"]');
-if (logoDiv) logoDiv.style.display = 'none';
-html2pdf().from(element).set(opt).save().then(() => {
+alert('Erro ao gerar PDF. Se estiver abrindo o arquivo diretamente (duplo clique), o navegador bloqueia imagens locais. Converta comprovante.png para Base64 e cole no src da imagem.');
+} finally {
 element.style.display = 'none';
-if (logoDiv) logoDiv.style.display = 'block';
-}).catch(err2 => {
-console.error('Erro novamente:', err2);
-alert('Erro ao gerar PDF. Tente usar outro navegador.');
-element.style.display = 'none';
-if (logoDiv) logoDiv.style.display = 'block';
-});
-});
+}
 }
 function preencherComprovanteCompleto() {
 const agora = new Date();
