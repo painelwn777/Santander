@@ -15,7 +15,6 @@
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <meta name="apple-mobile-web-app-title" content="Santander">
 <title>Santander</title>
-<!-- Substitua os scripts antigos por estes com o atributo 'defer' -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
 <style>
@@ -757,7 +756,6 @@ background: #c40000;
 .btn-copy-pix.copied {
 background: #00aa00;
 }
-/* ===== TELA DE EXTRATO (estilo da foto) ===== */
 .extrato-screen {
 background: #ffffff;
 min-height: 100vh;
@@ -1376,7 +1374,6 @@ stroke-width:1.6 !important;
 #mainScreen{padding-bottom:64px!important}
 </style>
 <style id="modernizacao-visual">
-/* Modernização visual: mantém o padrão, cores e estrutura existentes */
 html{background:#fff;overflow-x:hidden}
 body{width:100%!important;max-width:none!important;margin:0!important;background:#f5f7f9!important;overflow-x:hidden}
 .header{background:linear-gradient(180deg,#ec0000 0%,#df0000 100%)!important;box-shadow:0 2px 10px rgba(0,0,0,.14)!important}
@@ -1711,7 +1708,7 @@ Saldo em conta
 </div>
 <div id="comprovanteSimplesScreen" class="screen comprovante-simples">
 <header class="comprovante-header-vermelho">
-<button class="close-btn-novo" onclick="showMain()">✕</button>
+<button class="close-btn-novo" onclick="showMain()"></button>
 </header>
 <div class="success-box-ref">
 <div class="success-check-ref">✓</div>
@@ -1762,7 +1759,7 @@ Saldo em conta
 <time class="completo-date" id="completoData">—</time>
 </header>
 <section class="pix-qr-section">
-<p class="pix-qr-title">📱 Escaneie para pagar</p>
+<p class="pix-qr-title"> Escaneie para pagar</p>
 <div id="qrcode"></div>
 <p style="font-size: 12px; color: #888; margin-bottom: 10px;">
 Abra o app do seu banco e escaneie o QR Code
@@ -1809,7 +1806,6 @@ Abra o app do seu banco e escaneie o QR Code
 </footer>
 <button class="btn-primary" onclick="showMain()" style="margin-top: 30px;">← Voltar ao início</button>
 </div>
-<!-- ===== TELA DE EXTRATO (estilo da foto) ===== -->
 <div id="extratoScreen" class="screen extrato-screen">
 <header class="extrato-header">
 <button class="back-btn" onclick="showMain()" aria-label="Voltar">
@@ -1851,9 +1847,7 @@ Atualizar
 <span>Hoje</span>
 </div>
 </div>
-<div id="extratoItemsContainer">
-<!-- Items serão renderizados via JS -->
-</div>
+<div id="extratoItemsContainer"></div>
 </section>
 </main>
 </div>
@@ -1901,67 +1895,61 @@ background:#fff !important;
 overflow:hidden !important;
 position:relative !important;
 }
-#pdfTemplateContainer .pdf-page1 .pdf-demo-mark{
-position:absolute !important; top:4mm !important; right:6mm !important;
-font:700 7pt Arial,sans-serif !important; color:#999 !important;
-letter-spacing:.4px !important;
-}
-#pdfTemplateContainer .pdf-page1 .pdf-attendimento{
-position:absolute !important;
-left:10mm !important;
-right:10mm !important;
-bottom:5mm !important;
-border-top:1px solid #ddd !important;
-padding-top:2mm !important;
-text-align:center !important;
-font:7pt/1.3 Arial,sans-serif !important;
-color:#777 !important;
-}
-#pdfTemplateContainer .pdf-page1 .pdf-attendimento b{font-size:10pt !important;color:#333 !important;}
-#pdfTemplateContainer .pdf-page1 .pdf-demo-footer{font-size:7pt !important;color:#999 !important;margin-top:1mm !important;}
 </style>
+
+<!-- ===== TEMPLATE DO PDF CORRIGIDO ===== -->
 <div id="pdfTemplateContainer" style="display:none;">
-<div class="pdf-page1" style="background:#ffffff; padding:25px; font-family:Arial,sans-serif; color:#111; margin:0; font-size:13px;">
-<!-- IMAGEM DO COMPROVANTE ADICIONADA AQUI -->
-<div style="text-align: center; margin-bottom: 15px;">
-<img src="comprovante.png" crossorigin="anonymous" alt="Comprovante" style="max-width: 100%; display: block; margin: 0 auto 15px auto; height: auto;">
-<div style="font-size: 24px; font-weight: 900; color: #ec0000; letter-spacing: -1px; display: inline-block;">Santander</div>
+<div class="pdf-page1" style="background:#ffffff; padding:25px 30px; font-family:Arial,sans-serif; color:#111; margin:0; font-size:13px;">
+<!-- LOGO SANTANDER - TAMANHO CONTROLADO -->
+<div style="text-align: center; margin-bottom: 10px;">
+<img src="comprovante.png" crossorigin="anonymous" alt="Santander" style="max-width: 160px; height: auto; display: block; margin: 0 auto;">
 </div>
-<div style="font-size: 26px; font-weight: bold; color: #111; text-align: center; margin-bottom: 4px;">Comprovante do Pix</div>
+
+<div style="font-size: 22px; font-weight: bold; color: #111; text-align: center; margin-bottom: 4px;">Comprovante do Pix</div>
 <div style="font-size: 12px; color: #555; text-align: center; margin-bottom: 20px;" id="pdfDataHoraSub">18/09/2026 - 11:03:58</div>
+
 <div style="font-size: 11px; color: #666; margin-bottom: 3px; text-transform: uppercase;">Valor pago</div>
 <div style="font-size: 22px; font-weight: bold; color: #111; margin-bottom: 15px;" id="pdfValorPago">R$ 25,00</div>
+
 <div style="font-size: 11px; color: #666; margin-bottom: 3px; text-transform: uppercase;">Forma de pagamento</div>
 <div style="font-size: 13px; color: #111; margin-bottom: 18px;">Ag 3348 Cc 2055796-4</div>
+
 <div style="font-size: 11px; font-weight: bold; color: #333; margin-bottom: 6px; border-bottom: 1px solid #ddd; padding-bottom: 4px;">Dados do recebedor</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Para</div>
-<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 6px;" id="pdfRecebedorNome">Gabrielly Cristiny Camargo Bastos</div>
+<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 6px;" id="pdfRecebedorNome">Nome</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">CPF</div>
-<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 6px;" id="pdfRecebedorCPF">***.334.497-**</div>
+<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 6px;" id="pdfRecebedorCPF">***.000.000-**</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Chave</div>
-<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 6px;" id="pdfRecebedorChave">+55 (21) 98705-2110</div>
+<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 6px;" id="pdfRecebedorChave">(00) 00000-0000</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Instituição</div>
-<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 18px;" id="pdfRecebedorInstituicao">CAIXA ECONOMICA FEDERAL</div>
+<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 18px;" id="pdfRecebedorInstituicao">Instituição</div>
+
 <div style="font-size: 11px; font-weight: bold; color: #333; margin-bottom: 6px; border-bottom: 1px solid #ddd; padding-bottom: 4px;">Dados do pagador</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">De</div>
-<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 6px;" id="pdfPagadorNome">Gleicemara Cristiane De Camargo</div>
+<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 6px;" id="pdfPagadorNome">Nome</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">CPF</div>
-<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 6px;" id="pdfPagadorCPF">***.492.948-**</div>
+<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 6px;" id="pdfPagadorCPF">***.000.000-**</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Instituição</div>
 <div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 18px;">BCO SANTANDER (BRASIL) S.A.</div>
+
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">ID/Transação</div>
-<div style="font-size: 12px; font-family: monospace; color: #111; margin-bottom: 12px; word-break: break-all;" id="pdfIdTransacao">E9040088820260918140370170323989</div>
+<div style="font-size: 12px; font-family: monospace; color: #111; margin-bottom: 12px; word-break: break-all;" id="pdfIdTransacao">—</div>
+
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Data e hora da transação</div>
-<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 12px;" id="pdfDataHoraTransacao">18/09/2026 - 11:03:58</div>
+<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 12px;" id="pdfDataHoraTransacao">—</div>
+
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Código de autenticação</div>
-<div style="font-size: 12px; font-family: monospace; color: #111; margin-bottom: 25px; word-break: break-all;" id="pdfCodigoAutenticacao">B5B8AAFF7A846F055040809</div>
-<div style="border-top: 1px solid #ddd; padding-top: 12px; text-align: center; font-size: 9px; color: #777; line-height: 1.4;">
-<b>Central de Atendimento Santander</b><br>
+<div style="font-size: 12px; font-family: monospace; color: #111; margin-bottom: 25px; word-break: break-all;" id="pdfCodigoAutenticacao">—</div>
+
+<!-- RODAPÉ CENTRAL DE ATENDIMENTO -->
+<div style="border-top: 1px solid #ddd; padding-top: 12px; text-align: center; font-size: 9px; color: #777; line-height: 1.5;">
+<b style="font-size: 11px; color: #333;">Central de Atendimento Santander</b><br>
 4004-3535 (Capitais e Regiões Metropolitanas) • 0800-702-3535 (Demais Localidades)<br>
 SAC 0800-762-7777 • Ouvidoria 0800-726-0332
 </div>
 </div>
 </div>
+
 <script>
 let config = {
 meuNome: 'Seu Nome Completo',
@@ -1976,34 +1964,10 @@ accountLimit: 0,
 transferValue: 0
 };
 let extratoData = [
-{
-titulo: 'Pix recebido',
-subtitulo: 'Wise brasil corretora de',
-valor: 50.00,
-tipo: 'credito',
-data: 'Hoje'
-},
-{
-titulo: 'Pix recebido - dif tit',
-subtitulo: 'Josiane leite da silva',
-valor: 10.00,
-tipo: 'credito',
-data: 'Hoje'
-},
-{
-titulo: 'Pix enviado',
-subtitulo: 'Thalita lira blezer scali',
-valor: 4.00,
-tipo: 'debito',
-data: 'Hoje'
-},
-{
-titulo: 'Ted recebida',
-subtitulo: 'Pagto seguro desemprego',
-valor: 1302.00,
-tipo: 'credito',
-data: 'Hoje'
-}
+{titulo: 'Pix recebido', subtitulo: 'Wise brasil corretora de', valor: 50.00, tipo: 'credito', data: 'Hoje'},
+{titulo: 'Pix recebido - dif tit', subtitulo: 'Josiane leite da silva', valor: 10.00, tipo: 'credito', data: 'Hoje'},
+{titulo: 'Pix enviado', subtitulo: 'Thalita lira blezer scali', valor: 4.00, tipo: 'debito', data: 'Hoje'},
+{titulo: 'Ted recebida', subtitulo: 'Pagto seguro desemprego', valor: 1302.00, tipo: 'credito', data: 'Hoje'}
 ];
 document.addEventListener('DOMContentLoaded', () => {
 carregarConfiguracoes();
@@ -2015,10 +1979,7 @@ ativarEdicaoDiretaSaldo();
 });
 function formatarMoedaConfig(input) {
 let valor = input.value.replace(/\D/g, '');
-if (!valor) {
-input.value = '';
-return;
-}
+if (!valor) { input.value = ''; return; }
 valor = (parseInt(valor) / 100).toFixed(2);
 valor = valor.replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 input.value = valor;
@@ -2055,16 +2016,10 @@ salvarDadosLocais();
 atualizarTodasTelas();
 }
 });
-el.addEventListener('keydown', function(e) {
-if (e.key === 'Enter') { e.preventDefault(); this.blur(); }
-});
+el.addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); this.blur(); } });
 });
 }
-function sincronizarSaldoTelaInicial() {
-// Correção de desempenho: não observar os mesmos elementos que a página atualiza.
-// Os MutationObservers anteriores criavam um ciclo de alterações no saldo e podiam travar o navegador.
-return;
-}
+function sincronizarSaldoTelaInicial() { return; }
 function atualizarExtratoSaldo() {
 const extratoSaldo = document.getElementById('extratoSaldoDisponivel');
 const extratoLimite = document.getElementById('extratoSaldoLimite');
@@ -2106,19 +2061,13 @@ if (destChave) destChave.textContent = config.destChave;
 if (destInst) destInst.textContent = config.destInstituicao;
 if (recipientName) recipientName.textContent = config.destNome;
 }
-function salvarDadosLocais() {
-localStorage.setItem('santanderConfig', JSON.stringify(config));
-}
+function salvarDadosLocais() { localStorage.setItem('santanderConfig', JSON.stringify(config)); }
 function initValorInput() {
 const input = document.getElementById('valorTransferencia');
 if (!input) return;
 input.addEventListener('input', function(e) {
 let numeros = e.target.value.replace(/\D/g, '');
-if (!numeros) {
-e.target.value = 'R$ 0,00';
-document.getElementById('btnContinuarValor').disabled = true;
-return;
-}
+if (!numeros) { e.target.value = 'R$ 0,00'; document.getElementById('btnContinuarValor').disabled = true; return; }
 let valor = parseInt(numeros, 10) / 100;
 config.transferValue = valor;
 e.target.value = formatarMoeda(valor);
@@ -2127,16 +2076,9 @@ document.getElementById('btnContinuarValor').disabled = valor <= 0;
 }
 function carregarConfiguracoes() {
 const saved = localStorage.getItem('santanderConfig');
-if (saved) {
-try {
-const parsed = JSON.parse(saved);
-config = {...config, ...parsed};
-} catch(e) {}
-}
+if (saved) { try { const parsed = JSON.parse(saved); config = {...config, ...parsed}; } catch(e) {} }
 const ex = localStorage.getItem('santanderExtrato');
-if (ex) {
-try { extratoData = JSON.parse(ex); } catch(e) {}
-}
+if (ex) { try { extratoData = JSON.parse(ex); } catch(e) {} }
 document.getElementById('configMeuNome').value = config.meuNome;
 document.getElementById('configMeuCPF').value = config.meuCPF;
 document.getElementById('configDestNome').value = config.destNome;
@@ -2159,12 +2101,8 @@ config.destChave = document.getElementById('configDestChave').value || '(00) 000
 config.destInstituicao = document.getElementById('configDestInstituicao').value || 'BCO SANTANDER (BRASIL) S.A.';
 const saldoConfig = lerValorMoeda(document.getElementById('configSaldo').value);
 const limiteConfig = lerValorMoeda(document.getElementById('configLimite').value);
-if (saldoConfig > 0) {
-config.accountBalance = saldoConfig;
-}
-if (limiteConfig > 0) {
-config.accountLimit = limiteConfig;
-}
+if (saldoConfig > 0) config.accountBalance = saldoConfig;
+if (limiteConfig > 0) config.accountLimit = limiteConfig;
 salvarDadosLocais();
 atualizarTodasTelas();
 showMain();
@@ -2173,62 +2111,34 @@ function renderizarExtrato() {
 const container = document.getElementById('extratoItemsContainer');
 if (!container) return;
 container.innerHTML = '';
-if (extratoData.length === 0) {
-container.innerHTML = '<div style="padding:20px;text-align:center;color:#666">Nenhuma transação registrada</div>';
-return;
-}
+if (extratoData.length === 0) { container.innerHTML = '<div style="padding:20px;text-align:center;color:#666">Nenhuma transação registrada</div>'; return; }
 extratoData.forEach((item) => {
 const div = document.createElement('div');
 div.className = 'extrato-item fade-in';
 const isDebito = item.tipo === 'debito';
 const valorFormatado = (isDebito ? '- ' : '') + 'R$ ' + item.valor.toFixed(2).replace('.', ',');
-div.innerHTML = `
-<div class="extrato-item-dot ${isDebito ? 'saida' : 'entrada'}"></div>
-<div class="extrato-item-info">
-<div class="extrato-item-title">${item.titulo}</div>
-<div class="extrato-item-subtitle">${item.subtitulo || ''}</div>
-</div>
-<div class="extrato-item-amount ${isDebito ? 'debito' : 'credito'}">
-${valorFormatado}
-<svg class="extrato-item-arrow" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-</div>
-`;
+div.innerHTML = `<div class="extrato-item-dot ${isDebito ? 'saida' : 'entrada'}"></div><div class="extrato-item-info"><div class="extrato-item-title">${item.titulo}</div><div class="extrato-item-subtitle">${item.subtitulo || ''}</div></div><div class="extrato-item-amount ${isDebito ? 'debito' : 'credito'}">${valorFormatado}<svg class="extrato-item-arrow" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>`;
 container.appendChild(div);
 });
 }
 function showScreen(screenId) {
-document.querySelectorAll('.screen, .app-screen').forEach(s => {
-s.classList.remove('active');
-s.style.display = 'none';
-s.setAttribute('aria-hidden', 'true');
-});
+document.querySelectorAll('.screen, .app-screen').forEach(s => { s.classList.remove('active'); s.style.display = 'none'; s.setAttribute('aria-hidden', 'true'); });
 const target = document.getElementById(screenId);
 if (!target) return;
 target.classList.add('active');
 target.style.display = 'block';
 target.setAttribute('aria-hidden', 'false');
 window.scrollTo(0, 0);
-if (screenId === 'pagamentoScreen') {
-atualizarTelaPagamento();
-}
-if (screenId === 'valorScreen') {
-atualizarDadosDestinatario();
-}
-if (screenId === 'extratoScreen') {
-renderizarExtrato();
-atualizarExtratoSaldo();
-}
+if (screenId === 'pagamentoScreen') atualizarTelaPagamento();
+if (screenId === 'valorScreen') atualizarDadosDestinatario();
+if (screenId === 'extratoScreen') { renderizarExtrato(); atualizarExtratoSaldo(); }
 }
 function showPix() { showScreen('pixScreen'); }
 function showValor() { showScreen('valorScreen'); }
 function showPagamento() { showScreen('pagamentoScreen'); }
 function showConfirm() { showScreen('confirmScreen'); }
 function showComprovanteSimples() { showScreen('comprovanteSimplesScreen'); }
-function showComprovanteCompleto() {
-showScreen('comprovanteCompletoScreen');
-preencherComprovanteCompleto();
-setTimeout(gerarQRCode, 100);
-}
+function showComprovanteCompleto() { showScreen('comprovanteCompletoScreen'); preencherComprovanteCompleto(); setTimeout(gerarQRCode, 100); }
 function showSettings() {
 document.getElementById('configMeuNome').value = config.meuNome;
 document.getElementById('configMeuCPF').value = config.meuCPF;
@@ -2242,30 +2152,18 @@ showScreen('settingsScreen');
 }
 function showExtrato() { showScreen('extratoScreen'); }
 function showMain() { showScreen('mainScreen'); }
-function selectContact(nome) {
-document.getElementById('pixKey').value = nome;
-}
-function goToValor() {
-atualizarDadosDestinatario();
-showValor();
-}
+function selectContact(nome) { document.getElementById('pixKey').value = nome; }
+function goToValor() { atualizarDadosDestinatario(); showValor(); }
 function goToPagamento() {
 const valor = document.getElementById('valorTransferencia').value.trim();
-if (!valor || valor === 'R$ 0,00') {
-alert('Por favor, informe um valor.');
-return;
-}
+if (!valor || valor === 'R$ 0,00') { alert('Por favor, informe um valor.'); return; }
 showPagamento();
 }
 function goToRevisao() {
 const val = config.transferValue > 0 ? config.transferValue : 100;
 document.getElementById('reviewValue').textContent = formatarMoeda(val);
 const limitNeeded = val - config.accountBalance;
-if (limitNeeded > 0) {
-document.getElementById('limitUsed').textContent = formatarMoeda(limitNeeded);
-} else {
-document.getElementById('limitUsed').textContent = 'R$ 0,00';
-}
+document.getElementById('limitUsed').textContent = limitNeeded > 0 ? formatarMoeda(limitNeeded) : 'R$ 0,00';
 showConfirm();
 }
 function finalizarPIX() {
@@ -2273,10 +2171,7 @@ document.getElementById('processingOverlay').classList.add('active');
 setTimeout(() => {
 document.getElementById('processingOverlay').classList.remove('active');
 const valor = config.transferValue;
-if (valor > config.accountBalance) {
-alert('Saldo insuficiente!');
-return;
-}
+if (valor > config.accountBalance) { alert('Saldo insuficiente!'); return; }
 config.accountBalance -= valor;
 document.getElementById('simplesValor').textContent = formatarMoeda(valor);
 document.getElementById('simplesNome').textContent = config.destNome;
@@ -2288,13 +2183,7 @@ const horaStr = agora.toLocaleTimeString('pt-BR');
 document.getElementById('simplesDataHora').textContent = `${dataStr} - ${horaStr}`;
 document.getElementById('simplesIdTransacao').textContent = gerarIDTransacao();
 document.getElementById('simplesAutenticacao').textContent = gerarAutenticacao();
-extratoData.unshift({
-titulo: 'Pix enviado',
-subtitulo: config.destNome,
-valor: valor,
-tipo: 'debito',
-data: 'Hoje'
-});
+extratoData.unshift({titulo: 'Pix enviado', subtitulo: config.destNome, valor: valor, tipo: 'debito', data: 'Hoje'});
 localStorage.setItem('santanderExtrato', JSON.stringify(extratoData));
 salvarDadosLocais();
 atualizarTodasTelas();
@@ -2305,27 +2194,18 @@ showComprovanteSimples();
 function gerarIDTransacao() {
 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 let res = 'E';
-for (let i = 0; i < 31; i++) {
-res += chars.charAt(Math.floor(Math.random() * chars.length));
-}
+for (let i = 0; i < 31; i++) res += chars.charAt(Math.floor(Math.random() * chars.length));
 return res;
 }
-function gerarCodigoBarras() {
-let res = '';
-for (let i = 0; i < 44; i++) {
-res += Math.floor(Math.random() * 10);
-}
-return res;
-}
+function gerarCodigoBarras() { let res = ''; for (let i = 0; i < 44; i++) res += Math.floor(Math.random() * 10); return res; }
 function gerarAutenticacao() {
 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 let res = '';
-for (let i = 0; i < 23; i++) {
-res += chars.charAt(Math.floor(Math.random() * chars.length));
-}
+for (let i = 0; i < 23; i++) res += chars.charAt(Math.floor(Math.random() * chars.length));
 return res;
 }
-// ===== FUNÇÃO CORRIGIDA: aguarda imagens carregarem antes de gerar o PDF =====
+
+// ===== FUNÇÃO PDF CORRIGIDA =====
 async function baixarComprovantePDF() {
 document.getElementById('pdfValorPago').textContent = document.getElementById('simplesValor').textContent;
 document.getElementById('pdfRecebedorNome').textContent = document.getElementById('simplesNome').textContent;
@@ -2344,29 +2224,19 @@ element.style.display = 'block';
 element.style.width = '190mm';
 element.style.height = '277mm';
 
-// NOVO: Aguarda o carregamento completo de todas as imagens dentro do container
+// Aguarda imagens carregarem
 const images = element.querySelectorAll('img');
 const imagePromises = Array.from(images).map(img => {
 if (img.complete && img.naturalWidth > 0) return Promise.resolve();
-return new Promise(resolve => {
-img.onload = resolve;
-img.onerror = resolve; // Continua mesmo se a imagem falhar
+return new Promise(resolve => { img.onload = resolve; img.onerror = resolve; });
 });
-});
-
 await Promise.all(imagePromises);
 
 const opt = {
 margin: 5,
 filename: `comprovante_pix_${Date.now()}.pdf`,
 image: { type: 'jpeg', quality: 0.98 },
-html2canvas: {
-scale: 2, // Aumentado para melhor qualidade
-useCORS: true,
-allowTaint: true,
-backgroundColor: '#ffffff',
-logging: false
-},
+html2canvas: { scale: 2, useCORS: true, allowTaint: true, backgroundColor: '#ffffff', logging: false },
 pagebreak: { mode: [] },
 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
 };
@@ -2381,11 +2251,12 @@ try {
 await html2pdf().from(element).set(opt).save();
 } catch (err) {
 console.error('Erro ao gerar PDF:', err);
-alert('Erro ao gerar PDF. Se estiver abrindo o arquivo diretamente (duplo clique), o navegador bloqueia imagens locais. Converta comprovante.png para Base64 e cole no src da imagem.');
+alert('Erro ao gerar PDF. Se estiver abrindo o arquivo diretamente (duplo clique), o navegador bloqueia imagens locais. Converta comprovante.png para Base64.');
 } finally {
 element.style.display = 'none';
 }
 }
+
 function preencherComprovanteCompleto() {
 const agora = new Date();
 const dataFormatada = agora.toLocaleDateString('pt-BR');
@@ -2408,16 +2279,7 @@ const container = document.getElementById('qrcode');
 if (!container || typeof QRCode === 'undefined') return;
 container.innerHTML = '';
 const pixCode = document.getElementById('pixCopiaCola').textContent;
-try {
-new QRCode(container, {
-text: pixCode,
-width: 180,
-height: 180,
-correctLevel: QRCode.CorrectLevel.H
-});
-} catch (error) {
-console.error('Erro ao gerar QR Code:', error);
-}
+try { new QRCode(container, { text: pixCode, width: 180, height: 180, correctLevel: QRCode.CorrectLevel.H }); } catch (error) { console.error('Erro ao gerar QR Code:', error); }
 }
 function gerarPixCopiaCola(nome, cpf, valor) {
 return "00020126580014BR.GOV.BCB.PIX0136123e4567-e12b-12d1-a456-4266554400005204000053039865405" + (valor || "10.00") + "5802BR5913" + (nome || "BENEFICIARIO") + "6008SAO PAULO62070503***63041D4A";
@@ -2429,39 +2291,17 @@ const btn = document.querySelector('.btn-copy-pix');
 const txt = document.getElementById('copyBtnText');
 btn.classList.add('copied');
 txt.textContent = 'Código PIX copiado!';
-setTimeout(() => {
-btn.classList.remove('copied');
-txt.textContent = 'Copiar código PIX';
-}, 2000);
+setTimeout(() => { btn.classList.remove('copied'); txt.textContent = 'Copiar código PIX'; }, 2000);
 });
 }
-function selectPayment(el) {
-document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
-el.classList.add('selected');
-}
-function toggleExtratoSaldo() {
-const saldoEl = document.getElementById('extratoSaldoDisponivel');
-if (saldoEl) {
-saldoEl.classList.toggle('balance-hidden');
-}
-}
-function atualizarExtrato() {
-const agora = new Date();
-const horaStr = agora.toLocaleTimeString('pt-BR');
-document.getElementById('extratoHoraAtualizacao').textContent = horaStr;
-atualizarExtratoSaldo();
-}
+function selectPayment(el) { document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected')); el.classList.add('selected'); }
+function toggleExtratoSaldo() { const saldoEl = document.getElementById('extratoSaldoDisponivel'); if (saldoEl) saldoEl.classList.toggle('balance-hidden'); }
+function atualizarExtrato() { const agora = new Date(); document.getElementById('extratoHoraAtualizacao').textContent = agora.toLocaleTimeString('pt-BR'); atualizarExtratoSaldo(); }
 </script>
 <script>
 if ('serviceWorker' in navigator) {
 window.addEventListener('load', function () {
-navigator.serviceWorker.register('./sw.js')
-.then(function (registration) {
-console.log('PWA registrado com sucesso:', registration.scope);
-})
-.catch(function (error) {
-console.log('Falha ao registrar o PWA:', error);
-});
+navigator.serviceWorker.register('./sw.js').then(function (registration) { console.log('PWA registrado com sucesso:', registration.scope); }).catch(function (error) { console.log('Falha ao registrar o PWA:', error); });
 });
 }
 </script>
