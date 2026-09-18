@@ -1,1374 +1,97 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<link rel="manifest" href="manifest.json">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#ec0000">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#ec0000">
+<meta name="apple-mobile-web-app-title" content="Santander">
 <meta name="description" content="App Santander Mobile">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
-<meta name="apple-mobile-web-app-title" content="Santander">
 <title>Santander</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<style>
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
--webkit-tap-highlight-color: transparent;
-}
-body {
-background: #f5f5f5;
-max-width: 400px;
-margin: 0 auto;
-min-height: 100vh;
-padding-bottom: 80px;
-}
-.header {
-background: #ec0000;
-color: white;
-padding: 15px 20px;
-position: sticky;
-top: 0;
-z-index: 100;
-}
-.header-top {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 20px;
-}
-.logo-container {
-display: flex;
-align-items: center;
-gap: 10px;
-}
-.logo-svg {
-width: 35px;
-height: 35px;
-fill: white;
-}
-.logo-text {
-font-size: 22px;
-font-weight: 600;
-}
-.header-icons {
-display: flex;
-gap: 20px;
-}
-.header-icon {
-width: 24px;
-height: 24px;
-fill: white;
-cursor: pointer;
-}
-.tabs {
-display: flex;
-gap: 25px;
-}
-.tab {
-padding-bottom: 10px;
-cursor: pointer;
-opacity: 0.7;
-font-size: 15px;
-border-bottom: 3px solid transparent;
-transition: all 0.3s;
-}
-.tab.active {
-opacity: 1;
-border-bottom-color: white;
-}
-.balance-section {
-background: #ec0000;
-color: white;
-padding: 30px 20px;
-text-align: center;
-}
-.balance-label {
-font-size: 14px;
-margin-bottom: 10px;
-opacity: 0.9;
-}
-.balance-amount {
-font-size: 38px;
-font-weight: 300;
-margin: 10px 0;
-cursor: pointer;
-padding: 10px;
-border-radius: 8px;
-transition: background 0.3s;
-}
-.balance-amount:hover {
-background: rgba(255,255,255,0.1);
-}
-.balance-limit {
-font-size: 14px;
-opacity: 0.9;
-margin-top: 5px;
-cursor: pointer;
-}
-.quick-actions {
-background: white;
-padding: 25px 20px;
-margin: -20px 20px 20px;
-border-radius: 15px;
-box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-gap: 20px;
-position: relative;
-z-index: 10;
-}
-.action-btn {
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 10px;
-cursor: pointer;
-transition: transform 0.3s;
-}
-.action-btn:hover {
-transform: scale(1.05);
-}
-.action-icon {
-width: 55px;
-height: 55px;
-background: #ec0000;
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-}
-.action-icon svg {
-width: 26px;
-height: 26px;
-fill: white;
-}
-.action-label {
-color: #333;
-font-size: 12px;
-text-align: center;
-}
-.content {
-padding: 20px;
-}
-.section-title {
-font-size: 18px;
-font-weight: 600;
-margin-bottom: 15px;
-color: #333;
-}
-.info-card {
-background: white;
-border-radius: 12px;
-padding: 20px;
-margin-bottom: 20px;
-box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.account-card {
-background: white;
-border-radius: 12px;
-padding: 20px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-margin-bottom: 15px;
-cursor: pointer;
-transition: box-shadow 0.3s;
-}
-.account-card:hover {
-box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-.bottom-nav {
-position: fixed;
-bottom: 0;
-left: 50%;
-transform: translateX(-50%);
-width: 100%;
-max-width: 400px;
-background: white;
-border-top: 1px solid #e0e0e0;
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-padding: 10px 0;
-z-index: 1000;
-}
-.nav-item {
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 5px;
-color: #666;
-cursor: pointer;
-transition: color 0.3s;
-}
-.nav-item.active {
-color: #ec0000;
-}
-.nav-item svg {
-width: 24px;
-height: 24px;
-fill: currentColor;
-}
-.nav-label {
-font-size: 11px;
-}
-.screen {
-display: none;
-background: #f5f5f5;
-min-height: 100vh;
-padding-bottom: 80px;
-}
-.screen.active {
-display: block;
-}
-.pix-screen {
-background: white;
-}
-.pix-header {
-background: #ec0000;
-color: white;
-padding: 20px;
-display: flex;
-align-items: center;
-gap: 15px;
-position: sticky;
-top: 0;
-z-index: 100;
-}
-.pix-header h2 {
-color: white;
-font-size: 20px;
-font-weight: 600;
-margin: 0;
-}
-.back-btn {
-background: none;
-border: none;
-color: white;
-font-size: 24px;
-cursor: pointer;
-padding: 0;
-display: flex;
-align-items: center;
-justify-content: center;
-}
-.pix-content {
-padding: 20px;
-background: white;
-}
-.pix-main-title {
-font-size: 20px;
-font-weight: 600;
-color: #161616;
-margin-bottom: 16px;
-}
-.pix-input-group {
-position: relative;
-margin-bottom: 6px;
-}
-.pix-input {
-width: 100%;
-padding: 16px;
-border: 1px solid #ccc;
-border-radius: 8px;
-font-size: 16px;
-color: #333;
-background: white;
-transition: border-color 0.3s;
-}
-.pix-input::placeholder {
-color: #777;
-}
-.pix-input:focus {
-outline: none;
-border-color: #ec0000;
-}
-.pix-input-subtitle {
-font-size: 13px;
-color: #666;
-margin-bottom: 24px;
-}
-.pix-section-title {
-font-size: 17px;
-font-weight: 600;
-color: #161616;
-margin-bottom: 16px;
-}
-.pix-contacts-row {
-display: flex;
-gap: 16px;
-margin-bottom: 20px;
-}
-.pix-contact-item {
-display: flex;
-flex-direction: column;
-align-items: center;
-background: none;
-border: none;
-cursor: pointer;
-width: 70px;
-}
-.pix-contact-avatar {
-width: 56px;
-height: 56px;
-border-radius: 50%;
-background: #d0e1e8;
-color: #3b6e8c;
-font-size: 16px;
-font-weight: 600;
-display: flex;
-align-items: center;
-justify-content: center;
-margin-bottom: 6px;
-}
-.pix-contact-name {
-font-size: 13px;
-color: #161616;
-text-align: center;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-width: 100%;
-margin-bottom: 2px;
-}
-.pix-contact-type {
-font-size: 11px;
-color: #666;
-text-align: center;
-}
-.pix-contacts-link {
-display: flex;
-align-items: center;
-gap: 10px;
-color: #ec0000;
-font-size: 15px;
-font-weight: 600;
-background: none;
-border: none;
-cursor: pointer;
-padding: 10px 0;
-margin-bottom: 28px;
-}
-.pix-contacts-link svg {
-width: 20px;
-height: 20px;
-fill: none;
-stroke: currentColor;
-stroke-width: 1.6;
-}
-.pix-cards-grid {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 10px;
-margin-bottom: 24px;
-}
-.pix-option-card {
-background: #fff;
-border: 1px solid #e0e0e0;
-border-radius: 12px;
-padding: 16px 10px;
-display: flex;
-flex-direction: column;
-align-items: center;
-text-align: center;
-gap: 12px;
-cursor: pointer;
-box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-transition: border-color 0.3s;
-}
-.pix-option-card:hover {
-border-color: #ec0000;
-}
-.pix-option-icon {
-width: 28px;
-height: 28px;
-color: #ec0000;
-display: flex;
-align-items: center;
-justify-content: center;
-}
-.pix-option-icon svg {
-width: 26px;
-height: 26px;
-fill: none;
-stroke: currentColor;
-stroke-width: 1.6;
-stroke-linecap: round;
-stroke-linejoin: round;
-}
-.pix-option-text {
-font-size: 13px;
-color: #161616;
-line-height: 1.25;
-font-weight: 500;
-}
-.pix-other-transfers {
-border-top: 1px solid #eee;
-padding-top: 20px;
-}
-.pix-banner-box {
-background: #eef5f7;
-border-radius: 12px;
-padding: 16px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-margin-top: 12px;
-cursor: pointer;
-}
-.pix-banner-left {
-display: flex;
-align-items: center;
-gap: 14px;
-}
-.pix-banner-icon {
-width: 40px;
-height: 40px;
-background: #fff;
-border-radius: 50%;
-color: #ec0000;
-display: flex;
-align-items: center;
-justify-content: center;
-}
-.pix-banner-icon svg {
-width: 22px;
-height: 22px;
-fill: none;
-stroke: currentColor;
-stroke-width: 1.6;
-}
-.pix-banner-title {
-font-size: 15px;
-font-weight: 600;
-color: #161616;
-}
-.pix-novo-badge {
-background: #2cb2b7;
-color: white;
-font-size: 11px;
-font-weight: 700;
-padding: 4px 10px;
-border-radius: 12px;
-letter-spacing: 0.5px;
-}
-.btn-primary {
-width: 100%;
-padding: 18px;
-background: #ec0000;
-color: white;
-border: none;
-border-radius: 10px;
-font-size: 16px;
-font-weight: 600;
-cursor: pointer;
-margin-top: 20px;
-transition: background 0.3s;
-}
-.btn-primary:hover {
-background: #c40000;
-}
-.comprovante-simples {
-background: white;
-min-height: 100vh;
-}
-.comprovante-header-vermelho {
-background: #ec0000;
-color: white;
-padding: 15px 20px;
-display: flex;
-justify-content: flex-end;
-align-items: center;
-}
-.close-btn-novo {
-background: none;
-border: none;
-color: white;
-font-size: 24px;
-cursor: pointer;
-font-weight: bold;
-}
-.success-box-ref {
-background: white;
-border: 1px solid #e0e0e0;
-border-radius: 8px;
-padding: 16px;
-display: flex;
-align-items: center;
-gap: 12px;
-margin: 20px;
-box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-}
-.success-check-ref {
-width: 32px;
-height: 32px;
-background: #5b9241;
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-color: white;
-font-size: 16px;
-flex-shrink: 0;
-}
-.success-text-ref {
-font-size: 15px;
-color: #333;
-font-weight: 500;
-}
-.comprovante-bloco-detalhes {
-padding: 0 20px;
-}
-.comprovante-titulo-secao {
-font-size: 18px;
-font-weight: 700;
-color: #111;
-margin-bottom: 6px;
-}
-.comprovante-sub-secao {
-font-size: 13px;
-color: #555;
-margin-bottom: 22px;
-line-height: 1.4;
-}
-.comp-group {
-margin-bottom: 18px;
-}
-.comp-label {
-font-size: 13px;
-color: #666;
-margin-bottom: 3px;
-}
-.comp-value {
-font-size: 16px;
-color: #111;
-font-weight: 500;
-}
-.comp-value-destaque {
-font-size: 22px;
-color: #111;
-font-weight: 700;
-}
-.comp-divider {
-border: none;
-border-top: 1px solid #e5e5e5;
-margin: 20px 0;
-}
-.btn-save-ref {
-width: calc(100% - 40px);
-margin: 20px;
-padding: 16px;
-background: #c41212;
-color: white;
-border: none;
-border-radius: 6px;
-font-size: 16px;
-font-weight: 600;
-cursor: pointer;
-transition: background 0.3s;
-text-align: center;
-}
-.btn-save-ref:hover {
-background: #a80e0e;
-}
-.btn-view-complete {
-width: calc(100% - 40px);
-margin: 0 20px 20px 20px;
-padding: 12px;
-background: none;
-color: #ec0000;
-border: none;
-border-radius: 10px;
-font-size: 15px;
-font-weight: 600;
-cursor: pointer;
-text-decoration: underline;
-text-align: center;
-}
-.comprovante-completo {
-background: white;
-min-height: 100vh;
-padding: 20px;
-}
-.completo-header {
-text-align: center;
-padding: 20px 0 30px;
-border-bottom: 2px solid #ec0000;
-margin-bottom: 25px;
-}
-.completo-logo {
-font-size: 28px;
-font-weight: bold;
-color: #ec0000;
-margin-bottom: 10px;
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 10px;
-}
-.completo-title {
-font-size: 20px;
-color: #333;
-font-weight: 600;
-}
-.completo-date {
-color: #666;
-font-size: 13px;
-margin-top: 5px;
-}
-.completo-section {
-margin-bottom: 25px;
-padding: 0 10px;
-}
-.completo-label {
-font-size: 11px;
-color: #666;
-margin-bottom: 5px;
-text-transform: uppercase;
-letter-spacing: 0.5px;
-}
-.completo-value {
-font-size: 15px;
-color: #333;
-line-height: 1.6;
-font-weight: 500;
-}
-.barcode-container {
-background: white;
-border: 1px solid #ddd;
-border-radius: 8px;
-padding: 15px;
-margin: 20px 0;
-text-align: center;
-}
-.barcode-label {
-font-size: 12px;
-color: #666;
-margin-bottom: 12px;
-text-transform: uppercase;
-}
-.barcode-visual {
-height: 50px;
-background: repeating-linear-gradient(
-90deg,
-#000 0px, #000 2px,
-#fff 2px, #fff 4px,
-#000 4px, #000 8px,
-#fff 8px, #fff 12px,
-#000 12px, #000 14px,
-#fff 14px, #fff 18px,
-#000 18px, #000 22px,
-#fff 22px, #fff 24px
-);
-margin: 10px 0;
-border-radius: 3px;
-}
-.barcode-number {
-font-family: 'Courier New', monospace;
-font-size: 14px;
-color: #333;
-word-break: break-all;
-background: #f9f9f9;
-padding: 10px;
-border-radius: 5px;
-margin-top: 10px;
-}
-.pix-qr-section {
-background: #f9f9f9;
-border-radius: 12px;
-padding: 20px;
-margin: 20px 0;
-text-align: center;
-}
-.pix-qr-title {
-font-size: 14px;
-color: #666;
-margin-bottom: 15px;
-font-weight: 500;
-}
-#qrcode {
-display: flex;
-justify-content: center;
-margin-bottom: 15px;
-}
-#qrcode img {
-border: 3px solid white;
-border-radius: 10px;
-box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-.pix-copia-cola {
-background: white;
-border: 2px dashed #ec0000;
-border-radius: 8px;
-padding: 12px;
-margin-top: 15px;
-text-align: left;
-}
-.pix-copia-cola-label {
-font-size: 12px;
-color: #666;
-margin-bottom: 8px;
-display: flex;
-align-items: center;
-gap: 5px;
-}
-.pix-copia-cola-code {
-font-family: 'Courier New', monospace;
-font-size: 11px;
-color: #333;
-word-break: break-all;
-background: #f5f5f5;
-padding: 10px;
-border-radius: 5px;
-max-height: 80px;
-overflow-y: auto;
-}
-.btn-copy-pix {
-width: 100%;
-margin-top: 10px;
-padding: 12px;
-background: #ec0000;
-color: white;
-border: none;
-border-radius: 8px;
-font-size: 14px;
-font-weight: 600;
-cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 8px;
-transition: background 0.3s;
-}
-.btn-copy-pix:hover {
-background: #c40000;
-}
-.btn-copy-pix.copied {
-background: #00aa00;
-}
 
-/* ===== TELA DE EXTRATO (estilo da foto) ===== */
-.extrato-screen {
-background: #ffffff;
-min-height: 100vh;
-}
-.extrato-header {
-background: #c41212;
-color: white;
-padding: 16px 20px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-position: sticky;
-top: 0;
-z-index: 100;
-}
-.extrato-header .back-btn {
-background: none;
-border: none;
-color: white;
-font-size: 26px;
-cursor: pointer;
-padding: 0;
-display: flex;
-align-items: center;
-justify-content: center;
-}
-.extrato-header h2 {
-color: white;
-font-size: 20px;
-font-weight: 500;
-margin: 0;
-flex: 1;
-text-align: center;
-}
-.extrato-header .filtrar-btn {
-background: none;
-border: none;
-color: white;
-font-size: 15px;
-font-weight: 600;
-cursor: pointer;
-padding: 0;
-}
-.extrato-content {
-padding: 0;
-background: #ffffff;
-}
-.extrato-saldo-section {
-padding: 22px 20px 18px;
-background: #ffffff;
-border-bottom: 1px solid #e8e8e8;
-}
-.extrato-saldo-label {
-font-size: 17px;
-color: #111;
-font-weight: 400;
-margin-bottom: 8px;
-}
-.extrato-saldo-row {
-display: flex;
-align-items: center;
-justify-content: space-between;
-margin-bottom: 14px;
-}
-.extrato-saldo-valor {
-font-size: 32px;
-font-weight: 700;
-color: #111;
-letter-spacing: -0.5px;
-}
-.extrato-saldo-eye {
-width: 28px;
-height: 28px;
-cursor: pointer;
-color: #c41212;
-display: flex;
-align-items: center;
-justify-content: center;
-}
-.extrato-saldo-eye svg {
-width: 26px;
-height: 26px;
-fill: none;
-stroke: #c41212;
-stroke-width: 1.8;
-}
-.extrato-saldo-limite {
-font-size: 15px;
-color: #333;
-margin-bottom: 4px;
-}
-.extrato-saldo-limite-link {
-font-size: 14px;
-color: #c41212;
-text-decoration: underline;
-cursor: pointer;
-margin-bottom: 16px;
-display: inline-block;
-}
-.extrato-saldo-atualizado {
-display: flex;
-align-items: center;
-justify-content: space-between;
-font-size: 14px;
-color: #555;
-}
-.extrato-saldo-atualizado .atualizar-btn {
-background: none;
-border: none;
-color: #c41212;
-font-size: 14px;
-font-weight: 600;
-cursor: pointer;
-display: flex;
-align-items: center;
-gap: 6px;
-}
-.extrato-saldo-atualizado .atualizar-btn svg {
-width: 16px;
-height: 16px;
-fill: none;
-stroke: #c41212;
-stroke-width: 2;
-}
-.extrato-lancamentos {
-background: #ffffff;
-}
-.extrato-lancamento-header {
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 16px 20px;
-border-bottom: 1px solid #e8e8e8;
-cursor: pointer;
-}
-.extrato-lancamento-header.futuros {
-background: #dce8f0;
-}
-.extrato-lancamento-header.hoje {
-background: #f0f0f0;
-}
-.extrato-lancamento-header-left {
-display: flex;
-align-items: center;
-gap: 12px;
-}
-.extrato-lancamento-header-left svg {
-width: 22px;
-height: 22px;
-fill: none;
-stroke: #333;
-stroke-width: 1.8;
-}
-.extrato-lancamento-header-left span {
-font-size: 16px;
-color: #111;
-font-weight: 500;
-}
-.extrato-lancamento-header-right svg {
-width: 22px;
-height: 22px;
-fill: none;
-stroke: #333;
-stroke-width: 2;
-}
-.extrato-item {
-display: flex;
-align-items: center;
-padding: 16px 20px;
-border-bottom: 1px solid #f0f0f0;
-cursor: pointer;
-transition: background 0.2s;
-background: #ffffff;
-}
-.extrato-item:hover {
-background: #fafafa;
-}
-.extrato-item:last-child {
-border-bottom: none;
-}
-.extrato-item-dot {
-width: 10px;
-height: 10px;
-border-radius: 50%;
-margin-right: 14px;
-flex-shrink: 0;
-}
-.extrato-item-dot.entrada {
-background: #5bb8d4;
-}
-.extrato-item-dot.saida {
-background: #f5a623;
-}
-.extrato-item-info {
-flex: 1;
-min-width: 0;
-}
-.extrato-item-title {
-font-size: 15px;
-font-weight: 500;
-color: #111;
-margin-bottom: 3px;
-}
-.extrato-item-subtitle {
-font-size: 13px;
-color: #777;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-}
-.extrato-item-amount {
-font-size: 15px;
-font-weight: 600;
-color: #111;
-margin-left: 12px;
-display: flex;
-align-items: center;
-gap: 6px;
-flex-shrink: 0;
-}
-.extrato-item-amount.debito {
-color: #111;
-}
-.extrato-item-amount.credito {
-color: #111;
-}
-.extrato-item-arrow {
-width: 18px;
-height: 18px;
-fill: none;
-stroke: #999;
-stroke-width: 2;
-margin-left: 4px;
-}
+<!-- Preconnect para acelerar CDN -->
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 
-.settings-screen {
-background: #ec0000;
-min-height: 100vh;
-}
-.settings-header {
-background: #ec0000;
-padding: 20px;
-text-align: center;
-}
-.settings-logo {
-width: 120px;
-margin-bottom: 15px;
-}
-.settings-header h2 {
-color: white;
-font-size: 22px;
-font-weight: 600;
-}
-.settings-content {
-padding: 20px;
-}
-.settings-card {
-background: white;
-border-radius: 12px;
-padding: 20px;
-margin-bottom: 15px;
-box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-.settings-label {
-font-size: 14px;
-color: #666;
-margin-bottom: 12px;
-font-weight: 600;
-}
-.settings-input {
-width: 100%;
-padding: 14px;
-border: 2px solid #ddd;
-border-radius: 8px;
-font-size: 15px;
-margin-bottom: 15px;
-transition: border-color 0.3s;
-}
-.settings-input:focus {
-outline: none;
-border-color: #ec0000;
-}
-.btn-random {
-width: 100%;
-padding: 14px;
-background: #000;
-color: white;
-border: none;
-border-radius: 25px;
-font-size: 14px;
-font-weight: 600;
-cursor: pointer;
-margin-bottom: 20px;
-transition: background 0.3s;
-}
-.btn-random:hover {
-background: #333;
-}
-.btn-copy {
-padding: 12px 24px;
-background: #000;
-color: white;
-border: none;
-border-radius: 20px;
-font-size: 14px;
-font-weight: 600;
-cursor: pointer;
-transition: background 0.3s;
-}
-.btn-copy:hover {
-background: #333;
-}
-.chave-pix-list {
-margin-top: 15px;
-}
-.chave-pix-item {
-background: #f9f9f9;
-padding: 15px;
-border-radius: 8px;
-margin-bottom: 10px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-border: 2px solid transparent;
-cursor: pointer;
-transition: all 0.3s;
-}
-.chave-pix-item:hover {
-border-color: #ec0000;
-background: #fff5f5;
-}
-.chave-pix-type {
-font-weight: 600;
-color: #333;
-}
-.chave-pix-value {
-font-size: 13px;
-color: #666;
-margin-top: 3px;
-}
-.chave-pix-check {
-width: 24px;
-height: 24px;
-border-radius: 50%;
-background: #ec0000;
-color: white;
-display: flex;
-align-items: center;
-justify-content: center;
-display: none;
-}
-.chave-pix-item.active .chave-pix-check {
-display: flex;
-}
-.processing-overlay {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: rgba(0, 0, 0, 0.85);
-display: none;
-align-items: center;
-justify-content: center;
-z-index: 10000;
-flex-direction: column;
-}
-.processing-overlay.active {
-display: flex;
-}
-.face-id-circle {
-width: 120px;
-height: 120px;
-border: 3px solid #ec0000;
-border-radius: 50%;
-animation: pulse 2s infinite;
-margin-bottom: 20px;
-}
-@keyframes pulse {
-0%, 100% { transform: scale(1); opacity: 1; }
-50% { transform: scale(1.1); opacity: 0.7; }
-}
-.processing-text {
-color: white;
-font-size: 18px;
-}
-.app-screen {
-display: block;
-}
-.app-screen.active {
-display: block;
-}
-@keyframes fadeIn {
-from { opacity: 0; transform: translateY(10px); }
-to { opacity: 1; transform: translateY(0); }
-}
-.fade-in {
-animation: fadeIn 0.4s ease-out;
-}
-</style>
+<!-- CSS crítico inline (primeira pintura rápida) -->
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#111;font-family:Arial,Helvetica,sans-serif}
-.app-screen{display:none!important;min-height:100vh;background:#fff}
-.app-screen.active{display:block!important}
-.header{position:sticky;top:0;z-index:20;background:#d90000;color:#fff}
-.header-top{height:92px;display:flex;align-items:center;padding:18px 18px 8px;gap:10px}
-.brand{font-size:22px;font-weight:700;flex:1;text-align:center;display:flex;align-items:center;justify-content:center}
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
+body{background:#f5f5f5;max-width:400px;margin:0 auto;min-height:100vh;padding-bottom:80px}
+.screen,.app-screen{display:none}.screen.active,.app-screen.active{display:block}
+.header{background:#d90000;color:#fff;position:sticky;top:0;z-index:100}
+.header-top{height:64px;display:flex;align-items:center;padding:10px 14px 5px;gap:10px}
+.brand{font-size:18px;font-weight:700;flex:1;text-align:center;display:flex;align-items:center;justify-content:center}
 .brand-logo{width:120px;height:auto;max-height:40px;object-fit:contain}
 .icon-button{background:none;border:0;color:#fff;padding:7px;display:grid;place-items:center}
-.icon-button svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.icon-button svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .header-icons{display:flex;gap:2px}
-.bank-tabs{height:58px;display:flex}
-.bank-tab{flex:1;border:0;background:transparent;color:#fff;font-size:17px;position:relative}
+.bank-tabs{height:45px;display:flex}
+.bank-tab{flex:1;border:0;background:transparent;color:#fff;font-size:16px;position:relative}
 .bank-tab.active:after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:#fff}
 .tab-panel{display:none}.tab-panel.active{display:block}
-.hero-balance{background:#d90000;color:#fff;text-align:center;padding:24px 18px 25px}
-.balance-label{font-size:20px}.info-dot{display:inline-grid;place-items:center;border:1px solid #fff;border-radius:50%;font-size:13px;width:23px;height:23px}
-.balance-amount{font-size:49px;line-height:1.15;margin:15px 0 9px;letter-spacing:-1px}
-.balance-limit{font-size:17px}
-.link-button{margin:20px 0 25px;background:none;border:0;color:#fff;text-decoration:underline;font-size:19px;font-weight:700}
-.quick-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.quick{background:none;border:0;color:#fff;font-size:15px;line-height:1.25}
-.quick-icon{width:64px;height:64px;border-radius:50%;background:#fff;color:#d90000;display:grid;place-items:center;margin:0 auto 9px}
-.quick-icon svg{width:36px;height:36px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.home-section{padding:24px 18px}
-.home-section h2,.benefits h2{font-size:27px;font-weight:500;margin:0 0 17px;color:#161616}
+.hero-balance{background:#d90000;color:#fff;text-align:center;padding:16px 14px}
+.balance-label{font-size:18px}.info-dot{display:inline-grid;place-items:center;border:1px solid #fff;border-radius:50%;font-size:13px;width:23px;height:23px}
+.balance-amount{font-size:37px;line-height:1.15;margin:11px 0 7px;letter-spacing:-1px}
+.balance-limit{font-size:15px}
+.link-button{margin:14px 0 18px;background:none;border:0;color:#fff;text-decoration:underline;font-size:17px;font-weight:700}
+.quick-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;background:transparent;padding:0}
+.quick{background:none;border:0;color:#fff;font-size:13px;line-height:1.25;display:flex;flex-direction:column;align-items:center}
+.quick-icon{width:54px;height:54px;border-radius:50%;background:#fff;color:#d90000;display:grid;place-items:center;margin:0 auto 6px}
+.quick-icon svg{width:31px;height:31px;fill:none;stroke:currentColor;stroke-width:1.6}
+.home-section{padding:19px 15px}
+.home-section h2,.benefits h2{font-size:23px;font-weight:500;margin:0 0 13px;color:#161616}
 .important{background:#eef5f7}
 .ad-carousel{position:relative;min-height:220px}
 .home-ad{display:none;position:relative;border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 4px 16px #0002}
 .home-ad.active{display:block}
-.home-ad img{width:100%;height:170px;object-fit:cover;display:block}
-.home-ad div{padding:14px 16px 17px}.home-ad b{display:block;font-size:19px;margin-bottom:5px}.home-ad span{display:block;color:#555;font-size:14px}
+.home-ad img{width:100%;height:145px;object-fit:cover;display:block}
+.home-ad div{padding:11px 13px 13px}.home-ad b{display:block;font-size:17px;margin-bottom:5px}.home-ad span{display:block;color:#555;font-size:13px}
 .carousel-dots{text-align:center;padding-top:9px}.carousel-dots i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#aaa;margin:0 3px}.carousel-dots i.active{background:#d90000;width:18px;border-radius:6px}
 .account-card{background:#fff;border-radius:20px;box-shadow:0 3px 15px #0001;overflow:hidden}
-.account-card.large{display:grid;grid-template-columns:65px 1fr;gap:10px;padding:25px 18px 0}
+.account-card.large{display:grid;grid-template-columns:65px 1fr;gap:10px;padding:19px 15px 0}
 .account-icon{width:48px;height:48px;border-radius:14px;background:#f4f7f9;color:#d90000;display:grid;place-items:center}.account-icon svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.6}
 .account-main small,.account-values small{display:block;color:#666;font-size:14px}.account-main strong{display:block;font-size:22px;margin-top:8px}.account-main em,.investment-card em{font-style:normal;background:#eee;border-radius:50%;padding:0 9px;margin-left:5px}
-.account-values{grid-column:1/-1;background:#f2f7fa;margin:0 -18px;padding:15px 18px;display:flex;justify-content:space-between}.account-values b{font-size:17px}
-.mini-actions{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:22px 10px}.mini-actions button,.investment-actions button{border:0;background:none;font-size:15px;color:#333}.mini-actions span{width:60px;height:60px;border:2px solid #69aeb5;color:#4e9da5;border-radius:50%;display:grid;place-items:center;margin:auto auto 8px}.mini-actions svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.6}
-.investment-card{background:#fff;border-radius:20px;box-shadow:0 3px 15px #0001;padding:26px 18px 0;position:relative}.investment-icon{width:55px;height:55px;border-radius:15px;background:#f4f7f9;color:#d90000;display:grid;place-items:center}.investment-icon svg{width:33px;height:33px;fill:none;stroke:currentColor;stroke-width:1.7}.investment-card strong{display:block;font-size:21px;margin:85px 0 18px}.unlock{position:absolute;right:18px;top:27px;border:0;background:none;color:#16859b;font-size:17px;font-weight:700}.invested{background:#f2f7fa;margin:0 -18px;padding:15px 18px}.invested small,.invested b{display:block}.invested b{font-size:18px;margin-top:4px}
-.investment-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:20px 0}.investment-actions button span{width:55px;height:55px;border:2px solid #69aeb5;border-radius:50%;display:grid;place-items:center;margin:auto auto 8px;color:#4e9da5;font-size:26px}
-.support-card{background:#fff;border-radius:20px;box-shadow:0 3px 15px #0001;padding:0 18px}.support-card button{width:100%;border:0;background:none;display:flex;align-items:center;gap:16px;padding:22px 0;text-align:left}.support-icon{width:50px;height:50px;border-radius:50%;background:#f4f4f4;color:#d90000;display:grid;place-items:center;font-size:25px}.support-card b{display:block;font-size:19px}.support-card small{display:block;color:#666;font-size:14px;margin-top:4px}.support-card em{margin-left:auto;color:#d90000;font-size:30px;font-style:normal}
-.benefits{background:#e8f5f7;padding:24px 18px 100px}.benefit-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.benefit-grid article{background:#fff;border-radius:18px;overflow:hidden;position:relative;text-align:center;box-shadow:0 3px 12px #0001;padding-bottom:18px}.benefit-grid img{width:100%;height:125px;object-fit:cover}.benefit-grid h3{font-size:19px;margin:14px 10px 7px}.benefit-grid p{font-size:14px;line-height:1.4;color:#555;margin:0 10px 14px}.close-ad{position:absolute;right:8px;top:8px;border:0;border-radius:50%;width:34px;height:34px;background:#fff;font-size:23px}.outline{background:#fff;border:2px solid #d90000;color:#d90000;border-radius:22px;padding:8px 14px;font-weight:700}
+.account-values{grid-column:1/-1;background:#f2f7fa;margin:0 -15px;padding:12px 15px;display:flex;justify-content:space-between}.account-values b{font-size:17px}
+.mini-actions{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:16px 7px}.mini-actions button{border:0;background:none;font-size:15px;color:#333}.mini-actions span{width:52px;height:52px;border:2px solid #69aeb5;color:#4e9da5;border-radius:50%;display:grid;place-items:center;margin:auto auto 8px}.mini-actions svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.6}
+.investment-card{background:#fff;border-radius:20px;box-shadow:0 3px 15px #0001;padding:19px 15px 0;position:relative}.investment-icon{width:55px;height:55px;border-radius:15px;background:#f4f7f9;color:#d90000;display:grid;place-items:center}.investment-icon svg{width:33px;height:33px;fill:none;stroke:currentColor;stroke-width:1.7}.investment-card strong{display:block;font-size:21px;margin:65px 0 14px}.unlock{position:absolute;right:18px;top:27px;border:0;background:none;color:#16859b;font-size:17px;font-weight:700}.invested{background:#f2f7fa;margin:0 -15px;padding:12px 15px}.invested small,.invested b{display:block}.invested b{font-size:18px;margin-top:4px}
+.investment-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:15px 0}.investment-actions button{border:0;background:none;font-size:15px;color:#333}.investment-actions button span{width:50px;height:50px;border:2px solid #69aeb5;border-radius:50%;display:grid;place-items:center;margin:auto auto 8px;color:#4e9da5;font-size:26px}
+.support-card{background:#fff;border-radius:20px;box-shadow:0 3px 15px #0001;padding:0 14px}.support-card button{width:100%;border:0;background:none;display:flex;align-items:center;gap:16px;padding:17px 0;text-align:left}.support-icon{width:44px;height:44px;border-radius:50%;background:#f4f4f4;color:#d90000;display:grid;place-items:center;font-size:25px}.support-card b{display:block;font-size:19px}.support-card small{display:block;color:#666;font-size:14px;margin-top:4px}.support-card em{margin-left:auto;color:#d90000;font-size:30px;font-style:normal}
+.benefits{background:#e8f5f7;padding:24px 18px 100px}.benefit-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.benefit-grid article{background:#fff;border-radius:18px;overflow:hidden;position:relative;text-align:center;box-shadow:0 3px 12px #0001;padding-bottom:18px}.benefit-grid img{width:100%;height:105px;object-fit:cover}.benefit-grid h3{font-size:17px;margin:14px 10px 7px}.benefit-grid p{font-size:13px;line-height:1.4;color:#555;margin:0 10px 14px}.close-ad{position:absolute;right:8px;top:8px;border:0;border-radius:50%;width:34px;height:34px;background:#fff;font-size:23px}.outline{background:#fff;border:2px solid #d90000;color:#d90000;border-radius:22px;padding:8px 14px;font-weight:700}
 .other-bank-section{min-height:calc(100vh - 150px)}.other-card{display:flex;align-items:center;gap:15px;padding:18px;border-radius:17px;background:#fff;box-shadow:0 3px 13px #0001;margin-bottom:14px}.other-icon{width:48px;height:48px;border-radius:50%;background:#f2f2f2;display:grid;place-items:center;color:#d90000;font-size:24px}.other-card b,.other-card small{display:block}.other-card small{color:#666;margin-top:4px}.other-card em{margin-left:auto;font-size:28px;color:#d90000;font-style:normal}
-.bottom-nav{position:fixed!important;bottom:0;left:0;right:0;z-index:30;height:70px;background:#fff;border-top:1px solid #ddd;display:grid;grid-template-columns:repeat(4,1fr);padding-bottom:env(safe-area-inset-bottom)}.bottom-nav .nav-item{border:0;background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:#666;font-size:12px}.bottom-nav .nav-item svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}.bottom-nav .nav-item.active{color:#d90000;font-weight:700}
-@media(min-width:700px){.app-screen{max-width:430px;margin:auto}.bottom-nav{max-width:430px;left:50%;right:auto;transform:translateX(-50%)}}
+.bottom-nav{position:fixed!important;bottom:0;left:0;right:0;z-index:9999;height:64px;background:#fff;border-top:1px solid #ddd;display:grid;grid-template-columns:repeat(4,1fr);padding:4px 0}
+.bottom-nav .nav-item{border:0;background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:#666;font-size:11px}
+.bottom-nav .nav-item svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6}
+.bottom-nav .nav-item.active{color:#d90000;font-weight:700}
 .balance-sensitive.balance-hidden{filter:blur(9px);user-select:none}
 .balance-sensitive.balance-hidden *{filter:blur(9px)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn .4s ease-out}
 </style>
+
+<!-- Carregamento lazy dos scripts pesados -->
 <script>
-function toggleBalance(){
-document.documentElement.classList.toggle('saldo-oculto');
-const items=document.querySelectorAll('.balance-sensitive');
-const hidden=document.body.classList.toggle('balances-hidden');
-items.forEach(el=>el.classList.toggle('balance-hidden', hidden));
-const btn=document.getElementById('toggleBalanceBtn');
-if(btn) btn.setAttribute('aria-label', hidden ? 'Mostrar saldo' : 'Ocultar saldo');
-}
-function switchBankTab(id, btn){
-document.querySelectorAll('.bank-tab').forEach(b=>b.classList.remove('active'));
-document.querySelectorAll('#mainScreen .tab-panel').forEach(p=>p.classList.remove('active'));
-btn.classList.add('active');
-document.getElementById(id).classList.add('active');
-}
-(function(){
-let i=0;
-setInterval(function(){
-const ads=document.querySelectorAll('.home-ad');
-const dots=document.querySelectorAll('.carousel-dots i');
-if(!ads.length) return;
-ads[i].classList.remove('active'); dots[i].classList.remove('active');
-i=(i+1)%ads.length;
-ads[i].classList.add('active'); dots[i].classList.add('active');
-},4500);
-})();
+// Carrega QRCode e html2pdf apenas quando necessário
+window.__loadHeavyLibs = function() {
+  if (window.__libsLoaded) return;
+  window.__libsLoaded = true;
+  const s1 = document.createElement('script');
+  s1.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+  s1.defer = true;
+  document.head.appendChild(s1);
+  const s2 = document.createElement('script');
+  s2.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+  s2.defer = true;
+  document.head.appendChild(s2);
+};
 </script>
-<style id="final-mobile-layout-fix">
-#mainScreen .hero-balance .quick-actions{
-display:grid !important;
-grid-template-columns:repeat(4,minmax(0,1fr)) !important;
-gap:4px !important;
-background:transparent !important;
-padding:0 !important;
-margin:0 !important;
-border-radius:0 !important;
-box-shadow:none !important;
-position:static !important;
-}
-#mainScreen .hero-balance .quick{
-display:flex !important;
-flex-direction:column !important;
-align-items:center !important;
-justify-content:flex-start !important;
-width:100% !important;
-min-width:0 !important;
-background:transparent !important;
-color:#fff !important;
-border:0 !important;
-padding:0 !important;
-margin:0 !important;
-font-size:15px !important;
-line-height:1.25 !important;
-}
-#mainScreen .hero-balance .quick-icon{
-flex:none !important;
-width:64px !important;
-height:64px !important;
-min-width:64px !important;
-border-radius:50% !important;
-background:#fff !important;
-color:#d90000 !important;
-display:grid !important;
-place-items:center !important;
-margin:0 auto 9px !important;
-}
-#mainScreen .hero-balance .quick-icon svg{
-width:36px !important;
-height:36px !important;
-fill:none !important;
-stroke:currentColor !important;
-stroke-width:1.6 !important;
-}
-#mainScreen .bottom-nav{
-position:fixed !important;
-left:0 !important;
-right:0 !important;
-bottom:0 !important;
-transform:none !important;
-width:100% !important;
-max-width:none !important;
-height:72px !important;
-display:grid !important;
-grid-template-columns:repeat(4,minmax(0,1fr)) !important;
-padding:6px 0 calc(6px + env(safe-area-inset-bottom)) !important;
-margin:0 !important;
-z-index:9999 !important;
-background:#fff !important;
-}
-#mainScreen .bottom-nav .nav-item{
-min-width:0 !important;
-width:100% !important;
-display:flex !important;
-flex-direction:column !important;
-align-items:center !important;
-justify-content:center !important;
-gap:3px !important;
-padding:0 !important;
-margin:0 !important;
-border:0 !important;
-background:none !important;
-color:#555 !important;
-font-size:12px !important;
-}
-#mainScreen .bottom-nav .nav-item.active{color:#d90000 !important}
-#mainScreen .bottom-nav .nav-item svg{
-width:24px !important;
-height:24px !important;
-fill:none !important;
-stroke:currentColor !important;
-stroke-width:1.6 !important;
-}
-#mainScreen{padding-bottom:72px !important}
-@media(max-width:380px){
-#mainScreen .hero-balance .quick-icon{width:56px !important;height:56px !important;min-width:56px !important}
-#mainScreen .hero-balance .quick{font-size:13px !important}
-}
-</style>
-<style id="compact-scale">
-#mainScreen .header-top{height:64px!important;padding:10px 14px 5px!important}
-#mainScreen .header-top .icon-button svg{width:25px!important;height:25px!important}
-#mainScreen .brand{font-size:18px!important}
-#mainScreen .bank-tabs{height:45px!important}
-#mainScreen .bank-tab{font-size:16px!important}
-#mainScreen .hero-balance{padding:16px 14px 16px!important}
-#mainScreen .balance-label{font-size:18px!important}
-#mainScreen .balance-amount{font-size:37px!important;margin:11px 0 7px!important}
-#mainScreen .balance-limit{font-size:15px!important}
-#mainScreen .link-button{font-size:17px!important;margin:14px 0 18px!important}
-#mainScreen .hero-balance .quick-icon{width:54px!important;height:54px!important;min-width:54px!important;margin-bottom:6px!important}
-#mainScreen .hero-balance .quick-icon svg{width:31px!important;height:31px!important}
-#mainScreen .hero-balance .quick{font-size:13px!important}
-#mainScreen .home-section{padding:19px 15px!important}
-#mainScreen .home-section h2,#mainScreen .benefits h2{font-size:23px!important;margin-bottom:13px!important}
-#mainScreen .home-ad img{height:145px!important}
-#mainScreen .home-ad div{padding:11px 13px 13px!important}
-#mainScreen .home-ad b{font-size:17px!important}
-#mainScreen .home-ad span{font-size:13px!important}
-#mainScreen .account-card.large{padding:19px 15px 0!important}
-#mainScreen .account-values{margin:0 -15px!important;padding:12px 15px!important}
-#mainScreen .mini-actions{padding:16px 7px!important}
-#mainScreen .mini-actions span{width:52px!important;height:52px!important}
-#mainScreen .investment-card{padding:19px 15px 0!important}
-#mainScreen .investment-card strong{margin:65px 0 14px!important}
-#mainScreen .invested{margin:0 -15px!important;padding:12px 15px!important}
-#mainScreen .investment-actions{padding:15px 0!important}
-#mainScreen .investment-actions button span{width:50px!important;height:50px!important}
-#mainScreen .support-card{padding:0 14px!important}
-#mainScreen .support-card button{padding:17px 0!important}
-#mainScreen .support-icon{width:44px!important;height:44px!important}
-#mainScreen .benefit-grid{gap:12px!important}
-#mainScreen .benefit-grid img{height:105px!important}
-#mainScreen .benefit-grid h3{font-size:17px!important}
-#mainScreen .benefit-grid p{font-size:13px!important}
-#mainScreen .bottom-nav{height:64px!important;padding:4px 0!important}
-#mainScreen .bottom-nav .nav-item{font-size:11px!important}
-#mainScreen .bottom-nav .nav-item svg{width:22px!important;height:22px!important}
-#mainScreen{padding-bottom:64px!important}
-</style>
 </head>
 <body>
+
 <div class="app-screen active" id="mainScreen">
 <div class="header">
 <div class="header-top">
@@ -1376,10 +99,10 @@ stroke-width:1.6 !important;
 <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
 </button>
 <div class="brand">
-<img src="santander.png" alt="Santander" class="brand-logo">
+<img src="santander.png" alt="Santander" class="brand-logo" loading="eager">
 </div>
 <div class="header-icons">
-<button class="icon-button" onclick="showExtrato()" aria-label="Pesquisar">
+<button class="icon-button" onclick="showExtrato()" aria-label="Extrato">
 <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
 </button>
 <button class="icon-button" id="toggleBalanceBtn" onclick="toggleBalance()" aria-label="Ocultar saldo">
@@ -1395,6 +118,7 @@ stroke-width:1.6 !important;
 <button class="bank-tab" onclick="switchBankTab('bankTabOutros', this)">Outros bancos</button>
 </div>
 </div>
+
 <div id="bankTabAurora" class="tab-panel active">
 <section class="hero-balance">
 <div class="balance-label">Saldo total <span class="info-dot">i</span></div>
@@ -1420,24 +144,26 @@ stroke-width:1.6 !important;
 </button>
 </div>
 </section>
+
 <section class="home-section important">
 <h2>Importante para você</h2>
 <div class="ad-carousel">
 <article class="home-ad active">
-<img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=80" alt="Pessoa usando celular">
+<img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=80" alt="Pessoa usando celular" loading="lazy">
 <div><b>Organize sua vida financeira</b><span>Tenha praticidade para acompanhar suas contas.</span></div>
 </article>
 <article class="home-ad">
-<img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=900&q=80" alt="Pessoa trabalhando">
+<img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=900&q=80" alt="Pessoa trabalhando" loading="lazy">
 <div><b>Mais praticidade para você</b><span>Confira recursos e serviços disponíveis.</span></div>
 </article>
 <article class="home-ad">
-<img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80" alt="Equipe">
+<img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80" alt="Equipe" loading="lazy">
 <div><b>Novidades e benefícios</b><span>Veja as novidades da sua conta.</span></div>
 </article>
 </div>
 <div class="carousel-dots"><i class="active"></i><i></i><i></i></div>
 </section>
+
 <section class="home-section">
 <h2>Minhas contas Santander</h2>
 <div class="account-card large">
@@ -1456,6 +182,7 @@ stroke-width:1.6 !important;
 <button><span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v10M8.5 9.5c.7-1 5.8-1 6.5 0 .7 1-5.8 1-6.5 0Zm0 5c.7 1 5.8 1 6.5 0"/></svg></span>Limite da conta</button>
 </div>
 </section>
+
 <section class="home-section">
 <h2>Meus investimentos</h2>
 <div class="investment-card">
@@ -1465,32 +192,36 @@ stroke-width:1.6 !important;
 <div class="invested balance-sensitive"><small>Total investido</small><b contenteditable="true">R$ 0,00</b></div>
 </div>
 <div class="investment-actions">
-<button><span>⇢</span>Investir</button><button><span>⇠</span>Resgatar</button><button><span>♧</span>Poupança</button><button><span>＄</span>Minhas<br>reservas</button>
+<button><span>⇢</span>Investir</button><button><span>⇠</span>Resgatar</button><button><span></span>Poupança</button><button><span>＄</span>Minhas<br>reservas</button>
 </div>
 </section>
+
 <section class="home-section">
 <h2>Atendimento</h2>
 <div class="support-card">
 <button onclick="alert('Chat')"><span class="support-icon">?</span><div><b>Acessar chat</b><small>Assistente virtual</small></div><em>›</em></button>
-<button onclick="alert('Central de ajuda')"><span class="support-icon"></span><div><b>Central de ajuda</b><small>Encontre respostas rápidas</small></div><em>›</em></button>
+<button onclick="alert('Central de ajuda')"><span class="support-icon">◉</span><div><b>Central de ajuda</b><small>Encontre respostas rápidas</small></div><em>›</em></button>
 </div>
 </section>
+
 <section class="benefits">
 <h2>Benefícios e parcerias</h2>
 <div class="benefit-grid">
-<article><button class="close-ad">×</button><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=80"><h3>Centralize suas finanças</h3><p>Conecte suas contas e organize sua vida financeira.</p><button class="outline">CONECTE JÁ</button></article>
-<article><button class="close-ad">×</button><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=700&q=80"><h3>Crédito para você</h3><p>Confira opções e condições disponíveis para seu perfil.</p><button class="outline">SAIBA MAIS</button></article>
+<article><button class="close-ad">×</button><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=80" loading="lazy"><h3>Centralize suas finanças</h3><p>Conecte suas contas e organize sua vida financeira.</p><button class="outline">CONECTE JÁ</button></article>
+<article><button class="close-ad">×</button><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=700&q=80" loading="lazy"><h3>Crédito para você</h3><p>Confira opções e condições disponíveis para seu perfil.</p><button class="outline">SAIBA MAIS</button></article>
 </div>
 </section>
 </div>
+
 <div id="bankTabOutros" class="tab-panel">
 <section class="home-section other-bank-section">
 <h2>Outros bancos</h2>
 <div class="other-card"><span class="other-icon">▣</span><div><b>Contas cadastradas</b><small>Gerencie contas de outros bancos.</small></div><em>›</em></div>
-<div class="other-card"><span class="other-icon"></span><div><b>Transferências</b><small>Envie e receba valores.</small></div><em>›</em></div>
-<div class="other-card"><span class="other-icon"></span><div><b>Pix</b><small>Faça um Pix para qualquer instituição.</small></div><em>›</em></div>
+<div class="other-card"><span class="other-icon">⇄</span><div><b>Transferências</b><small>Envie e receba valores.</small></div><em>›</em></div>
+<div class="other-card"><span class="other-icon">⚡</span><div><b>Pix</b><small>Faça um Pix para qualquer instituição.</small></div><em>›</em></div>
 </section>
 </div>
+
 <nav class="bottom-nav">
 <button class="nav-item active" onclick="showMain()"><svg viewBox="0 0 24 24"><path d="m3 11 9-8 9 8v9h-6v-6H9v6H3z"/></svg><span>Início</span></button>
 <button class="nav-item" onclick="showPix()"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg><span>Pagar</span></button>
@@ -1498,405 +229,372 @@ stroke-width:1.6 !important;
 <button class="nav-item"><svg viewBox="0 0 24 24"><path d="M4 5h16v12H4zM8 21h8"/></svg><span>Atendimento</span></button>
 </nav>
 </div>
+
+<!-- Telas secundárias (carregadas sob demanda) -->
 <div id="pixScreen" class="screen pix-screen">
-<header class="pix-header">
-<button class="back-btn" onclick="showMain()" aria-label="Voltar">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-</button>
-<h2>Pix</h2>
+<header class="pix-header" style="background:#d90000;color:#fff;padding:15px 20px;display:flex;align-items:center;gap:15px;position:sticky;top:0;z-index:100">
+<button class="back-btn" onclick="showMain()" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer">←</button>
+<h2 style="color:#fff;font-size:20px;font-weight:600;margin:0">Pix</h2>
 </header>
-<main class="pix-content">
-<h1 class="pix-main-title">Para quem você vai transferir?</h1>
-<div class="pix-input-group">
-<input type="text" class="pix-input" placeholder="Nome, Chave ou Pix copia e cola" id="pixKey">
+<main class="pix-content" style="padding:20px;background:#fff">
+<h1 class="pix-main-title" style="font-size:20px;font-weight:600;color:#161616;margin-bottom:16px">Para quem você vai transferir?</h1>
+<div class="pix-input-group" style="margin-bottom:6px">
+<input type="text" class="pix-input" placeholder="Nome, Chave ou Pix copia e cola" id="pixKey" style="width:100%;padding:16px;border:1px solid #ccc;border-radius:8px;font-size:16px;color:#333;background:#fff">
 </div>
-<p class="pix-input-subtitle">Celular, CPF/CNPJ, e-mail, chave-aleatória...</p>
-<h2 class="pix-section-title">Transfira novamente</h2>
-<div class="pix-contacts-row">
-<button class="pix-contact-item" onclick="selectContact('Destinatário')">
-<div class="pix-contact-avatar">IN</div>
-<span class="pix-contact-name">Destinatário</span>
-<span class="pix-contact-type">Celular</span>
+<p class="pix-input-subtitle" style="font-size:13px;color:#666;margin-bottom:24px">Celular, CPF/CNPJ, e-mail, chave-aleatória...</p>
+<h2 class="pix-section-title" style="font-size:17px;font-weight:600;color:#161616;margin-bottom:16px">Transfira novamente</h2>
+<div class="pix-contacts-row" style="display:flex;gap:16px;margin-bottom:20px">
+<button class="pix-contact-item" onclick="selectContact('Destinatário')" style="display:flex;flex-direction:column;align-items:center;background:none;border:none;cursor:pointer;width:70px">
+<div class="pix-contact-avatar" style="width:56px;height:56px;border-radius:50%;background:#d0e1e8;color:#3b6e8c;font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-bottom:6px">IN</div>
+<span class="pix-contact-name" style="font-size:13px;color:#161616;text-align:center">Destinatário</span>
+<span class="pix-contact-type" style="font-size:11px;color:#666">Celular</span>
 </button>
-<button class="pix-contact-item" onclick="selectContact('Destinatário')">
-<div class="pix-contact-avatar">IN</div>
-<span class="pix-contact-name">Destinatário</span>
-<span class="pix-contact-type">Aleatória</span>
+<button class="pix-contact-item" onclick="selectContact('Destinatário')" style="display:flex;flex-direction:column;align-items:center;background:none;border:none;cursor:pointer;width:70px">
+<div class="pix-contact-avatar" style="width:56px;height:56px;border-radius:50%;background:#d0e1e8;color:#3b6e8c;font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-bottom:6px">IN</div>
+<span class="pix-contact-name" style="font-size:13px;color:#161616;text-align:center">Destinatário</span>
+<span class="pix-contact-type" style="font-size:11px;color:#666">Aleatória</span>
 </button>
-<button class="pix-contact-item" onclick="selectContact('Destinatário')">
-<div class="pix-contact-avatar">IN</div>
-<span class="pix-contact-name">Destinatário</span>
-<span class="pix-contact-type">CPF</span>
+<button class="pix-contact-item" onclick="selectContact('Destinatário')" style="display:flex;flex-direction:column;align-items:center;background:none;border:none;cursor:pointer;width:70px">
+<div class="pix-contact-avatar" style="width:56px;height:56px;border-radius:50%;background:#d0e1e8;color:#3b6e8c;font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-bottom:6px">IN</div>
+<span class="pix-contact-name" style="font-size:13px;color:#161616;text-align:center">Destinatário</span>
+<span class="pix-contact-type" style="font-size:11px;color:#666">CPF</span>
 </button>
 </div>
-<button class="pix-contacts-link" onclick="alert('Acessar todos os contatos')">
-<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 10h8M8 14h5"/><circle cx="9" cy="7" r="1"/></svg>
-Acessar todos os contatos
-</button>
-<h2 class="pix-section-title">Você também pode usar</h2>
-<div class="pix-cards-grid">
-<div class="pix-option-card" onclick="alert('Agência e conta')">
-<div class="pix-option-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v4M12 14v4M16 14v4"/></svg></div>
-<span class="pix-option-text">Agência<br>e conta</span>
-</div>
-<div class="pix-option-card" onclick="alert('Pix copia e cola')">
-<div class="pix-option-icon"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
-<span class="pix-option-text">Pix copia<br>e cola</span>
-</div>
-<div class="pix-option-card" onclick="alert('Código QR')">
-<div class="pix-option-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM17 17h4v4h-4zM14 21h3"/></svg></div>
-<span class="pix-option-text">Código<br>QR</span>
-</div>
-</div>
-<div class="pix-other-transfers">
-<h2 class="pix-section-title">Outras transferências</h2>
-<div class="pix-banner-box" onclick="goToValor()">
-<div class="pix-banner-left">
-<div class="pix-banner-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-<span class="pix-banner-title">Trazer Dinheiro</span>
-</div>
-<span class="pix-novo-badge">Novo</span>
-</div>
-</div>
-<button class="btn-primary" onclick="goToValor()" style="margin-top: 24px;">Continuar</button>
+<button class="btn-primary" onclick="goToValor()" style="margin-top:24px;width:100%;padding:18px;background:#d90000;color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer">Continuar</button>
 </main>
 </div>
+
 <div id="valorScreen" class="screen pix-screen">
-<header class="pix-header">
-<button class="back-btn" onclick="showPix()">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-</button>
-<h2>Definir transferência</h2>
+<header class="pix-header" style="background:#d90000;color:#fff;padding:15px 20px;display:flex;align-items:center;gap:15px;position:sticky;top:0;z-index:100">
+<button class="back-btn" onclick="showPix()" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer">←</button>
+<h2 style="color:#fff;font-size:20px;font-weight:600;margin:0">Definir transferência</h2>
 </header>
-<main class="pix-content" style="padding-top: 24px; background: #f8fafc; min-height: calc(100vh - 70px); padding-bottom: 100px;">
-<h2 style="font-size: 24px; font-weight: 600; color: #161616; margin-bottom: 20px;">Quanto você vai enviar?</h2>
-<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin-bottom: 20px;">
-<div style="font-size: 13px; color: #64748b; margin-bottom: 8px;">Para:</div>
-<div style="font-size: 14px; color: #333; line-height: 1.6;">
-<div style="margin-bottom: 4px;">Nome: <span id="destinatarioNome">Destinatário</span></div>
-<div style="margin-bottom: 4px;">CPF: <span id="destinatarioCPF">***.000.000-**</span></div>
+<main class="pix-content" style="padding-top:24px;background:#f8fafc;min-height:calc(100vh - 70px);padding-bottom:100px">
+<h2 style="font-size:24px;font-weight:600;color:#161616;margin-bottom:20px">Quanto você vai enviar?</h2>
+<div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin-bottom:20px">
+<div style="font-size:13px;color:#64748b;margin-bottom:8px">Para:</div>
+<div style="font-size:14px;color:#333;line-height:1.6">
+<div style="margin-bottom:4px">Nome: <span id="destinatarioNome">Destinatário</span></div>
+<div style="margin-bottom:4px">CPF: <span id="destinatarioCPF">***.000.000-**</span></div>
 <div>Chave: <span id="destinatarioChave">(00) 00000-0000</span> • <span id="destinatarioInstituicao">BCO SANTANDER (BRASIL) S.A.</span></div>
 </div>
 </div>
-<div style="margin-bottom: 20px;">
-<div style="font-size: 14px; color: #64748b; margin-bottom: 8px;">Valor</div>
-<div style="display: flex; align-items: center; border: 2px solid #e2e8f0; border-radius: 8px; padding: 0 16px; background: white;">
-<input type="text" class="pix-input" placeholder="R$ 0,00" id="valorTransferencia" style="border: none; padding: 16px 0; font-size: 24px; font-weight: 600; outline: none; background: transparent; width: 100%; color: #0f172a;" value="R$ 0,00">
+<div style="margin-bottom:20px">
+<div style="font-size:14px;color:#64748b;margin-bottom:8px">Valor</div>
+<div style="display:flex;align-items:center;border:2px solid #e2e8f0;border-radius:8px;padding:0 16px;background:#fff">
+<input type="text" class="pix-input" placeholder="R$ 0,00" id="valorTransferencia" style="border:none;padding:16px 0;font-size:24px;font-weight:600;outline:none;background:transparent;width:100%;color:#0f172a" value="R$ 0,00">
 </div>
 </div>
-<button class="btn-primary" id="btnContinuarValor" onclick="goToPagamento()" style="margin-top: 0; border-radius: 8px; padding: 16px; font-weight: 600;" disabled>Continuar</button>
+<button class="btn-primary" id="btnContinuarValor" onclick="goToPagamento()" style="width:100%;padding:16px;background:#d90000;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer" disabled>Continuar</button>
 </main>
 </div>
+
 <div id="pagamentoScreen" class="screen pix-screen">
-<header class="pix-header">
-<button class="back-btn" onclick="showValor()">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-</button>
-<h2>Forma de pagamento</h2>
-<button class="back-btn" style="margin-left: auto;">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-</button>
+<header class="pix-header" style="background:#d90000;color:#fff;padding:15px 20px;display:flex;align-items:center;gap:15px;position:sticky;top:0;z-index:100">
+<button class="back-btn" onclick="showValor()" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer">←</button>
+<h2 style="color:#fff;font-size:20px;font-weight:600;margin:0">Forma de pagamento</h2>
 </header>
-<main class="pix-content" style="padding-top: 24px; background: white; min-height: calc(100vh - 70px); padding-bottom: 100px;">
-<h2 style="font-size: 24px; font-weight: 600; color: #161616; margin-bottom: 20px;">Como você quer pagar?</h2>
-<h3 style="font-size: 16px; color: #64748b; margin-bottom: 16px; font-weight: 400;">Principais formas de pagamento</h3>
-<div class="payment-option selected" onclick="selectPayment(this)" style="border: 2px solid #ec0000; background: #fff5f3; border-radius: 8px; padding: 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
-<div style="flex: 1;">
-<div style="font-size: 16px; font-weight: 600; color: #333; margin-bottom: 4px; display: flex; align-items: center; gap: 8px;">
-<img src="logo.png" alt="Santander" style="width: 24px; height: 24px; object-fit: contain;">
+<main class="pix-content" style="padding-top:24px;background:#fff;min-height:calc(100vh - 70px);padding-bottom:100px">
+<h2 style="font-size:24px;font-weight:600;color:#161616;margin-bottom:20px">Como você quer pagar?</h2>
+<div class="payment-option selected" onclick="selectPayment(this)" style="border:2px solid #d90000;background:#fff5f3;border-radius:8px;padding:16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer">
+<div style="flex:1">
+<div style="font-size:16px;font-weight:600;color:#333;margin-bottom:4px;display:flex;align-items:center;gap:8px">
+<img src="logo.png" alt="Santander" style="width:24px;height:24px;object-fit:contain" loading="lazy">
 Saldo em conta
 </div>
-<div style="font-size: 13px; color: #666; margin: 2px 0;">Conta corrente <span id="accountNumber">0000000-0</span></div>
-<div style="font-size: 13px; color: #666; margin: 2px 0;">Saldo: <span id="accountBalance">R$ 0,00</span></div>
-<div style="font-size: 13px; color: #666; margin: 2px 0;">Saldo + Limite: <span id="accountLimit">R$ 0,00</span></div>
+<div style="font-size:13px;color:#666;margin:2px 0">Conta corrente <span id="accountNumber">0000000-0</span></div>
+<div style="font-size:13px;color:#666;margin:2px 0">Saldo: <span id="accountBalance">R$ 0,00</span></div>
+<div style="font-size:13px;color:#666;margin:2px 0">Saldo + Limite: <span id="accountLimit">R$ 0,00</span></div>
 </div>
-<div style="width: 24px; height: 24px; border: 2px solid #ec0000; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-<div style="width: 12px; height: 12px; border-radius: 50%; background: #ec0000;"></div>
+<div style="width:24px;height:24px;border:2px solid #d90000;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+<div style="width:12px;height:12px;border-radius:50%;background:#d90000"></div>
 </div>
 </div>
-<button class="btn-primary" onclick="goToRevisao()" style="margin-top: 24px; border-radius: 8px; padding: 16px; font-weight: 600;">Continuar</button>
+<button class="btn-primary" onclick="goToRevisao()" style="margin-top:24px;width:100%;padding:16px;background:#d90000;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer">Continuar</button>
 </main>
 </div>
+
 <div id="confirmScreen" class="screen pix-screen">
-<header class="pix-header">
-<button class="back-btn" onclick="showPagamento()">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-</button>
-<h2>Revisão</h2>
+<header class="pix-header" style="background:#d90000;color:#fff;padding:15px 20px;display:flex;align-items:center;gap:15px;position:sticky;top:0;z-index:100">
+<button class="back-btn" onclick="showPagamento()" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer">←</button>
+<h2 style="color:#fff;font-size:20px;font-weight:600;margin:0">Revisão</h2>
 </header>
-<main class="pix-content" style="padding-top: 20px; background: white; min-height: calc(100vh - 70px); padding-bottom: 100px;">
-<h2 style="font-size: 22px; font-weight: 600; color: #161616; margin-bottom: 16px;">Confirmar pagamento para</h2>
-<div style="font-size: 14px; color: #333; margin-bottom: 16px;" id="recipientName">Destinatário</div>
-<div style="background: #fff9e6; border-left: 4px solid #ffc107; padding: 14px 16px; border-radius: 4px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px;">
-<div style="font-size: 22px;">⚠️</div>
-<div style="font-size: 14px; color: #333; line-height: 1.4;">Para enviar o Pix, será utilizado <strong id="limitUsed">R$ 0,00</strong> do seu limite.</div>
+<main class="pix-content" style="padding-top:20px;background:#fff;min-height:calc(100vh - 70px);padding-bottom:100px">
+<h2 style="font-size:22px;font-weight:600;color:#161616;margin-bottom:16px">Confirmar pagamento para</h2>
+<div style="font-size:14px;color:#333;margin-bottom:16px" id="recipientName">Destinatário</div>
+<div style="background:#fff9e6;border-left:4px solid #ffc107;padding:14px 16px;border-radius:4px;margin-bottom:20px;display:flex;align-items:flex-start;gap:12px">
+<div style="font-size:22px">⚠️</div>
+<div style="font-size:14px;color:#333;line-height:1.4">Para enviar o Pix, será utilizado <strong id="limitUsed">R$ 0,00</strong> do seu limite.</div>
 </div>
-<div style="padding: 14px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
-<div style="font-size: 14px; color: #666;">Valor</div>
-<div style="display: flex; align-items: center; gap: 8px;">
-<div style="font-size: 22px; color: #ec0000; font-weight: 600;" id="reviewValue">R$ 0,00</div>
-<span style="color: #ec0000; text-decoration: underline; font-size: 14px; cursor: pointer;" onclick="showValor()">Alterar</span>
-</div>
-</div>
-<div style="padding: 14px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
-<div style="font-size: 14px; color: #666;">Quando vai ser feito</div>
-<div style="display: flex; align-items: center; gap: 8px;">
-<div style="font-size: 15px; color: #333; font-weight: 600;">Hoje, <span id="reviewDate">--</span></div>
-<span style="color: #ec0000; text-decoration: underline; font-size: 14px; cursor: pointer;">Agendar</span>
+<div style="padding:14px 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+<div style="font-size:14px;color:#666">Valor</div>
+<div style="display:flex;align-items:center;gap:8px">
+<div style="font-size:22px;color:#d90000;font-weight:600" id="reviewValue">R$ 0,00</div>
+<span style="color:#d90000;text-decoration:underline;font-size:14px;cursor:pointer" onclick="showValor()">Alterar</span>
 </div>
 </div>
-<div style="padding: 14px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
-<div style="font-size: 14px; color: #666;">Repetir pagamento</div>
-<div style="width: 48px; height: 26px; background: #ccc; border-radius: 13px; position: relative; cursor: pointer; transition: background 0.3s;" onclick="this.style.background = this.style.background === 'rgb(236, 0, 0)' ? '#ccc' : '#ec0000'">
-<div style="position: absolute; width: 22px; height: 22px; background: white; border-radius: 50%; top: 2px; left: 2px; transition: transform 0.3s;"></div>
+<div style="padding:14px 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+<div style="font-size:14px;color:#666">Quando vai ser feito</div>
+<div style="display:flex;align-items:center;gap:8px">
+<div style="font-size:15px;color:#333;font-weight:600">Hoje, <span id="reviewDate">--</span></div>
+<span style="color:#d90000;text-decoration:underline;font-size:14px;cursor:pointer">Agendar</span>
 </div>
 </div>
-<div style="padding: 14px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
-<div style="font-size: 14px; color: #666;">Tipo de pagamento</div>
-<div style="font-size: 15px; color: #333; font-weight: 600;">Pix</div>
+<div style="padding:14px 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+<div style="font-size:14px;color:#666">Tipo de pagamento</div>
+<div style="font-size:15px;color:#333;font-weight:600">Pix</div>
 </div>
-<div style="padding: 14px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
-<div style="font-size: 14px; color: #666;">Forma de pagamento</div>
-<div style="display: flex; align-items: center; gap: 8px;">
-<div style="font-size: 15px; color: #333; font-weight: 600;">Saldo em conta</div>
-<span style="color: #ec0000; text-decoration: underline; font-size: 14px; cursor: pointer;" onclick="showPagamento()">Alterar</span>
-</div>
-</div>
-<div style="padding: 14px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
-<div style="font-size: 14px; color: #666;">Escrever uma mensagem</div>
-<span style="color: #ec0000; text-decoration: underline; font-size: 14px; cursor: pointer;">Adicionar</span>
-</div>
-<div style="padding: 14px 0; display: flex; justify-content: space-between; align-items: center;">
-<div style="font-size: 14px; color: #666;">Salvar contato</div>
-<div style="width: 48px; height: 26px; background: #ccc; border-radius: 13px; position: relative; cursor: pointer; transition: background 0.3s;" onclick="this.style.background = this.style.background === 'rgb(236, 0, 0)' ? '#ccc' : '#ec0000'">
-<div style="position: absolute; width: 22px; height: 22px; background: white; border-radius: 50%; top: 2px; left: 2px; transition: transform 0.3s;"></div>
+<div style="padding:14px 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+<div style="font-size:14px;color:#666">Forma de pagamento</div>
+<div style="display:flex;align-items:center;gap:8px">
+<div style="font-size:15px;color:#333;font-weight:600">Saldo em conta</div>
+<span style="color:#d90000;text-decoration:underline;font-size:14px;cursor:pointer" onclick="showPagamento()">Alterar</span>
 </div>
 </div>
-<button class="btn-primary" onclick="finalizarPIX()" style="margin-top: 24px; border-radius: 8px; padding: 16px; font-weight: 600; position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 400px;">Confirmar e transferir</button>
+<button class="btn-primary" onclick="finalizarPIX()" style="margin-top:24px;width:100%;padding:16px;background:#d90000;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer">Confirmar e transferir</button>
 </main>
 </div>
-<div id="comprovanteSimplesScreen" class="screen comprovante-simples">
-<header class="comprovante-header-vermelho">
-<button class="close-btn-novo" onclick="showMain()">✕</button>
+
+<div id="comprovanteSimplesScreen" class="screen comprovante-simples" style="background:#fff;min-height:100vh">
+<header class="comprovante-header-vermelho" style="background:#d90000;color:#fff;padding:15px 20px;display:flex;justify-content:flex-end;align-items:center">
+<button class="close-btn-novo" onclick="showMain()" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer;font-weight:bold">✕</button>
 </header>
-<div class="success-box-ref">
-<div class="success-check-ref">✓</div>
-<div class="success-text-ref">Pronto! Seu pagamento foi realizado.</div>
+<div class="success-box-ref" style="background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:16px;display:flex;align-items:center;gap:12px;margin:20px;box-shadow:0 1px 3px rgba(0,0,0,0.05)">
+<div class="success-check-ref" style="width:32px;height:32px;background:#5b9241;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;flex-shrink:0">✓</div>
+<div class="success-text-ref" style="font-size:15px;color:#333;font-weight:500">Pronto! Seu pagamento foi realizado.</div>
 </div>
-<div class="comprovante-bloco-detalhes">
-<h2 class="comprovante-titulo-secao">Comprovante do Pix</h2>
-<p class="comprovante-sub-secao">Você pode consultar o comprovante da sua transação em Início > Pix > Extrato Pix.</p>
-<div class="comp-group">
-<div class="comp-label">Valor pago</div>
-<div class="comp-value-destaque" id="simplesValor">R$ 0,00</div>
+<div class="comprovante-bloco-detalhes" style="padding:0 20px">
+<h2 class="comprovante-titulo-secao" style="font-size:18px;font-weight:700;color:#111;margin-bottom:6px">Comprovante do Pix</h2>
+<p class="comprovante-sub-secao" style="font-size:13px;color:#555;margin-bottom:22px;line-height:1.4">Você pode consultar o comprovante da sua transação em Início > Pix > Extrato Pix.</p>
+<div class="comp-group" style="margin-bottom:18px">
+<div class="comp-label" style="font-size:13px;color:#666;margin-bottom:3px">Valor pago</div>
+<div class="comp-value-destaque" id="simplesValor" style="font-size:22px;color:#111;font-weight:700">R$ 0,00</div>
 </div>
-<div class="comp-group" style="margin-top: 18px;">
-<div class="comp-label">Para</div>
-<div class="comp-value" id="simplesNome">Destinatário</div>
+<div class="comp-group" style="margin-bottom:18px;margin-top:18px">
+<div class="comp-label" style="font-size:13px;color:#666;margin-bottom:3px">Para</div>
+<div class="comp-value" id="simplesNome" style="font-size:16px;color:#111;font-weight:500">Destinatário</div>
 </div>
-<div class="comp-group">
-<div class="comp-label">CPF</div>
-<div class="comp-value" id="simplesCPF">***.000.000-**</div>
+<div class="comp-group" style="margin-bottom:18px">
+<div class="comp-label" style="font-size:13px;color:#666;margin-bottom:3px">CPF</div>
+<div class="comp-value" id="simplesCPF" style="font-size:16px;color:#111;font-weight:500">***.000.000-**</div>
 </div>
-<div class="comp-group">
-<div class="comp-label">Instituição</div>
-<div class="comp-value" id="simplesInstituicao">Instituição</div>
+<div class="comp-group" style="margin-bottom:18px">
+<div class="comp-label" style="font-size:13px;color:#666;margin-bottom:3px">Instituição</div>
+<div class="comp-value" id="simplesInstituicao" style="font-size:16px;color:#111;font-weight:500">Instituição</div>
 </div>
-<hr class="comp-divider">
-<div class="comp-group">
-<div class="comp-label">ID/Transação</div>
-<div class="comp-value" id="simplesIdTransacao" style="font-size: 14px; word-break: break-all;">—</div>
+<hr class="comp-divider" style="border:none;border-top:1px solid #e5e5e5;margin:20px 0">
+<div class="comp-group" style="margin-bottom:18px">
+<div class="comp-label" style="font-size:13px;color:#666;margin-bottom:3px">ID/Transação</div>
+<div class="comp-value" id="simplesIdTransacao" style="font-size:14px;word-break:break-all">—</div>
 </div>
-<div class="comp-group">
-<div class="comp-label">Data e hora da transação</div>
-<div class="comp-value" id="simplesDataHora">—</div>
+<div class="comp-group" style="margin-bottom:18px">
+<div class="comp-label" style="font-size:13px;color:#666;margin-bottom:3px">Data e hora da transação</div>
+<div class="comp-value" id="simplesDataHora" style="font-size:16px;color:#111;font-weight:500">—</div>
 </div>
-<div class="comp-group">
-<div class="comp-label">Código de autenticação</div>
-<div class="comp-value" id="simplesAutenticacao" style="font-size: 14px; word-break: break-all;">—</div>
+<div class="comp-group" style="margin-bottom:18px">
+<div class="comp-label" style="font-size:13px;color:#666;margin-bottom:3px">Código de autenticação</div>
+<div class="comp-value" id="simplesAutenticacao" style="font-size:14px;word-break:break-all">—</div>
 </div>
 </div>
-<button class="btn-save-ref" onclick="baixarComprovantePDF()">Salvar ou Compartilhar (PDF)</button>
-<button class="btn-view-complete" onclick="showComprovanteCompleto()">Ver comprovante completo</button>
+<button class="btn-save-ref" onclick="baixarComprovantePDF()" style="width:calc(100% - 40px);margin:20px;padding:16px;background:#c41212;color:#fff;border:none;border-radius:6px;font-size:16px;font-weight:600;cursor:pointer;text-align:center">Salvar ou Compartilhar (PDF)</button>
+<button class="btn-view-complete" onclick="showComprovanteCompleto()" style="width:calc(100% - 40px);margin:0 20px 20px;padding:12px;background:none;color:#d90000;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;text-decoration:underline;text-align:center">Ver comprovante completo</button>
 </div>
-<div id="comprovanteCompletoScreen" class="screen comprovante-completo">
-<header class="completo-header">
-<div class="completo-logo">
-<img src="santander.png" alt="Santander" style="width: 120px; height: auto; object-fit: contain;">
+
+<div id="comprovanteCompletoScreen" class="screen comprovante-completo" style="background:#fff;min-height:100vh;padding:20px">
+<header class="completo-header" style="text-align:center;padding:20px 0 30px;border-bottom:2px solid #d90000;margin-bottom:25px">
+<div class="completo-logo" style="font-size:28px;font-weight:bold;color:#d90000;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:10px">
+<img src="santander.png" alt="Santander" style="width:120px;height:auto;object-fit:contain" loading="lazy">
 </div>
-<h1 class="completo-title">Comprovante de Pagamento PIX</h1>
-<time class="completo-date" id="completoData">—</time>
+<h1 class="completo-title" style="font-size:20px;color:#333;font-weight:600">Comprovante de Pagamento PIX</h1>
+<time class="completo-date" id="completoData" style="color:#666;font-size:13px;margin-top:5px">—</time>
 </header>
-<section class="pix-qr-section">
-<p class="pix-qr-title">📱 Escaneie para pagar</p>
-<div id="qrcode"></div>
-<p style="font-size: 12px; color: #888; margin-bottom: 10px;">
-Abra o app do seu banco e escaneie o QR Code
-</p>
-<div class="pix-copia-cola">
-<p class="pix-copia-cola-label">📋 PIX Copia e Cola:</p>
-<code class="pix-copia-cola-code" id="pixCopiaCola">—</code>
-<button class="btn-copy-pix" onclick="copiarPix()">
+<section class="pix-qr-section" style="background:#f9f9f9;border-radius:12px;padding:20px;margin:20px 0;text-align:center">
+<p class="pix-qr-title" style="font-size:14px;color:#666;margin-bottom:15px;font-weight:500">📱 Escaneie para pagar</p>
+<div id="qrcode" style="display:flex;justify-content:center;margin-bottom:15px"></div>
+<p style="font-size:12px;color:#888;margin-bottom:10px">Abra o app do seu banco e escaneie o QR Code</p>
+<div class="pix-copia-cola" style="background:#fff;border:2px dashed #d90000;border-radius:8px;padding:12px;margin-top:15px;text-align:left">
+<p class="pix-copia-cola-label" style="font-size:12px;color:#666;margin-bottom:8px;display:flex;align-items:center;gap:5px">📋 PIX Copia e Cola:</p>
+<code class="pix-copia-cola-code" id="pixCopiaCola" style="font-family:'Courier New',monospace;font-size:11px;color:#333;word-break:break-all;background:#f5f5f5;padding:10px;border-radius:5px;max-height:80px;overflow-y:auto">—</code>
+<button class="btn-copy-pix" onclick="copiarPix()" style="width:100%;margin-top:10px;padding:12px;background:#d90000;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer">
 <span id="copyBtnText">Copiar código PIX</span>
 </button>
 </div>
 </section>
-<section class="barcode-container">
-<p class="barcode-label">Código de barras</p>
-<div class="barcode-visual"></div>
-<code class="barcode-number" id="barcodeNumber">—</code>
+<section class="barcode-container" style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:15px;margin:20px 0;text-align:center">
+<p class="barcode-label" style="font-size:12px;color:#666;margin-bottom:12px;text-transform:uppercase">Código de barras</p>
+<div class="barcode-visual" style="height:50px;background:repeating-linear-gradient(90deg,#000 0px,#000 2px,#fff 2px,#fff 4px,#000 4px,#000 8px,#fff 8px,#fff 12px,#000 12px,#000 14px,#fff 14px,#fff 18px,#000 18px,#000 22px,#fff 22px,#fff 24px);margin:10px 0;border-radius:3px"></div>
+<code class="barcode-number" id="barcodeNumber" style="font-family:'Courier New',monospace;font-size:14px;color:#333;word-break:break-all;background:#f9f9f9;padding:10px;border-radius:5px;margin-top:10px">—</code>
 </section>
-<section class="completo-section">
-<p class="completo-label">Valor</p>
-<p class="completo-value" style="font-size: 24px; font-weight: bold; color: #ec0000;" id="compValor">R$ 0,00</p>
+<section class="completo-section" style="margin-bottom:25px;padding:0 10px">
+<p class="completo-label" style="font-size:11px;color:#666;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.5px">Valor</p>
+<p class="completo-value" id="compValor" style="font-size:24px;font-weight:bold;color:#d90000">R$ 0,00</p>
 </section>
-<section class="completo-section">
-<p class="completo-label">Beneficiário (Quem recebe)</p>
-<p class="completo-value" id="compNome">Destinatário</p>
-<p class="completo-value" style="font-size: 13px; color: #666; margin-top: 3px;" id="compCPF">CPF: ***.000.000-**</p>
+<section class="completo-section" style="margin-bottom:25px;padding:0 10px">
+<p class="completo-label" style="font-size:11px;color:#666;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.5px">Beneficiário (Quem recebe)</p>
+<p class="completo-value" id="compNome" style="font-size:15px;color:#333;line-height:1.6;font-weight:500">Destinatário</p>
+<p class="completo-value" id="compCPF" style="font-size:13px;color:#666;margin-top:3px">CPF: ***.000.000-**</p>
 </section>
-<section class="completo-section">
-<p class="completo-label">Instituição (Quem recebe)</p>
-<p class="completo-value" id="compInstituicao">Instituição</p>
-<p class="completo-value" style="font-size: 13px; color: #666; margin-top: 3px;">Agência: 0000 | Conta: 0000000-0</p>
+<section class="completo-section" style="margin-bottom:25px;padding:0 10px">
+<p class="completo-label" style="font-size:11px;color:#666;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.5px">Instituição (Quem recebe)</p>
+<p class="completo-value" id="compInstituicao" style="font-size:15px;color:#333;line-height:1.6;font-weight:500">Instituição</p>
+<p class="completo-value" style="font-size:13px;color:#666;margin-top:3px">Agência: 0000 | Conta: 0000000-0</p>
 </section>
-<section class="completo-section">
-<p class="completo-label">Pagador</p>
-<p class="completo-value" id="compPagador">Seu nome</p>
-<p class="completo-value" style="font-size: 13px; color: #666; margin-top: 3px;" id="compPagadorCPF">CPF: ***.000.000-**</p>
+<section class="completo-section" style="margin-bottom:25px;padding:0 10px">
+<p class="completo-label" style="font-size:11px;color:#666;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.5px">Pagador</p>
+<p class="completo-value" id="compPagador" style="font-size:15px;color:#333;line-height:1.6;font-weight:500">Seu nome</p>
+<p class="completo-value" id="compPagadorCPF" style="font-size:13px;color:#666;margin-top:3px">CPF: ***.000.000-**</p>
 </section>
-<section class="completo-section">
-<p class="completo-label">ID da Transação</p>
-<p class="completo-value" style="font-size: 12px; font-family: monospace;" id="compIdTransacao">—</p>
+<section class="completo-section" style="margin-bottom:25px;padding:0 10px">
+<p class="completo-label" style="font-size:11px;color:#666;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.5px">ID da Transação</p>
+<p class="completo-value" id="compIdTransacao" style="font-size:12px;font-family:monospace">—</p>
 </section>
-<footer class="completo-footer" style="display: flex; justify-content: space-between; font-size: 11px; color: #666; margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd;">
+<footer class="completo-footer" style="display:flex;justify-content:space-between;font-size:11px;color:#666;margin-top:40px;padding-top:20px;border-top:1px solid #ddd">
 <span>Comprovante gerado em: <time id="compDataFooter">—</time></span>
 <span>1/1</span>
 </footer>
-<button class="btn-primary" onclick="showMain()" style="margin-top: 30px;">← Voltar ao início</button>
+<button class="btn-primary" onclick="showMain()" style="margin-top:30px;width:100%;padding:18px;background:#d90000;color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer">← Voltar ao início</button>
 </div>
 
-<!-- ===== TELA DE EXTRATO (estilo da foto) ===== -->
-<div id="extratoScreen" class="screen extrato-screen">
-<header class="extrato-header">
-<button class="back-btn" onclick="showMain()" aria-label="Voltar">
-<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-</button>
-<h2>Extrato</h2>
-<button class="filtrar-btn" onclick="alert('Filtrar extrato')">Filtrar</button>
+<div id="extratoScreen" class="screen extrato-screen" style="background:#fff;min-height:100vh">
+<header class="extrato-header" style="background:#c41212;color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100">
+<button class="back-btn" onclick="showMain()" style="background:none;border:none;color:#fff;font-size:26px;cursor:pointer">←</button>
+<h2 style="color:#fff;font-size:20px;font-weight:500;margin:0;flex:1;text-align:center">Extrato</h2>
+<button class="filtrar-btn" onclick="alert('Filtrar extrato')" style="background:none;border:none;color:#fff;font-size:15px;font-weight:600;cursor:pointer">Filtrar</button>
 </header>
-<main class="extrato-content">
-<section class="extrato-saldo-section">
-<div class="extrato-saldo-label">Saldo disponível</div>
-<div class="extrato-saldo-row">
-<div class="extrato-saldo-valor balance-sensitive" id="extratoSaldoDisponivel" contenteditable="true">R$ 1.410,55</div>
-<div class="extrato-saldo-eye" onclick="toggleExtratoSaldo()" aria-label="Mostrar/Ocultar saldo">
-<svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+<main class="extrato-content" style="padding:0;background:#fff">
+<section class="extrato-saldo-section" style="padding:22px 20px 18px;background:#fff;border-bottom:1px solid #e8e8e8">
+<div class="extrato-saldo-label" style="font-size:17px;color:#111;font-weight:400;margin-bottom:8px">Saldo disponível</div>
+<div class="extrato-saldo-row" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+<div class="extrato-saldo-valor balance-sensitive" id="extratoSaldoDisponivel" contenteditable="true" style="font-size:32px;font-weight:700;color:#111;letter-spacing:-0.5px">R$ 1.410,55</div>
+<div class="extrato-saldo-eye" onclick="toggleExtratoSaldo()" style="width:28px;height:28px;cursor:pointer;color:#c41212;display:flex;align-items:center;justify-content:center">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c41212" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
 </div>
 </div>
-<div class="extrato-saldo-limite">Saldo + limite: <span id="extratoSaldoLimite">R$ 1.410,55</span></div>
-<a class="extrato-saldo-limite-link" onclick="alert('Entenda seu limite')">Entenda seu limite</a>
-<div class="extrato-saldo-atualizado">
+<div class="extrato-saldo-limite" style="font-size:15px;color:#333;margin-bottom:4px">Saldo + limite: <span id="extratoSaldoLimite">R$ 1.410,55</span></div>
+<a class="extrato-saldo-limite-link" onclick="alert('Entenda seu limite')" style="font-size:14px;color:#c41212;text-decoration:underline;cursor:pointer;margin-bottom:16px;display:inline-block">Entenda seu limite</a>
+<div class="extrato-saldo-atualizado" style="display:flex;align-items:center;justify-content:space-between;font-size:14px;color:#555">
 <span>Saldo atualizado as <span id="extratoHoraAtualizacao">10:58:35</span></span>
-<button class="atualizar-btn" onclick="atualizarExtrato()">
-<svg viewBox="0 0 24 24"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+<button class="atualizar-btn" onclick="atualizarExtrato()" style="background:none;border:none;color:#c41212;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c41212" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
 Atualizar
 </button>
 </div>
 </section>
-<section class="extrato-lancamentos">
-<div class="extrato-lancamento-header futuros">
-<div class="extrato-lancamento-header-left">
-<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-<span>Lançamentos futuros</span>
+<section class="extrato-lancamentos" style="background:#fff">
+<div class="extrato-lancamento-header futuros" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid #e8e8e8;cursor:pointer;background:#dce8f0">
+<div class="extrato-lancamento-header-left" style="display:flex;align-items:center;gap:12px">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+<span style="font-size:16px;color:#111;font-weight:500">Lançamentos futuros</span>
 </div>
-<svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
 </div>
-<div class="extrato-lancamento-header hoje">
-<div class="extrato-lancamento-header-left">
-<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M9 16l2 2 4-4"/></svg>
-<span>Hoje</span>
+<div class="extrato-lancamento-header hoje" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid #e8e8e8;cursor:pointer;background:#f0f0f0">
+<div class="extrato-lancamento-header-left" style="display:flex;align-items:center;gap:12px">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M9 16l2 2 4-4"/></svg>
+<span style="font-size:16px;color:#111;font-weight:500">Hoje</span>
 </div>
 </div>
-<div id="extratoItemsContainer">
-<!-- Items serão renderizados via JS -->
-</div>
+<div id="extratoItemsContainer"></div>
 </section>
 </main>
 </div>
 
-<div id="settingsScreen" class="screen settings-screen">
-<header class="settings-header">
-<img src="santander.png" alt="Santander" class="settings-logo" style="width: 120px; height: auto;">
-<h2>Configurações PIX</h2>
+<div id="settingsScreen" class="screen settings-screen" style="background:#d90000;min-height:100vh">
+<header class="settings-header" style="background:#d90000;padding:20px;text-align:center">
+<img src="santander.png" alt="Santander" class="settings-logo" style="width:120px;height:auto" loading="lazy">
+<h2 style="color:#fff;font-size:22px;font-weight:600">Configurações PIX</h2>
 </header>
-<main class="settings-content">
-<section class="settings-card">
-<p class="settings-label"> PAGADOR</p>
-<input type="text" class="settings-input" id="configMeuNome" placeholder="Nome completo">
-<input type="text" class="settings-input" id="configMeuCPF" placeholder="***.000.000-**">
-<p class="settings-label" style="margin-top: 15px;"> Saldo</p>
-<input type="text" class="settings-input" id="configSaldo" placeholder="0,00" oninput="formatarMoedaConfig(this)">
-<p class="settings-label" style="margin-top: 15px;"> Limite</p>
-<input type="text" class="settings-input" id="configLimite" placeholder="0,00" oninput="formatarMoedaConfig(this)">
+<main class="settings-content" style="padding:20px">
+<section class="settings-card" style="background:#fff;border-radius:12px;padding:20px;margin-bottom:15px;box-shadow:0 2px 8px rgba(0,0,0,0.1)">
+<p class="settings-label" style="font-size:14px;color:#666;margin-bottom:12px;font-weight:600">PAGADOR</p>
+<input type="text" class="settings-input" id="configMeuNome" placeholder="Nome completo" style="width:100%;padding:14px;border:2px solid #ddd;border-radius:8px;font-size:15px;margin-bottom:15px">
+<input type="text" class="settings-input" id="configMeuCPF" placeholder="***.000.000-**" style="width:100%;padding:14px;border:2px solid #ddd;border-radius:8px;font-size:15px;margin-bottom:15px">
+<p class="settings-label" style="font-size:14px;color:#666;margin-bottom:12px;font-weight:600;margin-top:15px">Saldo</p>
+<input type="text" class="settings-input" id="configSaldo" placeholder="0,00" oninput="formatarMoedaConfig(this)" style="width:100%;padding:14px;border:2px solid #ddd;border-radius:8px;font-size:15px;margin-bottom:15px">
+<p class="settings-label" style="font-size:14px;color:#666;margin-bottom:12px;font-weight:600;margin-top:15px">Limite</p>
+<input type="text" class="settings-input" id="configLimite" placeholder="0,00" oninput="formatarMoedaConfig(this)" style="width:100%;padding:14px;border:2px solid #ddd;border-radius:8px;font-size:15px;margin-bottom:15px">
 </section>
-<section class="settings-card">
-<p class="settings-label"> QUEM RECEBER</p>
-<input type="text" class="settings-input" id="configDestNome" placeholder="Nome completo">
-<input type="text" class="settings-input" id="configDestCPF" placeholder="CPF">
-<input type="text" class="settings-input" id="configDestChave" placeholder="Chave Pix">
-<input type="text" class="settings-input" id="configDestInstituicao" placeholder="Instituição" value="BCO SANTANDER (BRASIL) S.A.">
+<section class="settings-card" style="background:#fff;border-radius:12px;padding:20px;margin-bottom:15px;box-shadow:0 2px 8px rgba(0,0,0,0.1)">
+<p class="settings-label" style="font-size:14px;color:#666;margin-bottom:12px;font-weight:600">QUEM RECEBER</p>
+<input type="text" class="settings-input" id="configDestNome" placeholder="Nome completo" style="width:100%;padding:14px;border:2px solid #ddd;border-radius:8px;font-size:15px;margin-bottom:15px">
+<input type="text" class="settings-input" id="configDestCPF" placeholder="CPF" style="width:100%;padding:14px;border:2px solid #ddd;border-radius:8px;font-size:15px;margin-bottom:15px">
+<input type="text" class="settings-input" id="configDestChave" placeholder="Chave Pix" style="width:100%;padding:14px;border:2px solid #ddd;border-radius:8px;font-size:15px;margin-bottom:15px">
+<input type="text" class="settings-input" id="configDestInstituicao" placeholder="Instituição" value="BCO SANTANDER (BRASIL) S.A." style="width:100%;padding:14px;border:2px solid #ddd;border-radius:8px;font-size:15px;margin-bottom:15px">
 </section>
-<button class="btn-primary" onclick="salvarConfiguracoes()" style="margin-top: 10px;">💾 Salvar Configurações</button>
-<button onclick="showMain()" style="width: 100%; margin-top: 12px; padding: 14px; background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.4); border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.3s;">← Voltar</button>
+<button class="btn-primary" onclick="salvarConfiguracoes()" style="width:100%;padding:18px;background:#d90000;color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;margin-top:10px">💾 Salvar Configurações</button>
+<button onclick="showMain()" style="width:100%;margin-top:12px;padding:14px;background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.4);border-radius:10px;font-size:15px;font-weight:600;cursor:pointer">← Voltar</button>
 </main>
 </div>
-<div class="processing-overlay" id="processingOverlay">
-<div class="face-id-circle"></div>
-<p class="processing-text">Processando...</p>
+
+<div class="processing-overlay" id="processingOverlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:10000;flex-direction:column">
+<div class="face-id-circle" style="width:120px;height:120px;border:3px solid #d90000;border-radius:50%;animation:pulse 2s infinite;margin-bottom:20px"></div>
+<p class="processing-text" style="color:#fff;font-size:18px">Processando...</p>
 </div>
-<div id="pdfTemplateContainer" style="display:none;">
-<div style="background: #ffffff; padding: 25px; font-family: Arial, sans-serif; color: #111; max-width: 400px; margin: 0 auto; font-size: 13px;">
-<div style="text-align: center; margin-bottom: 10px; border: 0; outline: 0; box-shadow: none;">
-<img src="comprovante.png" alt="Santander" style="display: inline-block; width: 120px; height: auto; object-fit: contain;">
+
+<div id="pdfTemplateContainer" style="display:none">
+<div style="background:#fff;padding:25px;font-family:Arial,sans-serif;color:#111;max-width:400px;margin:0 auto;font-size:13px">
+<div style="text-align:center;margin-bottom:10px">
+<img src="comprovante.png" alt="Santander" style="display:inline-block;width:120px;height:auto;object-fit:contain" loading="lazy">
 </div>
-<div style="font-size: 29px; font-weight: bold; color: #111; text-align: center; margin-bottom: 12px;" id="pdfDataHoraTop">Comprovante do Pix</div>
-<div style="font-size: 11px; color: #555; text-align: center; margin-bottom: 18px;" id="pdfDataHoraSub">—</div>
-<div style="font-size: 11px; color: #666; margin-bottom: 3px; text-transform: uppercase;">Valor pago</div>
-<div style="font-size: 20px; font-weight: bold; color: #111; margin-bottom: 15px;" id="pdfValorPago">R$ 0,00</div>
-<div style="font-size: 11px; color: #666; margin-bottom: 3px; text-transform: uppercase;">Forma de pagamento</div>
-<div style="font-size: 13px; color: #111; margin-bottom: 15px;">Ag 0000 Cc 0000000-0</div>
-<div style="font-size: 11px; font-weight: bold; color: #333; margin-bottom: 8px; border-bottom: 1px solid #ddd; padding-bottom: 4px;">Dados do recebedor</div>
-<div style="font-size: 11px; color: #666; margin-bottom: 2px;">Para</div>
-<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 8px;" id="pdfRecebedorNome">Destinatário</div>
-<div style="font-size: 11px; color: #666; margin-bottom: 2px;">CPF</div>
-<div style="font-size: 13px; color: #111; margin-bottom: 8px;" id="pdfRecebedorCPF">***.000.000-**</div>
-<div style="font-size: 11px; color: #666; margin-bottom: 2px;">Chave</div>
-<div style="font-size: 13px; color: #111; margin-bottom: 8px;" id="pdfRecebedorChave">(00) 00000-0000</div>
-<div style="font-size: 11px; color: #666; margin-bottom: 2px;">Instituição</div>
-<div style="font-size: 13px; color: #111; margin-bottom: 18px;" id="pdfRecebedorInstituicao">Instituição</div>
-<div style="font-size: 11px; font-weight: bold; color: #333; margin-bottom: 8px; border-bottom: 1px solid #ddd; padding-bottom: 4px;">Dados do pagador</div>
-<div style="font-size: 11px; color: #666; margin-bottom: 2px;">De</div>
-<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 8px;" id="pdfPagadorNome">Seu nome</div>
-<div style="font-size: 11px; color: #666; margin-bottom: 2px;">CPF</div>
-<div style="font-size: 13px; color: #111; margin-bottom: 8px;" id="pdfPagadorCPF">***.000.000-**</div>
-<div style="font-size: 11px; color: #666; margin-bottom: 2px;">Instituição</div>
-<div style="font-size: 13px; color: #111; margin-bottom: 18px;">BCO SANTANDER (BRASIL) S.A.</div>
-<div style="font-size: 11px; color: #666; margin-bottom: 2px;">ID/Transação</div>
-<div style="font-size: 12px; font-family: monospace; color: #111; margin-bottom: 12px; word-break: break-all;" id="pdfIdTransacao">—</div>
-<div style="font-size: 11px; color: #666; margin-bottom: 2px;">Data e hora da transação</div>
-<div style="font-size: 13px; color: #111; margin-bottom: 12px;" id="pdfDataHoraTransacao">—</div>
-<div style="font-size: 11px; color: #666; margin-bottom: 2px;">Código de autenticação</div>
-<div style="font-size: 12px; font-family: monospace; color: #111; margin-bottom: 25px; word-break: break-all;" id="pdfCodigoAutenticacao">—</div>
-<div style="border-top: 1px solid #ddd; padding-top: 15px; margin-top: 20px; font-size: 10px; color: #666; text-align: center; line-height: 1.4;">
+<div style="font-size:29px;font-weight:bold;color:#111;text-align:center;margin-bottom:12px" id="pdfDataHoraTop">Comprovante do Pix</div>
+<div style="font-size:11px;color:#555;text-align:center;margin-bottom:18px" id="pdfDataHoraSub">—</div>
+<div style="font-size:11px;color:#666;margin-bottom:3px;text-transform:uppercase">Valor pago</div>
+<div style="font-size:20px;font-weight:bold;color:#111;margin-bottom:15px" id="pdfValorPago">R$ 0,00</div>
+<div style="font-size:11px;color:#666;margin-bottom:3px;text-transform:uppercase">Forma de pagamento</div>
+<div style="font-size:13px;color:#111;margin-bottom:15px">Ag 0000 Cc 0000000-0</div>
+<div style="font-size:11px;font-weight:bold;color:#333;margin-bottom:8px;border-bottom:1px solid #ddd;padding-bottom:4px">Dados do recebedor</div>
+<div style="font-size:11px;color:#666;margin-bottom:2px">Para</div>
+<div style="font-size:13px;font-weight:bold;color:#111;margin-bottom:8px" id="pdfRecebedorNome">Destinatário</div>
+<div style="font-size:11px;color:#666;margin-bottom:2px">CPF</div>
+<div style="font-size:13px;color:#111;margin-bottom:8px" id="pdfRecebedorCPF">***.000.000-**</div>
+<div style="font-size:11px;color:#666;margin-bottom:2px">Chave</div>
+<div style="font-size:13px;color:#111;margin-bottom:8px" id="pdfRecebedorChave">(00) 00000-0000</div>
+<div style="font-size:11px;color:#666;margin-bottom:2px">Instituição</div>
+<div style="font-size:13px;color:#111;margin-bottom:18px" id="pdfRecebedorInstituicao">Instituição</div>
+<div style="font-size:11px;font-weight:bold;color:#333;margin-bottom:8px;border-bottom:1px solid #ddd;padding-bottom:4px">Dados do pagador</div>
+<div style="font-size:11px;color:#666;margin-bottom:2px">De</div>
+<div style="font-size:13px;font-weight:bold;color:#111;margin-bottom:8px" id="pdfPagadorNome">Seu nome</div>
+<div style="font-size:11px;color:#666;margin-bottom:2px">CPF</div>
+<div style="font-size:13px;color:#111;margin-bottom:8px" id="pdfPagadorCPF">***.000.000-**</div>
+<div style="font-size:11px;color:#666;margin-bottom:2px">Instituição</div>
+<div style="font-size:13px;color:#111;margin-bottom:18px">BCO SANTANDER (BRASIL) S.A.</div>
+<div style="font-size:11px;color:#666;margin-bottom:2px">ID/Transação</div>
+<div style="font-size:12px;font-family:monospace;color:#111;margin-bottom:12px;word-break:break-all" id="pdfIdTransacao">—</div>
+<div style="font-size:11px;color:#666;margin-bottom:2px">Data e hora da transação</div>
+<div style="font-size:13px;color:#111;margin-bottom:12px" id="pdfDataHoraTransacao">—</div>
+<div style="font-size:11px;color:#666;margin-bottom:2px">Código de autenticação</div>
+<div style="font-size:12px;font-family:monospace;color:#111;margin-bottom:25px;word-break:break-all" id="pdfCodigoAutenticacao">—</div>
+<div style="border-top:1px solid #ddd;padding-top:15px;margin-top:20px;font-size:10px;color:#666;text-align:center;line-height:1.4">
 <b>Central de Atendimento Santander</b><br>
-4004-3535 (Capitais e Regiões Metropolitanas)
-0800-702-3535 (Demais Localidades)
-SAC 0800-762-7777
+4004-3535 (Capitais e Regiões Metropolitanas)<br>
+0800-702-3535 (Demais Localidades)<br>
+SAC 0800-762-7777<br>
 Ouvidoria 0800-726-0332
 </div>
 </div>
 </div>
+
+<style>
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.1);opacity:0.7}}
+.extrato-item{display:flex;align-items:center;padding:16px 20px;border-bottom:1px solid #f0f0f0;cursor:pointer;transition:background 0.2s;background:#fff}
+.extrato-item:hover{background:#fafafa}
+.extrato-item:last-child{border-bottom:none}
+.extrato-item-dot{width:10px;height:10px;border-radius:50%;margin-right:14px;flex-shrink:0}
+.extrato-item-dot.entrada{background:#5bb8d4}
+.extrato-item-dot.saida{background:#f5a623}
+.extrato-item-info{flex:1;min-width:0}
+.extrato-item-title{font-size:15px;font-weight:500;color:#111;margin-bottom:3px}
+.extrato-item-subtitle{font-size:13px;color:#777;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.extrato-item-amount{font-size:15px;font-weight:600;color:#111;margin-left:12px;display:flex;align-items:center;gap:6px;flex-shrink:0}
+.extrato-item-arrow{width:18px;height:18px;fill:none;stroke:#999;stroke-width:2;margin-left:4px}
+.pix-screen{background:#fff}
+@media(max-width:380px){
+.quick-icon{width:50px!important;height:50px!important}
+.quick{font-size:12px!important}
+.balance-amount{font-size:32px!important}
+}
+</style>
+
 <script>
 let config = {
 meuNome: 'Seu Nome Completo',
@@ -1911,48 +609,25 @@ accountLimit: 0,
 transferValue: 0
 };
 let extratoData = [
-{
-titulo: 'Pix recebido',
-subtitulo: 'Wise brasil corretora de',
-valor: 50.00,
-tipo: 'credito',
-data: 'Hoje'
-},
-{
-titulo: 'Pix recebido - dif tit',
-subtitulo: 'Josiane leite da silva',
-valor: 10.00,
-tipo: 'credito',
-data: 'Hoje'
-},
-{
-titulo: 'Pix enviado',
-subtitulo: 'Thalita lira blezer scali',
-valor: 4.00,
-tipo: 'debito',
-data: 'Hoje'
-},
-{
-titulo: 'Ted recebida',
-subtitulo: 'Pagto seguro desemprego',
-valor: 1302.00,
-tipo: 'credito',
-data: 'Hoje'
-}
+{titulo:'Pix recebido',subtitulo:'Wise brasil corretora de',valor:50.00,tipo:'credito',data:'Hoje'},
+{titulo:'Pix recebido - dif tit',subtitulo:'Josiane leite da silva',valor:10.00,tipo:'credito',data:'Hoje'},
+{titulo:'Pix enviado',subtitulo:'Thalita lira blezer scali',valor:4.00,tipo:'debito',data:'Hoje'},
+{titulo:'Ted recebida',subtitulo:'Pagto seguro desemprego',valor:1302.00,tipo:'credito',data:'Hoje'}
 ];
+
 document.addEventListener('DOMContentLoaded', () => {
 carregarConfiguracoes();
 renderizarExtrato();
 initValorInput();
 sincronizarSaldoTelaInicial();
 atualizarTodasTelas();
+// Carrega libs pesadas apenas após a tela inicial estar pronta
+setTimeout(() => window.__loadHeavyLibs(), 1500);
 });
+
 function formatarMoedaConfig(input) {
 let valor = input.value.replace(/\D/g, '');
-if (!valor) {
-input.value = '';
-return;
-}
+if (!valor) { input.value = ''; return; }
 valor = (parseInt(valor) / 100).toFixed(2);
 valor = valor.replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 input.value = valor;
@@ -2044,7 +719,7 @@ if (destInst) destInst.textContent = config.destInstituicao;
 if (recipientName) recipientName.textContent = config.destNome;
 }
 function salvarDadosLocais() {
-localStorage.setItem('santanderConfig', JSON.stringify(config));
+try { localStorage.setItem('santanderConfig', JSON.stringify(config)); } catch(e) {}
 }
 function initValorInput() {
 const input = document.getElementById('valorTransferencia');
@@ -2063,17 +738,12 @@ document.getElementById('btnContinuarValor').disabled = valor <= 0;
 });
 }
 function carregarConfiguracoes() {
-const saved = localStorage.getItem('santanderConfig');
-if (saved) {
 try {
-const parsed = JSON.parse(saved);
-config = {...config, ...parsed};
-} catch(e) {}
-}
+const saved = localStorage.getItem('santanderConfig');
+if (saved) { const parsed = JSON.parse(saved); config = {...config, ...parsed}; }
 const ex = localStorage.getItem('santanderExtrato');
-if (ex) {
-try { extratoData = JSON.parse(ex); } catch(e) {}
-}
+if (ex) { extratoData = JSON.parse(ex); }
+} catch(e) {}
 document.getElementById('configMeuNome').value = config.meuNome;
 document.getElementById('configMeuCPF').value = config.meuCPF;
 document.getElementById('configDestNome').value = config.destNome;
@@ -2096,12 +766,8 @@ config.destChave = document.getElementById('configDestChave').value || '(00) 000
 config.destInstituicao = document.getElementById('configDestInstituicao').value || 'BCO SANTANDER (BRASIL) S.A.';
 const saldoConfig = lerValorMoeda(document.getElementById('configSaldo').value);
 const limiteConfig = lerValorMoeda(document.getElementById('configLimite').value);
-if (saldoConfig > 0) {
-config.accountBalance = saldoConfig;
-}
-if (limiteConfig > 0) {
-config.accountLimit = limiteConfig;
-}
+if (saldoConfig > 0) config.accountBalance = saldoConfig;
+if (limiteConfig > 0) config.accountLimit = limiteConfig;
 salvarDadosLocais();
 atualizarTodasTelas();
 showMain();
@@ -2145,16 +811,9 @@ target.classList.add('active');
 target.style.display = 'block';
 target.setAttribute('aria-hidden', 'false');
 window.scrollTo(0, 0);
-if (screenId === 'pagamentoScreen') {
-atualizarTelaPagamento();
-}
-if (screenId === 'valorScreen') {
-atualizarDadosDestinatario();
-}
-if (screenId === 'extratoScreen') {
-renderizarExtrato();
-atualizarExtratoSaldo();
-}
+if (screenId === 'pagamentoScreen') atualizarTelaPagamento();
+if (screenId === 'valorScreen') atualizarDadosDestinatario();
+if (screenId === 'extratoScreen') { renderizarExtrato(); atualizarExtratoSaldo(); }
 }
 function showPix() { showScreen('pixScreen'); }
 function showValor() { showScreen('valorScreen'); }
@@ -2179,41 +838,26 @@ showScreen('settingsScreen');
 }
 function showExtrato() { showScreen('extratoScreen'); }
 function showMain() { showScreen('mainScreen'); }
-function selectContact(nome) {
-document.getElementById('pixKey').value = nome;
-}
-function goToValor() {
-atualizarDadosDestinatario();
-showValor();
-}
+function selectContact(nome) { document.getElementById('pixKey').value = nome; }
+function goToValor() { atualizarDadosDestinatario(); showValor(); }
 function goToPagamento() {
 const valor = document.getElementById('valorTransferencia').value.trim();
-if (!valor || valor === 'R$ 0,00') {
-alert('Por favor, informe um valor.');
-return;
-}
+if (!valor || valor === 'R$ 0,00') { alert('Por favor, informe um valor.'); return; }
 showPagamento();
 }
 function goToRevisao() {
 const val = config.transferValue > 0 ? config.transferValue : 100;
 document.getElementById('reviewValue').textContent = formatarMoeda(val);
 const limitNeeded = val - config.accountBalance;
-if (limitNeeded > 0) {
-document.getElementById('limitUsed').textContent = formatarMoeda(limitNeeded);
-} else {
-document.getElementById('limitUsed').textContent = 'R$ 0,00';
-}
+document.getElementById('limitUsed').textContent = limitNeeded > 0 ? formatarMoeda(limitNeeded) : 'R$ 0,00';
 showConfirm();
 }
 function finalizarPIX() {
-document.getElementById('processingOverlay').classList.add('active');
+document.getElementById('processingOverlay').style.display = 'flex';
 setTimeout(() => {
-document.getElementById('processingOverlay').classList.remove('active');
+document.getElementById('processingOverlay').style.display = 'none';
 const valor = config.transferValue;
-if (valor > config.accountBalance) {
-alert('Saldo insuficiente!');
-return;
-}
+if (valor > config.accountBalance) { alert('Saldo insuficiente!'); return; }
 config.accountBalance -= valor;
 document.getElementById('simplesValor').textContent = formatarMoeda(valor);
 document.getElementById('simplesNome').textContent = config.destNome;
@@ -2225,44 +869,39 @@ const horaStr = agora.toLocaleTimeString('pt-BR');
 document.getElementById('simplesDataHora').textContent = `${dataStr} - ${horaStr}`;
 document.getElementById('simplesIdTransacao').textContent = gerarIDTransacao();
 document.getElementById('simplesAutenticacao').textContent = gerarAutenticacao();
-extratoData.unshift({
-titulo: 'Pix enviado',
-subtitulo: config.destNome,
-valor: valor,
-tipo: 'debito',
-data: 'Hoje'
-});
-localStorage.setItem('santanderExtrato', JSON.stringify(extratoData));
+extratoData.unshift({titulo:'Pix enviado',subtitulo:config.destNome,valor:valor,tipo:'debito',data:'Hoje'});
+try { localStorage.setItem('santanderExtrato', JSON.stringify(extratoData)); } catch(e) {}
 salvarDadosLocais();
 atualizarTodasTelas();
 renderizarExtrato();
 showComprovanteSimples();
-}, 3000);
+}, 2000);
 }
 function gerarIDTransacao() {
 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 let res = 'E';
-for (let i = 0; i < 31; i++) {
-res += chars.charAt(Math.floor(Math.random() * chars.length));
-}
+for (let i = 0; i < 31; i++) res += chars.charAt(Math.floor(Math.random() * chars.length));
 return res;
 }
 function gerarCodigoBarras() {
 let res = '';
-for (let i = 0; i < 44; i++) {
-res += Math.floor(Math.random() * 10);
-}
+for (let i = 0; i < 44; i++) res += Math.floor(Math.random() * 10);
 return res;
 }
 function gerarAutenticacao() {
 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 let res = '';
-for (let i = 0; i < 23; i++) {
-res += chars.charAt(Math.floor(Math.random() * chars.length));
-}
+for (let i = 0; i < 23; i++) res += chars.charAt(Math.floor(Math.random() * chars.length));
 return res;
 }
 function baixarComprovantePDF() {
+// Carrega libs se ainda não carregou
+window.__loadHeavyLibs();
+setTimeout(() => {
+if (typeof html2pdf === 'undefined') {
+alert('Carregando biblioteca PDF... Tente novamente em 2 segundos.');
+return;
+}
 document.getElementById('pdfValorPago').textContent = document.getElementById('simplesValor').textContent;
 document.getElementById('pdfRecebedorNome').textContent = document.getElementById('simplesNome').textContent;
 document.getElementById('pdfRecebedorCPF').textContent = document.getElementById('simplesCPF').textContent;
@@ -2280,37 +919,17 @@ const opt = {
 margin: 10,
 filename: `comprovante_pix_${Date.now()}.pdf`,
 image: { type: 'jpeg', quality: 0.98 },
-html2canvas: {
-scale: 2,
-useCORS: true,
-backgroundColor: '#ffffff',
-logging: false,
-allowTaint: true
-},
+html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', logging: false, allowTaint: true },
 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
 };
-if (typeof html2pdf === 'undefined') {
-alert('Erro: Biblioteca PDF não carregada. Tente novamente.');
-element.style.display = 'none';
-return;
-}
 html2pdf().from(element).set(opt).save().then(() => {
 element.style.display = 'none';
 }).catch(err => {
 console.error('Erro ao gerar PDF:', err);
-alert('Gerando PDF sem imagem...');
-const logoDiv = element.querySelector('div[style*="text-align: center"]');
-if (logoDiv) logoDiv.style.display = 'none';
-html2pdf().from(element).set(opt).save().then(() => {
 element.style.display = 'none';
-if (logoDiv) logoDiv.style.display = 'block';
-}).catch(err2 => {
-console.error('Erro novamente:', err2);
 alert('Erro ao gerar PDF. Tente usar outro navegador.');
-element.style.display = 'none';
-if (logoDiv) logoDiv.style.display = 'block';
 });
-});
+}, 500);
 }
 function preencherComprovanteCompleto() {
 const agora = new Date();
@@ -2331,19 +950,19 @@ document.getElementById('pixCopiaCola').textContent = gerarPixCopiaCola(config.d
 }
 function gerarQRCode() {
 const container = document.getElementById('qrcode');
-if (!container || typeof QRCode === 'undefined') return;
+if (!container || typeof QRCode === 'undefined') {
+// Tenta carregar QRCode se não tiver
+window.__loadHeavyLibs();
+setTimeout(() => {
+if (typeof QRCode !== 'undefined') gerarQRCode();
+}, 1000);
+return;
+}
 container.innerHTML = '';
 const pixCode = document.getElementById('pixCopiaCola').textContent;
 try {
-new QRCode(container, {
-text: pixCode,
-width: 180,
-height: 180,
-correctLevel: QRCode.CorrectLevel.H
-});
-} catch (error) {
-console.error('Erro ao gerar QR Code:', error);
-}
+new QRCode(container, { text: pixCode, width: 180, height: 180, correctLevel: QRCode.CorrectLevel.H });
+} catch (error) { console.error('Erro ao gerar QR Code:', error); }
 }
 function gerarPixCopiaCola(nome, cpf, valor) {
 return "00020126580014BR.GOV.BCB.PIX0136123e4567-e12b-12d1-a456-4266554400005204000053039865405" + (valor || "10.00") + "5802BR5913" + (nome || "BENEFICIARIO") + "6008SAO PAULO62070503***63041D4A";
@@ -2353,10 +972,10 @@ const code = document.getElementById('pixCopiaCola').textContent;
 navigator.clipboard.writeText(code).then(() => {
 const btn = document.querySelector('.btn-copy-pix');
 const txt = document.getElementById('copyBtnText');
-btn.classList.add('copied');
+btn.style.background = '#00aa00';
 txt.textContent = 'Código PIX copiado!';
 setTimeout(() => {
-btn.classList.remove('copied');
+btn.style.background = '#d90000';
 txt.textContent = 'Copiar código PIX';
 }, 2000);
 });
@@ -2365,11 +984,16 @@ function selectPayment(el) {
 document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
 el.classList.add('selected');
 }
+function toggleBalance() {
+const items = document.querySelectorAll('.balance-sensitive');
+const hidden = document.body.classList.toggle('balances-hidden');
+items.forEach(el => el.classList.toggle('balance-hidden', hidden));
+const btn = document.getElementById('toggleBalanceBtn');
+if (btn) btn.setAttribute('aria-label', hidden ? 'Mostrar saldo' : 'Ocultar saldo');
+}
 function toggleExtratoSaldo() {
 const saldoEl = document.getElementById('extratoSaldoDisponivel');
-if (saldoEl) {
-saldoEl.classList.toggle('balance-hidden');
-}
+if (saldoEl) saldoEl.classList.toggle('balance-hidden');
 }
 function atualizarExtrato() {
 const agora = new Date();
@@ -2377,17 +1001,34 @@ const horaStr = agora.toLocaleTimeString('pt-BR');
 document.getElementById('extratoHoraAtualizacao').textContent = horaStr;
 atualizarExtratoSaldo();
 }
+function switchBankTab(id, btn) {
+document.querySelectorAll('.bank-tab').forEach(b => b.classList.remove('active'));
+document.querySelectorAll('#mainScreen .tab-panel').forEach(p => p.classList.remove('active'));
+btn.classList.add('active');
+document.getElementById(id).classList.add('active');
+}
+(function() {
+let i = 0;
+setInterval(function() {
+const ads = document.querySelectorAll('.home-ad');
+const dots = document.querySelectorAll('.carousel-dots i');
+if (!ads.length) return;
+ads[i].classList.remove('active'); dots[i].classList.remove('active');
+i = (i + 1) % ads.length;
+ads[i].classList.add('active'); dots[i].classList.add('active');
+}, 4500);
+})();
 </script>
+
 <script>
+// Service Worker registrado de forma não-bloqueante
 if ('serviceWorker' in navigator) {
-window.addEventListener('load', function () {
+window.addEventListener('load', function() {
+setTimeout(() => {
 navigator.serviceWorker.register('./sw.js')
-.then(function (registration) {
-console.log('PWA registrado com sucesso:', registration.scope);
-})
-.catch(function (error) {
-console.log('Falha ao registrar o PWA:', error);
-});
+.then(reg => console.log('PWA registrado:', reg.scope))
+.catch(err => console.log('Falha SW:', err));
+}, 2000);
 });
 }
 </script>
