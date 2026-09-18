@@ -10,25 +10,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#ec0000">
 <meta name="description" content="App Santander Mobile">
-    
-    <!-- Configurações PWA -->
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
-    <link rel="apple-touch-icon" href="icons/icon-192.png">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Santander">
-    
-    <title>Santander</title>
-    
-    <!-- Suas bibliotecas (QR Code e html2pdf) continuam aqui embaixo -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-title" content="Santander">
 <title>Santander</title>
-<!-- QR Code Library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<!-- html2pdf Library para exportação em PDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
 * {
@@ -45,7 +32,6 @@ margin: 0 auto;
 min-height: 100vh;
 padding-bottom: 80px;
 }
-/* HEADER */
 .header {
 background: #ec0000;
 color: white;
@@ -100,7 +86,6 @@ transition: all 0.3s;
 opacity: 1;
 border-bottom-color: white;
 }
-/* BALANCE */
 .balance-section {
 background: #ec0000;
 color: white;
@@ -130,7 +115,6 @@ opacity: 0.9;
 margin-top: 5px;
 cursor: pointer;
 }
-/* QUICK ACTIONS */
 .quick-actions {
 background: white;
 padding: 25px 20px;
@@ -173,7 +157,6 @@ color: #333;
 font-size: 12px;
 text-align: center;
 }
-/* CONTENT */
 .content {
 padding: 20px;
 }
@@ -205,7 +188,6 @@ transition: box-shadow 0.3s;
 .account-card:hover {
 box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
-/* BOTTOM NAV */
 .bottom-nav {
 position: fixed;
 bottom: 0;
@@ -240,7 +222,6 @@ fill: currentColor;
 .nav-label {
 font-size: 11px;
 }
-/* SCREENS */
 .screen {
 display: none;
 background: #f5f5f5;
@@ -250,7 +231,6 @@ padding-bottom: 80px;
 .screen.active {
 display: block;
 }
-/* PIX SCREEN */
 .pix-screen {
 background: white;
 }
@@ -498,7 +478,6 @@ transition: background 0.3s;
 .btn-primary:hover {
 background: #c40000;
 }
-/* COMPROVANTE SIMPLES */
 .comprovante-simples {
 background: white;
 min-height: 100vh;
@@ -616,7 +595,6 @@ cursor: pointer;
 text-decoration: underline;
 text-align: center;
 }
-/* COMPROVANTE COMPLETO */
 .comprovante-completo {
 background: white;
 min-height: 100vh;
@@ -665,7 +643,6 @@ color: #333;
 line-height: 1.6;
 font-weight: 500;
 }
-/* CÓDIGO DE BARRAS */
 .barcode-container {
 background: white;
 border: 1px solid #ddd;
@@ -706,7 +683,6 @@ padding: 10px;
 border-radius: 5px;
 margin-top: 10px;
 }
-/* QR CODE PIX */
 .pix-qr-section {
 background: #f9f9f9;
 border-radius: 12px;
@@ -780,75 +756,243 @@ background: #c40000;
 .btn-copy-pix.copied {
 background: #00aa00;
 }
-/* EXTRATO */
+
+/* ===== TELA DE EXTRATO (estilo da foto) ===== */
 .extrato-screen {
-background: #f5f5f5;
+background: #ffffff;
 min-height: 100vh;
 }
 .extrato-header {
-background: white;
-padding: 20px;
-border-bottom: 1px solid #e0e0e0;
+background: #c41212;
+color: white;
+padding: 16px 20px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+position: sticky;
+top: 0;
+z-index: 100;
+}
+.extrato-header .back-btn {
+background: none;
+border: none;
+color: white;
+font-size: 26px;
+cursor: pointer;
+padding: 0;
+display: flex;
+align-items: center;
+justify-content: center;
 }
 .extrato-header h2 {
-color: #333;
-font-size: 22px;
+color: white;
+font-size: 20px;
+font-weight: 500;
+margin: 0;
+flex: 1;
+text-align: center;
+}
+.extrato-header .filtrar-btn {
+background: none;
+border: none;
+color: white;
+font-size: 15px;
 font-weight: 600;
+cursor: pointer;
+padding: 0;
 }
 .extrato-content {
-padding: 20px;
+padding: 0;
+background: #ffffff;
+}
+.extrato-saldo-section {
+padding: 22px 20px 18px;
+background: #ffffff;
+border-bottom: 1px solid #e8e8e8;
+}
+.extrato-saldo-label {
+font-size: 17px;
+color: #111;
+font-weight: 400;
+margin-bottom: 8px;
+}
+.extrato-saldo-row {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 14px;
+}
+.extrato-saldo-valor {
+font-size: 32px;
+font-weight: 700;
+color: #111;
+letter-spacing: -0.5px;
+}
+.extrato-saldo-eye {
+width: 28px;
+height: 28px;
+cursor: pointer;
+color: #c41212;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.extrato-saldo-eye svg {
+width: 26px;
+height: 26px;
+fill: none;
+stroke: #c41212;
+stroke-width: 1.8;
+}
+.extrato-saldo-limite {
+font-size: 15px;
+color: #333;
+margin-bottom: 4px;
+}
+.extrato-saldo-limite-link {
+font-size: 14px;
+color: #c41212;
+text-decoration: underline;
+cursor: pointer;
+margin-bottom: 16px;
+display: inline-block;
+}
+.extrato-saldo-atualizado {
+display: flex;
+align-items: center;
+justify-content: space-between;
+font-size: 14px;
+color: #555;
+}
+.extrato-saldo-atualizado .atualizar-btn {
+background: none;
+border: none;
+color: #c41212;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+display: flex;
+align-items: center;
+gap: 6px;
+}
+.extrato-saldo-atualizado .atualizar-btn svg {
+width: 16px;
+height: 16px;
+fill: none;
+stroke: #c41212;
+stroke-width: 2;
+}
+.extrato-lancamentos {
+background: #ffffff;
+}
+.extrato-lancamento-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 16px 20px;
+border-bottom: 1px solid #e8e8e8;
+cursor: pointer;
+}
+.extrato-lancamento-header.futuros {
+background: #dce8f0;
+}
+.extrato-lancamento-header.hoje {
+background: #f0f0f0;
+}
+.extrato-lancamento-header-left {
+display: flex;
+align-items: center;
+gap: 12px;
+}
+.extrato-lancamento-header-left svg {
+width: 22px;
+height: 22px;
+fill: none;
+stroke: #333;
+stroke-width: 1.8;
+}
+.extrato-lancamento-header-left span {
+font-size: 16px;
+color: #111;
+font-weight: 500;
+}
+.extrato-lancamento-header-right svg {
+width: 22px;
+height: 22px;
+fill: none;
+stroke: #333;
+stroke-width: 2;
 }
 .extrato-item {
-background: white;
-border-radius: 12px;
-padding: 20px;
-margin-bottom: 15px;
-box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+display: flex;
+align-items: center;
+padding: 16px 20px;
+border-bottom: 1px solid #f0f0f0;
 cursor: pointer;
-transition: transform 0.3s;
+transition: background 0.2s;
+background: #ffffff;
 }
 .extrato-item:hover {
-transform: translateX(5px);
+background: #fafafa;
 }
-.extrato-item-header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 10px;
+.extrato-item:last-child {
+border-bottom: none;
+}
+.extrato-item-dot {
+width: 10px;
+height: 10px;
+border-radius: 50%;
+margin-right: 14px;
+flex-shrink: 0;
+}
+.extrato-item-dot.entrada {
+background: #5bb8d4;
+}
+.extrato-item-dot.saida {
+background: #f5a623;
+}
+.extrato-item-info {
+flex: 1;
+min-width: 0;
 }
 .extrato-item-title {
-font-weight: 600;
-color: #333;
 font-size: 15px;
+font-weight: 500;
+color: #111;
+margin-bottom: 3px;
+}
+.extrato-item-subtitle {
+font-size: 13px;
+color: #777;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
 }
 .extrato-item-amount {
-font-weight: bold;
-font-size: 16px;
+font-size: 15px;
+font-weight: 600;
+color: #111;
+margin-left: 12px;
+display: flex;
+align-items: center;
+gap: 6px;
+flex-shrink: 0;
 }
 .extrato-item-amount.debito {
-color: #ec0000;
+color: #111;
 }
 .extrato-item-amount.credito {
-color: #00aa00;
+color: #111;
 }
-.extrato-item-date {
-color: #666;
-font-size: 13px;
+.extrato-item-arrow {
+width: 18px;
+height: 18px;
+fill: none;
+stroke: #999;
+stroke-width: 2;
+margin-left: 4px;
 }
-.extrato-item-editable {
-margin-top: 10px;
-padding-top: 10px;
-border-top: 1px dashed #ddd;
-}
-.extrato-item-editable input {
-width: 100%;
-padding: 8px;
-border: 1px solid #ddd;
-border-radius: 6px;
-font-size: 14px;
-margin-top: 5px;
-}
-/* SETTINGS */
+
 .settings-screen {
 background: #ec0000;
 min-height: 100vh;
@@ -926,7 +1070,6 @@ transition: background 0.3s;
 .btn-copy:hover {
 background: #333;
 }
-/* CHAVE PIX LIST */
 .chave-pix-list {
 margin-top: 15px;
 }
@@ -969,7 +1112,6 @@ display: none;
 .chave-pix-item.active .chave-pix-check {
 display: flex;
 }
-/* PROCESSING OVERLAY */
 .processing-overlay {
 position: fixed;
 top: 0;
@@ -1008,7 +1150,6 @@ display: block;
 .app-screen.active {
 display: block;
 }
-/* ANIMAÇÕES */
 @keyframes fadeIn {
 from { opacity: 0; transform: translateY(10px); }
 to { opacity: 1; transform: translateY(0); }
@@ -1228,7 +1369,6 @@ stroke-width:1.6 !important;
 </style>
 </head>
 <body>
-<!-- MAIN SCREEN -->
 <div class="app-screen active" id="mainScreen">
 <div class="header">
 <div class="header-top">
@@ -1258,8 +1398,8 @@ stroke-width:1.6 !important;
 <div id="bankTabAurora" class="tab-panel active">
 <section class="hero-balance">
 <div class="balance-label">Saldo total <span class="info-dot">i</span></div>
-<div class="balance-amount balance-sensitive" id="mainBalanceAmount" contenteditable="true">R$ 13.989,21</div>
-<div class="balance-limit balance-sensitive">Saldo + Limite: <b contenteditable="true">R$ 33.989,21</b></div>
+<div class="balance-amount balance-sensitive" id="mainBalanceAmount" contenteditable="true">R$ 0,00</div>
+<div class="balance-limit balance-sensitive">Saldo + Limite: <b contenteditable="true" id="mainBalanceLimite">R$ 0,00</b></div>
 <button class="link-button" onclick="showExtrato()">Acessar extrato</button>
 <div class="quick-actions">
 <button class="quick" onclick="showPix()">
@@ -1303,12 +1443,12 @@ stroke-width:1.6 !important;
 <div class="account-card large">
 <div class="account-icon"><svg viewBox="0 0 24 24"><path d="M4 7h16v13H4zM7 7V4h10v3M7 11h10M7 15h5"/></svg></div>
 <div class="account-main">
-<small>Ag XXXX Cc XXXXXXXX-X | Titular</small>
+<small>Ag <span id="displayAgencia">0000</span> Cc <span id="displayConta">0000000-0</span> | <span id="displayTitular">Titular</span></small>
 <strong>Conta corrente <em>›</em></strong>
 </div>
 <div class="account-values balance-sensitive">
-<div><small>Saldo</small><b contenteditable="true" id="saldoConta">R$1.234,00</b></div>
-<div><small>Limite</small><b contenteditable="true" id="limiteConta">R$1.234,00</b></div>
+<div><small>Saldo</small><b contenteditable="true" id="saldoConta">R$ 0,00</b></div>
+<div><small>Limite</small><b contenteditable="true" id="limiteConta">R$ 0,00</b></div>
 </div>
 </div>
 <div class="mini-actions">
@@ -1322,7 +1462,7 @@ stroke-width:1.6 !important;
 <div class="investment-icon"><svg viewBox="0 0 24 24"><path d="M4 19V5h16v14H4Z"/><path d="m7 15 3-3 2 2 5-6"/></svg></div>
 <button class="unlock" onclick="alert('Desbloquear')">Desbloquear</button>
 <strong>Carteira de investimentos <em>›</em></strong>
-<div class="invested balance-sensitive"><small>Total investido</small><b contenteditable="true">R$ 8.750,00</b></div>
+<div class="invested balance-sensitive"><small>Total investido</small><b contenteditable="true">R$ 0,00</b></div>
 </div>
 <div class="investment-actions">
 <button><span>⇢</span>Investir</button><button><span>⇠</span>Resgatar</button><button><span>♧</span>Poupança</button><button><span>＄</span>Minhas<br>reservas</button>
@@ -1332,7 +1472,7 @@ stroke-width:1.6 !important;
 <h2>Atendimento</h2>
 <div class="support-card">
 <button onclick="alert('Chat')"><span class="support-icon">?</span><div><b>Acessar chat</b><small>Assistente virtual</small></div><em>›</em></button>
-<button onclick="alert('Central de ajuda')"><span class="support-icon">◉</span><div><b>Central de ajuda</b><small>Encontre respostas rápidas</small></div><em>›</em></button>
+<button onclick="alert('Central de ajuda')"><span class="support-icon"></span><div><b>Central de ajuda</b><small>Encontre respostas rápidas</small></div><em>›</em></button>
 </div>
 </section>
 <section class="benefits">
@@ -1347,8 +1487,8 @@ stroke-width:1.6 !important;
 <section class="home-section other-bank-section">
 <h2>Outros bancos</h2>
 <div class="other-card"><span class="other-icon">▣</span><div><b>Contas cadastradas</b><small>Gerencie contas de outros bancos.</small></div><em>›</em></div>
-<div class="other-card"><span class="other-icon">↔</span><div><b>Transferências</b><small>Envie e receba valores.</small></div><em>›</em></div>
-<div class="other-card"><span class="other-icon">₿</span><div><b>Pix</b><small>Faça um Pix para qualquer instituição.</small></div><em>›</em></div>
+<div class="other-card"><span class="other-icon"></span><div><b>Transferências</b><small>Envie e receba valores.</small></div><em>›</em></div>
+<div class="other-card"><span class="other-icon"></span><div><b>Pix</b><small>Faça um Pix para qualquer instituição.</small></div><em>›</em></div>
 </section>
 </div>
 <nav class="bottom-nav">
@@ -1358,7 +1498,6 @@ stroke-width:1.6 !important;
 <button class="nav-item"><svg viewBox="0 0 24 24"><path d="M4 5h16v12H4zM8 21h8"/></svg><span>Atendimento</span></button>
 </nav>
 </div>
-<!-- PIX SCREEN -->
 <div id="pixScreen" class="screen pix-screen">
 <header class="pix-header">
 <button class="back-btn" onclick="showMain()" aria-label="Voltar">
@@ -1374,19 +1513,19 @@ stroke-width:1.6 !important;
 <p class="pix-input-subtitle">Celular, CPF/CNPJ, e-mail, chave-aleatória...</p>
 <h2 class="pix-section-title">Transfira novamente</h2>
 <div class="pix-contacts-row">
-<button class="pix-contact-item" onclick="selectContact('Francisco S.')">
-<div class="pix-contact-avatar">FS</div>
-<span class="pix-contact-name">Francisc...</span>
+<button class="pix-contact-item" onclick="selectContact('Destinatário')">
+<div class="pix-contact-avatar">IN</div>
+<span class="pix-contact-name">Destinatário</span>
 <span class="pix-contact-type">Celular</span>
 </button>
-<button class="pix-contact-item" onclick="selectContact('Carolina S.')">
-<div class="pix-contact-avatar">CS</div>
-<span class="pix-contact-name">Carolina...</span>
+<button class="pix-contact-item" onclick="selectContact('Destinatário')">
+<div class="pix-contact-avatar">IN</div>
+<span class="pix-contact-name">Destinatário</span>
 <span class="pix-contact-type">Aleatória</span>
 </button>
-<button class="pix-contact-item" onclick="selectContact('Joao C.')">
-<div class="pix-contact-avatar">JL</div>
-<span class="pix-contact-name">Joao C.</span>
+<button class="pix-contact-item" onclick="selectContact('Destinatário')">
+<div class="pix-contact-avatar">IN</div>
+<span class="pix-contact-name">Destinatário</span>
 <span class="pix-contact-type">CPF</span>
 </button>
 </div>
@@ -1422,7 +1561,6 @@ Acessar todos os contatos
 <button class="btn-primary" onclick="goToValor()" style="margin-top: 24px;">Continuar</button>
 </main>
 </div>
-<!-- VALOR SCREEN - ATUALIZADO (TELA 1: DEFINIR TRANSFERÊNCIA) -->
 <div id="valorScreen" class="screen pix-screen">
 <header class="pix-header">
 <button class="back-btn" onclick="showPix()">
@@ -1435,8 +1573,9 @@ Acessar todos os contatos
 <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin-bottom: 20px;">
 <div style="font-size: 13px; color: #64748b; margin-bottom: 8px;">Para:</div>
 <div style="font-size: 14px; color: #333; line-height: 1.6;">
-<div style="margin-bottom: 4px;">CPF: <span id="destinatarioCPF">***.993.555-**</span></div>
-<div>Chave: <span id="destinatarioChave">(**) *****-5678</span> • BCO SANTANDER (BRASIL) S.A.</div>
+<div style="margin-bottom: 4px;">Nome: <span id="destinatarioNome">Destinatário</span></div>
+<div style="margin-bottom: 4px;">CPF: <span id="destinatarioCPF">***.000.000-**</span></div>
+<div>Chave: <span id="destinatarioChave">(00) 00000-0000</span> • <span id="destinatarioInstituicao">BCO SANTANDER (BRASIL) S.A.</span></div>
 </div>
 </div>
 <div style="margin-bottom: 20px;">
@@ -1448,7 +1587,6 @@ Acessar todos os contatos
 <button class="btn-primary" id="btnContinuarValor" onclick="goToPagamento()" style="margin-top: 0; border-radius: 8px; padding: 16px; font-weight: 600;" disabled>Continuar</button>
 </main>
 </div>
-<!-- FORMA DE PAGAMENTO SCREEN - NOVA (TELA 2) -->
 <div id="pagamentoScreen" class="screen pix-screen">
 <header class="pix-header">
 <button class="back-btn" onclick="showValor()">
@@ -1468,9 +1606,9 @@ Acessar todos os contatos
 <img src="logo.png" alt="Santander" style="width: 24px; height: 24px; object-fit: contain;">
 Saldo em conta
 </div>
-<div style="font-size: 13px; color: #666; margin: 2px 0;">Conta corrente <span id="accountNumber">01084572-1</span></div>
-<div style="font-size: 13px; color: #666; margin: 2px 0;">Saldo: <span id="accountBalance">R$ 70,46</span></div>
-<div style="font-size: 13px; color: #666; margin: 2px 0;">Saldo + Limite: <span id="accountLimit">R$ 6.070,46</span></div>
+<div style="font-size: 13px; color: #666; margin: 2px 0;">Conta corrente <span id="accountNumber">0000000-0</span></div>
+<div style="font-size: 13px; color: #666; margin: 2px 0;">Saldo: <span id="accountBalance">R$ 0,00</span></div>
+<div style="font-size: 13px; color: #666; margin: 2px 0;">Saldo + Limite: <span id="accountLimit">R$ 0,00</span></div>
 </div>
 <div style="width: 24px; height: 24px; border: 2px solid #ec0000; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
 <div style="width: 12px; height: 12px; border-radius: 50%; background: #ec0000;"></div>
@@ -1479,7 +1617,6 @@ Saldo em conta
 <button class="btn-primary" onclick="goToRevisao()" style="margin-top: 24px; border-radius: 8px; padding: 16px; font-weight: 600;">Continuar</button>
 </main>
 </div>
-<!-- CONFIRM SCREEN - ATUALIZADO (TELA 3: REVISÃO) -->
 <div id="confirmScreen" class="screen pix-screen">
 <header class="pix-header">
 <button class="back-btn" onclick="showPagamento()">
@@ -1489,22 +1626,22 @@ Saldo em conta
 </header>
 <main class="pix-content" style="padding-top: 20px; background: white; min-height: calc(100vh - 70px); padding-bottom: 100px;">
 <h2 style="font-size: 22px; font-weight: 600; color: #161616; margin-bottom: 16px;">Confirmar pagamento para</h2>
-<div style="font-size: 14px; color: #333; margin-bottom: 16px;" id="recipientName">Nadir da Silva</div>
+<div style="font-size: 14px; color: #333; margin-bottom: 16px;" id="recipientName">Destinatário</div>
 <div style="background: #fff9e6; border-left: 4px solid #ffc107; padding: 14px 16px; border-radius: 4px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px;">
 <div style="font-size: 22px;">⚠️</div>
-<div style="font-size: 14px; color: #333; line-height: 1.4;">Para enviar o Pix, será utilizado <strong id="limitUsed">R$ 29,54</strong> do seu limite.</div>
+<div style="font-size: 14px; color: #333; line-height: 1.4;">Para enviar o Pix, será utilizado <strong id="limitUsed">R$ 0,00</strong> do seu limite.</div>
 </div>
 <div style="padding: 14px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
 <div style="font-size: 14px; color: #666;">Valor</div>
 <div style="display: flex; align-items: center; gap: 8px;">
-<div style="font-size: 22px; color: #ec0000; font-weight: 600;" id="reviewValue">R$ 100,00</div>
+<div style="font-size: 22px; color: #ec0000; font-weight: 600;" id="reviewValue">R$ 0,00</div>
 <span style="color: #ec0000; text-decoration: underline; font-size: 14px; cursor: pointer;" onclick="showValor()">Alterar</span>
 </div>
 </div>
 <div style="padding: 14px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
 <div style="font-size: 14px; color: #666;">Quando vai ser feito</div>
 <div style="display: flex; align-items: center; gap: 8px;">
-<div style="font-size: 15px; color: #333; font-weight: 600;">Hoje, <span id="reviewDate">17 de Set</span></div>
+<div style="font-size: 15px; color: #333; font-weight: 600;">Hoje, <span id="reviewDate">--</span></div>
 <span style="color: #ec0000; text-decoration: underline; font-size: 14px; cursor: pointer;">Agendar</span>
 </div>
 </div>
@@ -1538,7 +1675,6 @@ Saldo em conta
 <button class="btn-primary" onclick="finalizarPIX()" style="margin-top: 24px; border-radius: 8px; padding: 16px; font-weight: 600; position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 400px;">Confirmar e transferir</button>
 </main>
 </div>
-<!-- COMPROVANTE SIMPLES -->
 <div id="comprovanteSimplesScreen" class="screen comprovante-simples">
 <header class="comprovante-header-vermelho">
 <button class="close-btn-novo" onclick="showMain()">✕</button>
@@ -1552,110 +1688,143 @@ Saldo em conta
 <p class="comprovante-sub-secao">Você pode consultar o comprovante da sua transação em Início > Pix > Extrato Pix.</p>
 <div class="comp-group">
 <div class="comp-label">Valor pago</div>
-<div class="comp-value-destaque" id="simplesValor">R$ 4.400,00</div>
+<div class="comp-value-destaque" id="simplesValor">R$ 0,00</div>
 </div>
 <div class="comp-group" style="margin-top: 18px;">
 <div class="comp-label">Para</div>
-<div class="comp-value" id="simplesNome">Carlos Henrique Barbosa Filho</div>
+<div class="comp-value" id="simplesNome">Destinatário</div>
 </div>
 <div class="comp-group">
 <div class="comp-label">CPF</div>
-<div class="comp-value" id="simplesCPF">***.518.307-**</div>
+<div class="comp-value" id="simplesCPF">***.000.000-**</div>
 </div>
 <div class="comp-group">
 <div class="comp-label">Instituição</div>
-<div class="comp-value" id="simplesInstituicao">NU PAGAMENTOS - IP</div>
+<div class="comp-value" id="simplesInstituicao">Instituição</div>
 </div>
 <hr class="comp-divider">
 <div class="comp-group">
 <div class="comp-label">ID/Transação</div>
-<div class="comp-value" id="simplesIdTransacao" style="font-size: 14px; word-break: break-all;">E9040088820241025122728890258928</div>
+<div class="comp-value" id="simplesIdTransacao" style="font-size: 14px; word-break: break-all;">—</div>
 </div>
 <div class="comp-group">
 <div class="comp-label">Data e hora da transação</div>
-<div class="comp-value" id="simplesDataHora">25/10/2024 - 09:28:13</div>
+<div class="comp-value" id="simplesDataHora">—</div>
 </div>
 <div class="comp-group">
 <div class="comp-label">Código de autenticação</div>
-<div class="comp-value" id="simplesAutenticacao" style="font-size: 14px; word-break: break-all;">A3A0AFD45880D96C1667795</div>
+<div class="comp-value" id="simplesAutenticacao" style="font-size: 14px; word-break: break-all;">—</div>
 </div>
 </div>
-<!-- BOTÃO PARA EXPORTAR EM PDF IDÊNTICO AO COMPROVANTE ENVIADO -->
 <button class="btn-save-ref" onclick="baixarComprovantePDF()">Salvar ou Compartilhar (PDF)</button>
 <button class="btn-view-complete" onclick="showComprovanteCompleto()">Ver comprovante completo</button>
 </div>
-<!-- COMPROVANTE COMPLETO -->
 <div id="comprovanteCompletoScreen" class="screen comprovante-completo">
 <header class="completo-header">
 <div class="completo-logo">
 <img src="santander.png" alt="Santander" style="width: 120px; height: auto; object-fit: contain;">
 </div>
 <h1 class="completo-title">Comprovante de Pagamento PIX</h1>
-<time class="completo-date" id="completoData">06/03/2026 às 18:46:11</time>
+<time class="completo-date" id="completoData">—</time>
 </header>
-<!-- QR CODE PIX -->
 <section class="pix-qr-section">
 <p class="pix-qr-title">📱 Escaneie para pagar</p>
 <div id="qrcode"></div>
 <p style="font-size: 12px; color: #888; margin-bottom: 10px;">
 Abra o app do seu banco e escaneie o QR Code
 </p>
-<!-- PIX COPIA E COLA -->
 <div class="pix-copia-cola">
 <p class="pix-copia-cola-label">📋 PIX Copia e Cola:</p>
-<code class="pix-copia-cola-code" id="pixCopiaCola">00020126580014BR.GOV.BCB.PIX0136123e4567-e12b-12d1-a456-426655440000520400005303986540510.005802BR5913NOME DO BENEFICIARIO6008SAO PAULO62070503***63041D4A</code>
+<code class="pix-copia-cola-code" id="pixCopiaCola">—</code>
 <button class="btn-copy-pix" onclick="copiarPix()">
- <span id="copyBtnText">Copiar código PIX</span>
+<span id="copyBtnText">Copiar código PIX</span>
 </button>
 </div>
 </section>
-<!-- CÓDIGO DE BARRAS -->
 <section class="barcode-container">
 <p class="barcode-label">Código de barras</p>
 <div class="barcode-visual"></div>
-<code class="barcode-number" id="barcodeNumber">46191.11000 00000.000042 09314.497018 8 13810000010016</code>
+<code class="barcode-number" id="barcodeNumber">—</code>
 </section>
-<!-- DADOS DA TRANSFERÊNCIA -->
 <section class="completo-section">
 <p class="completo-label">Valor</p>
 <p class="completo-value" style="font-size: 24px; font-weight: bold; color: #ec0000;" id="compValor">R$ 0,00</p>
 </section>
 <section class="completo-section">
 <p class="completo-label">Beneficiário (Quem recebe)</p>
-<p class="completo-value" id="compNome">nome da vítima</p>
-<p class="completo-value" style="font-size: 13px; color: #666; margin-top: 3px;" id="compCPF">CPF: ***.874.781-**</p>
+<p class="completo-value" id="compNome">Destinatário</p>
+<p class="completo-value" style="font-size: 13px; color: #666; margin-top: 3px;" id="compCPF">CPF: ***.000.000-**</p>
 </section>
 <section class="completo-section">
 <p class="completo-label">Instituição (Quem recebe)</p>
-<p class="completo-value" id="compInstituicao">BCO SANTANDER (BRASIL) S.A.</p>
-<p class="completo-value" style="font-size: 13px; color: #666; margin-top: 3px;">Agência: 0040 | Conta: 415.874.781-34</p>
+<p class="completo-value" id="compInstituicao">Instituição</p>
+<p class="completo-value" style="font-size: 13px; color: #666; margin-top: 3px;">Agência: 0000 | Conta: 0000000-0</p>
 </section>
 <section class="completo-section">
 <p class="completo-label">Pagador</p>
-<p class="completo-value" id="compPagador">seu nome</p>
-<p class="completo-value" style="font-size: 13px; color: #666; margin-top: 3px;" id="compPagadorCPF">CPF: ***.646.446-**</p>
+<p class="completo-value" id="compPagador">Seu nome</p>
+<p class="completo-value" style="font-size: 13px; color: #666; margin-top: 3px;" id="compPagadorCPF">CPF: ***.000.000-**</p>
 </section>
 <section class="completo-section">
 <p class="completo-label">ID da Transação</p>
-<p class="completo-value" style="font-size: 12px; font-family: monospace;" id="compIdTransacao">12ecac61-5dae-4678-8938-919d0ed7b060</p>
+<p class="completo-value" style="font-size: 12px; font-family: monospace;" id="compIdTransacao">—</p>
 </section>
 <footer class="completo-footer" style="display: flex; justify-content: space-between; font-size: 11px; color: #666; margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd;">
-<span>Comprovante gerado em: <time id="compDataFooter">06/03/2026 18:46:11</time></span>
+<span>Comprovante gerado em: <time id="compDataFooter">—</time></span>
 <span>1/1</span>
 </footer>
 <button class="btn-primary" onclick="showMain()" style="margin-top: 30px;">← Voltar ao início</button>
 </div>
-<!-- EXTRATO SCREEN -->
+
+<!-- ===== TELA DE EXTRATO (estilo da foto) ===== -->
 <div id="extratoScreen" class="screen extrato-screen">
 <header class="extrato-header">
-<button class="back-btn" onclick="showMain()">←</button>
+<button class="back-btn" onclick="showMain()" aria-label="Voltar">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+</button>
 <h2>Extrato</h2>
+<button class="filtrar-btn" onclick="alert('Filtrar extrato')">Filtrar</button>
 </header>
-<main class="extrato-content" id="extratoContent">
-<!-- Extrato items serão gerados via JavaScript -->
+<main class="extrato-content">
+<section class="extrato-saldo-section">
+<div class="extrato-saldo-label">Saldo disponível</div>
+<div class="extrato-saldo-row">
+<div class="extrato-saldo-valor balance-sensitive" id="extratoSaldoDisponivel" contenteditable="true">R$ 1.410,55</div>
+<div class="extrato-saldo-eye" onclick="toggleExtratoSaldo()" aria-label="Mostrar/Ocultar saldo">
+<svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+</div>
+</div>
+<div class="extrato-saldo-limite">Saldo + limite: <span id="extratoSaldoLimite">R$ 1.410,55</span></div>
+<a class="extrato-saldo-limite-link" onclick="alert('Entenda seu limite')">Entenda seu limite</a>
+<div class="extrato-saldo-atualizado">
+<span>Saldo atualizado as <span id="extratoHoraAtualizacao">10:58:35</span></span>
+<button class="atualizar-btn" onclick="atualizarExtrato()">
+<svg viewBox="0 0 24 24"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+Atualizar
+</button>
+</div>
+</section>
+<section class="extrato-lancamentos">
+<div class="extrato-lancamento-header futuros">
+<div class="extrato-lancamento-header-left">
+<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+<span>Lançamentos futuros</span>
+</div>
+<svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+</div>
+<div class="extrato-lancamento-header hoje">
+<div class="extrato-lancamento-header-left">
+<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M9 16l2 2 4-4"/></svg>
+<span>Hoje</span>
+</div>
+</div>
+<div id="extratoItemsContainer">
+<!-- Items serão renderizados via JS -->
+</div>
+</section>
 </main>
 </div>
-<!-- SETTINGS SCREEN -->
+
 <div id="settingsScreen" class="screen settings-screen">
 <header class="settings-header">
 <img src="santander.png" alt="Santander" class="settings-logo" style="width: 120px; height: auto;">
@@ -1665,7 +1834,11 @@ Abra o app do seu banco e escaneie o QR Code
 <section class="settings-card">
 <p class="settings-label"> PAGADOR</p>
 <input type="text" class="settings-input" id="configMeuNome" placeholder="Nome completo">
-<input type="text" class="settings-input" id="configMeuCPF" placeholder="***.xxx.xxx-**">
+<input type="text" class="settings-input" id="configMeuCPF" placeholder="***.000.000-**">
+<p class="settings-label" style="margin-top: 15px;"> Saldo</p>
+<input type="text" class="settings-input" id="configSaldo" placeholder="0,00" oninput="formatarMoedaConfig(this)">
+<p class="settings-label" style="margin-top: 15px;"> Limite</p>
+<input type="text" class="settings-input" id="configLimite" placeholder="0,00" oninput="formatarMoedaConfig(this)">
 </section>
 <section class="settings-card">
 <p class="settings-label"> QUEM RECEBER</p>
@@ -1674,49 +1847,47 @@ Abra o app do seu banco e escaneie o QR Code
 <input type="text" class="settings-input" id="configDestChave" placeholder="Chave Pix">
 <input type="text" class="settings-input" id="configDestInstituicao" placeholder="Instituição" value="BCO SANTANDER (BRASIL) S.A.">
 </section>
-<button class="btn-primary" onclick="salvarConfiguracoes()">💾 Salvar Configurações</button>
+<button class="btn-primary" onclick="salvarConfiguracoes()" style="margin-top: 10px;">💾 Salvar Configurações</button>
 <button onclick="showMain()" style="width: 100%; margin-top: 12px; padding: 14px; background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.4); border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.3s;">← Voltar</button>
 </main>
 </div>
-<!-- PROCESSING OVERLAY -->
 <div class="processing-overlay" id="processingOverlay">
 <div class="face-id-circle"></div>
 <p class="processing-text">Processando...</p>
 </div>
-<!-- CONTAINER OCULTO PARA GERAR O PDF -->
 <div id="pdfTemplateContainer" style="display:none;">
 <div style="background: #ffffff; padding: 25px; font-family: Arial, sans-serif; color: #111; max-width: 400px; margin: 0 auto; font-size: 13px;">
 <div style="text-align: center; margin-bottom: 10px; border: 0; outline: 0; box-shadow: none;">
 <img src="comprovante.png" alt="Santander" style="display: inline-block; width: 120px; height: auto; object-fit: contain;">
 </div>
 <div style="font-size: 29px; font-weight: bold; color: #111; text-align: center; margin-bottom: 12px;" id="pdfDataHoraTop">Comprovante do Pix</div>
-<div style="font-size: 11px; color: #555; text-align: center; margin-bottom: 18px;" id="pdfDataHoraSub">11/09/2026 - 17:48:18</div>
+<div style="font-size: 11px; color: #555; text-align: center; margin-bottom: 18px;" id="pdfDataHoraSub">—</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 3px; text-transform: uppercase;">Valor pago</div>
-<div style="font-size: 20px; font-weight: bold; color: #111; margin-bottom: 15px;" id="pdfValorPago">R$ 90,00</div>
+<div style="font-size: 20px; font-weight: bold; color: #111; margin-bottom: 15px;" id="pdfValorPago">R$ 0,00</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 3px; text-transform: uppercase;">Forma de pagamento</div>
-<div style="font-size: 13px; color: #111; margin-bottom: 15px;">Ag 3602 Cc 1076279-1</div>
+<div style="font-size: 13px; color: #111; margin-bottom: 15px;">Ag 0000 Cc 0000000-0</div>
 <div style="font-size: 11px; font-weight: bold; color: #333; margin-bottom: 8px; border-bottom: 1px solid #ddd; padding-bottom: 4px;">Dados do recebedor</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Para</div>
-<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 8px;" id="pdfRecebedorNome">Gabrielly Cristiny Camargo Bastos</div>
+<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 8px;" id="pdfRecebedorNome">Destinatário</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">CPF</div>
-<div style="font-size: 13px; color: #111; margin-bottom: 8px;" id="pdfRecebedorCPF">***.334.497-**</div>
+<div style="font-size: 13px; color: #111; margin-bottom: 8px;" id="pdfRecebedorCPF">***.000.000-**</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Chave</div>
-<div style="font-size: 13px; color: #111; margin-bottom: 8px;" id="pdfRecebedorChave">+55 (21) 98705-2110</div>
+<div style="font-size: 13px; color: #111; margin-bottom: 8px;" id="pdfRecebedorChave">(00) 00000-0000</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Instituição</div>
-<div style="font-size: 13px; color: #111; margin-bottom: 18px;" id="pdfRecebedorInstituicao">CAIXA ECONOMICA FEDERAL</div>
+<div style="font-size: 13px; color: #111; margin-bottom: 18px;" id="pdfRecebedorInstituicao">Instituição</div>
 <div style="font-size: 11px; font-weight: bold; color: #333; margin-bottom: 8px; border-bottom: 1px solid #ddd; padding-bottom: 4px;">Dados do pagador</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">De</div>
-<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 8px;" id="pdfPagadorNome">Maria Luiza De Oliveira</div>
+<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 8px;" id="pdfPagadorNome">Seu nome</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">CPF</div>
-<div style="font-size: 13px; color: #111; margin-bottom: 8px;" id="pdfPagadorCPF">***.567.439-**</div>
+<div style="font-size: 13px; color: #111; margin-bottom: 8px;" id="pdfPagadorCPF">***.000.000-**</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Instituição</div>
 <div style="font-size: 13px; color: #111; margin-bottom: 18px;">BCO SANTANDER (BRASIL) S.A.</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">ID/Transação</div>
-<div style="font-size: 12px; font-family: monospace; color: #111; margin-bottom: 12px; word-break: break-all;" id="pdfIdTransacao">E9040088820260911204869745768666</div>
+<div style="font-size: 12px; font-family: monospace; color: #111; margin-bottom: 12px; word-break: break-all;" id="pdfIdTransacao">—</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Data e hora da transação</div>
-<div style="font-size: 13px; color: #111; margin-bottom: 12px;" id="pdfDataHoraTransacao">11/09/2026 - 17:48:18</div>
+<div style="font-size: 13px; color: #111; margin-bottom: 12px;" id="pdfDataHoraTransacao">—</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Código de autenticação</div>
-<div style="font-size: 12px; font-family: monospace; color: #111; margin-bottom: 25px; word-break: break-all;" id="pdfCodigoAutenticacao">ACF6524760BF1B611992710</div>
+<div style="font-size: 12px; font-family: monospace; color: #111; margin-bottom: 25px; word-break: break-all;" id="pdfCodigoAutenticacao">—</div>
 <div style="border-top: 1px solid #ddd; padding-top: 15px; margin-top: 20px; font-size: 10px; color: #666; text-align: center; line-height: 1.4;">
 <b>Central de Atendimento Santander</b><br>
 4004-3535 (Capitais e Regiões Metropolitanas)
@@ -1729,70 +1900,152 @@ Ouvidoria 0800-726-0332
 <script>
 let config = {
 meuNome: 'Seu Nome Completo',
-meuCPF: '***.646.446-**',
-destNome: 'Nadir da Silva',
-destCPF: '***.993.555-**',
-destChave: '(**) *****-5678',
+meuCPF: '***.000.000-**',
+destNome: 'Destinatário',
+destCPF: '***.000.000-**',
+destChave: '(00) 00000-0000',
 destInstituicao: 'BCO SANTANDER (BRASIL) S.A.',
-accountNumber: '01084572-1',
-accountBalance: 70.46,
-accountLimit: 6070.46,
+accountNumber: '0000000-0',
+accountBalance: 1410.55,
+accountLimit: 0,
 transferValue: 0
 };
 let extratoData = [
-{ titulo: 'PIX Recebido', valor: 502.00, tipo: 'credito', data: 'Hoje, 10:32', editavel: true },
-{ titulo: 'PIX Enviado', valor: 150.00, tipo: 'debito', data: 'Ontem, 15:20', editavel: true },
-{ titulo: 'Pagamento de Boleto', valor: 89.90, tipo: 'debito', data: '15/01/2026', editavel: true },
-{ titulo: 'Transferência Recebida', valor: 1200.00, tipo: 'credito', data: '14/01/2026', editavel: true },
-{ titulo: 'Cartão de Crédito', valor: 450.00, tipo: 'debito', data: '10/01/2026', editavel: true }
+{
+titulo: 'Pix recebido',
+subtitulo: 'Wise brasil corretora de',
+valor: 50.00,
+tipo: 'credito',
+data: 'Hoje'
+},
+{
+titulo: 'Pix recebido - dif tit',
+subtitulo: 'Josiane leite da silva',
+valor: 10.00,
+tipo: 'credito',
+data: 'Hoje'
+},
+{
+titulo: 'Pix enviado',
+subtitulo: 'Thalita lira blezer scali',
+valor: 4.00,
+tipo: 'debito',
+data: 'Hoje'
+},
+{
+titulo: 'Ted recebida',
+subtitulo: 'Pagto seguro desemprego',
+valor: 1302.00,
+tipo: 'credito',
+data: 'Hoje'
+}
 ];
 document.addEventListener('DOMContentLoaded', () => {
 carregarConfiguracoes();
 renderizarExtrato();
 initValorInput();
 sincronizarSaldoTelaInicial();
+atualizarTodasTelas();
 });
-
-// Sincronizar saldo da tela inicial com a tela de pagamento
+function formatarMoedaConfig(input) {
+let valor = input.value.replace(/\D/g, '');
+if (!valor) {
+input.value = '';
+return;
+}
+valor = (parseInt(valor) / 100).toFixed(2);
+valor = valor.replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+input.value = valor;
+}
+function lerValorMoeda(texto) {
+if (!texto) return 0;
+const limpo = texto.replace(/[^\d,]/g, '').replace('.', '').replace(',', '.');
+return parseFloat(limpo) || 0;
+}
+function formatarMoeda(valor) {
+return 'R$ ' + Number(valor || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+}
 function sincronizarSaldoTelaInicial() {
 const saldoElement = document.getElementById('saldoConta');
 const limiteElement = document.getElementById('limiteConta');
-
-if (saldoElement && limiteElement) {
-// Observar mudanças nos elementos contenteditable
-const observer = new MutationObserver(() => {
-atualizarSaldoTelaPagamento();
+const mainBalance = document.getElementById('mainBalanceAmount');
+const mainLimite = document.getElementById('mainBalanceLimite');
+if (saldoElement) {
+const obsSaldo = new MutationObserver(() => {
+const novoSaldo = lerValorMoeda(saldoElement.textContent);
+config.accountBalance = novoSaldo;
+if (mainBalance) mainBalance.textContent = formatarMoeda(novoSaldo);
+atualizarTelaPagamento();
+atualizarExtratoSaldo();
+salvarDadosLocais();
 });
-
-observer.observe(saldoElement, { childList: true, characterData: true, subtree: true });
-observer.observe(limiteElement, { childList: true, characterData: true, subtree: true });
-
-// Atualizar inicialmente
-atualizarSaldoTelaPagamento();
+obsSaldo.observe(saldoElement, { childList: true, characterData: true, subtree: true });
+}
+if (limiteElement) {
+const obsLimite = new MutationObserver(() => {
+const novoLimite = lerValorMoeda(limiteElement.textContent);
+config.accountLimit = novoLimite;
+if (mainLimite) mainLimite.textContent = formatarMoeda(config.accountBalance + novoLimite);
+atualizarTelaPagamento();
+atualizarExtratoSaldo();
+salvarDadosLocais();
+});
+obsLimite.observe(limiteElement, { childList: true, characterData: true, subtree: true });
+}
+if (mainBalance) {
+const obsMain = new MutationObserver(() => {
+const novoSaldo = lerValorMoeda(mainBalance.textContent);
+config.accountBalance = novoSaldo;
+if (saldoElement) saldoElement.textContent = formatarMoeda(novoSaldo);
+atualizarTelaPagamento();
+atualizarExtratoSaldo();
+salvarDadosLocais();
+});
+obsMain.observe(mainBalance, { childList: true, characterData: true, subtree: true });
 }
 }
-
-function atualizarSaldoTelaPagamento() {
-const saldoElement = document.getElementById('saldoConta');
-const limiteElement = document.getElementById('limiteConta');
-const accountBalanceElement = document.getElementById('accountBalance');
-const accountLimitElement = document.getElementById('accountLimit');
-
-if (saldoElement && accountBalanceElement) {
-const saldoTexto = saldoElement.textContent.replace(/[^\d,]/g, '').replace(',', '.');
-const saldoValor = parseFloat(saldoTexto) || 0;
-accountBalanceElement.textContent = 'R$ ' + saldoValor.toFixed(2).replace('.', ',');
-config.accountBalance = saldoValor;
+function atualizarExtratoSaldo() {
+const extratoSaldo = document.getElementById('extratoSaldoDisponivel');
+const extratoLimite = document.getElementById('extratoSaldoLimite');
+if (extratoSaldo) extratoSaldo.textContent = formatarMoeda(config.accountBalance);
+if (extratoLimite) extratoLimite.textContent = formatarMoeda(config.accountBalance + config.accountLimit);
 }
-
-if (limiteElement && accountLimitElement) {
-const limiteTexto = limiteElement.textContent.replace(/[^\d,]/g, '').replace(',', '.');
-const limiteValor = parseFloat(limiteTexto) || 0;
-accountLimitElement.textContent = 'R$ ' + limiteValor.toFixed(2).replace('.', ',');
-config.accountLimit = limiteValor;
+function atualizarTelaPagamento() {
+const accountBalance = document.getElementById('accountBalance');
+const accountLimit = document.getElementById('accountLimit');
+if (accountBalance) accountBalance.textContent = formatarMoeda(config.accountBalance);
+if (accountLimit) accountLimit.textContent = formatarMoeda(config.accountBalance + config.accountLimit);
 }
+function atualizarTodasTelas() {
+const mainBalance = document.getElementById('mainBalanceAmount');
+const mainLimite = document.getElementById('mainBalanceLimite');
+const saldoConta = document.getElementById('saldoConta');
+const limiteConta = document.getElementById('limiteConta');
+const accountNumber = document.getElementById('accountNumber');
+if (mainBalance) mainBalance.textContent = formatarMoeda(config.accountBalance);
+if (mainLimite) mainLimite.textContent = formatarMoeda(config.accountBalance + config.accountLimit);
+if (saldoConta) saldoConta.textContent = formatarMoeda(config.accountBalance);
+if (limiteConta) limiteConta.textContent = formatarMoeda(config.accountLimit);
+if (accountNumber) accountNumber.textContent = config.accountNumber;
+atualizarDadosDestinatario();
+atualizarTelaPagamento();
+atualizarExtratoSaldo();
 }
-
+function atualizarDadosDestinatario() {
+const destNome = document.getElementById('destinatarioNome');
+const destCPF = document.getElementById('destinatarioCPF');
+const destChave = document.getElementById('destinatarioChave');
+const destInst = document.getElementById('destinatarioInstituicao');
+const recipientName = document.getElementById('recipientName');
+if (destNome) destNome.textContent = config.destNome;
+if (destCPF) destCPF.textContent = config.destCPF;
+if (destChave) destChave.textContent = config.destChave;
+if (destInst) destInst.textContent = config.destInstituicao;
+if (recipientName) recipientName.textContent = config.destNome;
+}
+function salvarDadosLocais() {
+localStorage.setItem('santanderConfig', JSON.stringify(config));
+}
 function initValorInput() {
 const input = document.getElementById('valorTransferencia');
 if (!input) return;
@@ -1805,17 +2058,21 @@ return;
 }
 let valor = parseInt(numeros, 10) / 100;
 config.transferValue = valor;
-e.target.value = valor.toLocaleString('pt-BR', {
-style: 'currency',
-currency: 'BRL'
-});
+e.target.value = formatarMoeda(valor);
 document.getElementById('btnContinuarValor').disabled = valor <= 0;
 });
 }
 function carregarConfiguracoes() {
 const saved = localStorage.getItem('santanderConfig');
 if (saved) {
-config = JSON.parse(saved);
+try {
+const parsed = JSON.parse(saved);
+config = {...config, ...parsed};
+} catch(e) {}
+}
+const ex = localStorage.getItem('santanderExtrato');
+if (ex) {
+try { extratoData = JSON.parse(ex); } catch(e) {}
 }
 document.getElementById('configMeuNome').value = config.meuNome;
 document.getElementById('configMeuCPF').value = config.meuCPF;
@@ -1823,56 +2080,58 @@ document.getElementById('configDestNome').value = config.destNome;
 document.getElementById('configDestCPF').value = config.destCPF;
 document.getElementById('configDestChave').value = config.destChave || '';
 document.getElementById('configDestInstituicao').value = config.destInstituicao;
-document.getElementById('recipientName').textContent = config.destNome;
-document.getElementById('destinatarioCPF').textContent = config.destCPF;
-document.getElementById('destinatarioChave').textContent = config.destChave;
-document.getElementById('accountNumber').textContent = config.accountNumber;
-document.getElementById('accountBalance').textContent = 'R$ ' + config.accountBalance.toFixed(2).replace('.', ',');
-document.getElementById('accountLimit').textContent = 'R$ ' + config.accountLimit.toFixed(2).replace('.', ',');
+document.getElementById('configSaldo').value = config.accountBalance.toFixed(2).replace('.', ',');
+document.getElementById('configLimite').value = config.accountLimit.toFixed(2).replace('.', ',');
+atualizarTodasTelas();
 const months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
 const today = new Date();
 document.getElementById('reviewDate').textContent = today.getDate() + ' de ' + months[today.getMonth()];
 }
 function salvarConfiguracoes() {
-config.meuNome = document.getElementById('configMeuNome').value;
-config.meuCPF = document.getElementById('configMeuCPF').value;
-config.destNome = document.getElementById('configDestNome').value;
-config.destCPF = document.getElementById('configDestCPF').value;
-config.destChave = document.getElementById('configDestChave').value;
-config.destInstituicao = document.getElementById('configDestInstituicao').value;
-localStorage.setItem('santanderConfig', JSON.stringify(config));
-alert('✅ Configurações salvas com sucesso!');
+config.meuNome = document.getElementById('configMeuNome').value || 'Seu Nome';
+config.meuCPF = document.getElementById('configMeuCPF').value || '***.000.000-**';
+config.destNome = document.getElementById('configDestNome').value || 'Destinatário';
+config.destCPF = document.getElementById('configDestCPF').value || '***.000.000-**';
+config.destChave = document.getElementById('configDestChave').value || '(00) 00000-0000';
+config.destInstituicao = document.getElementById('configDestInstituicao').value || 'BCO SANTANDER (BRASIL) S.A.';
+const saldoConfig = lerValorMoeda(document.getElementById('configSaldo').value);
+const limiteConfig = lerValorMoeda(document.getElementById('configLimite').value);
+if (saldoConfig > 0) {
+config.accountBalance = saldoConfig;
+}
+if (limiteConfig > 0) {
+config.accountLimit = limiteConfig;
+}
+salvarDadosLocais();
+atualizarTodasTelas();
 showMain();
 }
 function renderizarExtrato() {
-const container = document.getElementById('extratoContent');
+const container = document.getElementById('extratoItemsContainer');
 if (!container) return;
 container.innerHTML = '';
-extratoData.forEach((item, index) => {
+if (extratoData.length === 0) {
+container.innerHTML = '<div style="padding:20px;text-align:center;color:#666">Nenhuma transação registrada</div>';
+return;
+}
+extratoData.forEach((item) => {
 const div = document.createElement('div');
 div.className = 'extrato-item fade-in';
+const isDebito = item.tipo === 'debito';
+const valorFormatado = (isDebito ? '- ' : '') + 'R$ ' + item.valor.toFixed(2).replace('.', ',');
 div.innerHTML = `
-<div class="extrato-item-header">
+<div class="extrato-item-dot ${isDebito ? 'saida' : 'entrada'}"></div>
+<div class="extrato-item-info">
 <div class="extrato-item-title">${item.titulo}</div>
-<div class="extrato-item-amount ${item.tipo}">
-${item.tipo === 'credito' ? '+' : '-'} R$ ${item.valor.toFixed(2).replace('.', ',')}
+<div class="extrato-item-subtitle">${item.subtitulo || ''}</div>
 </div>
+<div class="extrato-item-amount ${isDebito ? 'debito' : 'credito'}">
+${valorFormatado}
+<svg class="extrato-item-arrow" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
 </div>
-<div class="extrato-item-date">${item.data}</div>
-${item.editavel ? `
-<div class="extrato-item-editable">
-<div style="font-size: 12px; color: #666; margin-bottom: 5px;">️ Editar valor:</div>
-<input type="number" value="${item.valor}" onchange="atualizarExtrato(${index}, this.value)" placeholder="Novo valor">
-</div>
-` : ''}
 `;
 container.appendChild(div);
 });
-}
-function atualizarExtrato(index, novoValor) {
-extratoData[index].valor = parseFloat(novoValor);
-renderizarExtrato();
-alert('✅ Extrato atualizado!');
 }
 function showScreen(screenId) {
 document.querySelectorAll('.screen, .app-screen').forEach(s => {
@@ -1886,6 +2145,16 @@ target.classList.add('active');
 target.style.display = 'block';
 target.setAttribute('aria-hidden', 'false');
 window.scrollTo(0, 0);
+if (screenId === 'pagamentoScreen') {
+atualizarTelaPagamento();
+}
+if (screenId === 'valorScreen') {
+atualizarDadosDestinatario();
+}
+if (screenId === 'extratoScreen') {
+renderizarExtrato();
+atualizarExtratoSaldo();
+}
 }
 function showPix() { showScreen('pixScreen'); }
 function showValor() { showScreen('valorScreen'); }
@@ -1897,23 +2166,24 @@ showScreen('comprovanteCompletoScreen');
 preencherComprovanteCompleto();
 setTimeout(gerarQRCode, 100);
 }
-function showSettings() { showScreen('settingsScreen'); }
+function showSettings() {
+document.getElementById('configMeuNome').value = config.meuNome;
+document.getElementById('configMeuCPF').value = config.meuCPF;
+document.getElementById('configDestNome').value = config.destNome;
+document.getElementById('configDestCPF').value = config.destCPF;
+document.getElementById('configDestChave').value = config.destChave || '';
+document.getElementById('configDestInstituicao').value = config.destInstituicao;
+document.getElementById('configSaldo').value = config.accountBalance.toFixed(2).replace('.', ',');
+document.getElementById('configLimite').value = config.accountLimit.toFixed(2).replace('.', ',');
+showScreen('settingsScreen');
+}
 function showExtrato() { showScreen('extratoScreen'); }
 function showMain() { showScreen('mainScreen'); }
 function selectContact(nome) {
 document.getElementById('pixKey').value = nome;
 }
 function goToValor() {
-config.destNome = document.getElementById('configDestNome').value || config.destNome;
-config.destCPF = document.getElementById('configDestCPF').value || config.destCPF;
-config.destChave = document.getElementById('configDestChave').value || config.destChave;
-config.destInstituicao = document.getElementById('configDestInstituicao').value || config.destInstituicao;
-const keyInput = document.getElementById('pixKey').value.trim();
-if (keyInput) {
-config.destChave = keyInput;
-}
-document.getElementById('destinatarioCPF').textContent = config.destCPF;
-document.getElementById('destinatarioChave').textContent = config.destChave;
+atualizarDadosDestinatario();
 showValor();
 }
 function goToPagamento() {
@@ -1926,10 +2196,10 @@ showPagamento();
 }
 function goToRevisao() {
 const val = config.transferValue > 0 ? config.transferValue : 100;
-document.getElementById('reviewValue').textContent = 'R$ ' + val.toFixed(2).replace('.', ',');
+document.getElementById('reviewValue').textContent = formatarMoeda(val);
 const limitNeeded = val - config.accountBalance;
 if (limitNeeded > 0) {
-document.getElementById('limitUsed').textContent = 'R$ ' + limitNeeded.toFixed(2).replace('.', ',');
+document.getElementById('limitUsed').textContent = formatarMoeda(limitNeeded);
 } else {
 document.getElementById('limitUsed').textContent = 'R$ 0,00';
 }
@@ -1939,7 +2209,13 @@ function finalizarPIX() {
 document.getElementById('processingOverlay').classList.add('active');
 setTimeout(() => {
 document.getElementById('processingOverlay').classList.remove('active');
-document.getElementById('simplesValor').textContent = document.getElementById('reviewValue').textContent;
+const valor = config.transferValue;
+if (valor > config.accountBalance) {
+alert('Saldo insuficiente!');
+return;
+}
+config.accountBalance -= valor;
+document.getElementById('simplesValor').textContent = formatarMoeda(valor);
 document.getElementById('simplesNome').textContent = config.destNome;
 document.getElementById('simplesCPF').textContent = config.destCPF;
 document.getElementById('simplesInstituicao').textContent = config.destInstituicao;
@@ -1949,6 +2225,17 @@ const horaStr = agora.toLocaleTimeString('pt-BR');
 document.getElementById('simplesDataHora').textContent = `${dataStr} - ${horaStr}`;
 document.getElementById('simplesIdTransacao').textContent = gerarIDTransacao();
 document.getElementById('simplesAutenticacao').textContent = gerarAutenticacao();
+extratoData.unshift({
+titulo: 'Pix enviado',
+subtitulo: config.destNome,
+valor: valor,
+tipo: 'debito',
+data: 'Hoje'
+});
+localStorage.setItem('santanderExtrato', JSON.stringify(extratoData));
+salvarDadosLocais();
+atualizarTodasTelas();
+renderizarExtrato();
 showComprovanteSimples();
 }, 3000);
 }
@@ -1976,11 +2263,10 @@ res += chars.charAt(Math.floor(Math.random() * chars.length));
 return res;
 }
 function baixarComprovantePDF() {
-// Preencher todos os campos do PDF
 document.getElementById('pdfValorPago').textContent = document.getElementById('simplesValor').textContent;
 document.getElementById('pdfRecebedorNome').textContent = document.getElementById('simplesNome').textContent;
 document.getElementById('pdfRecebedorCPF').textContent = document.getElementById('simplesCPF').textContent;
-document.getElementById('pdfRecebedorChave').textContent = config.destChave || '(**) *****-5678';
+document.getElementById('pdfRecebedorChave').textContent = config.destChave || '(00) 00000-0000';
 document.getElementById('pdfRecebedorInstituicao').textContent = document.getElementById('simplesInstituicao').textContent;
 document.getElementById('pdfPagadorNome').textContent = config.meuNome;
 document.getElementById('pdfPagadorCPF').textContent = config.meuCPF;
@@ -1988,42 +2274,33 @@ document.getElementById('pdfIdTransacao').textContent = document.getElementById(
 document.getElementById('pdfDataHoraSub').textContent = document.getElementById('simplesDataHora').textContent;
 document.getElementById('pdfDataHoraTransacao').textContent = document.getElementById('simplesDataHora').textContent;
 document.getElementById('pdfCodigoAutenticacao').textContent = document.getElementById('simplesAutenticacao').textContent;
-
 const element = document.getElementById('pdfTemplateContainer');
 element.style.display = 'block';
-
 const opt = {
-margin:       10,
-filename:     `comprovante_pix_${Date.now()}.pdf`,
-image:        { type: 'jpeg', quality: 0.98 },
-html2canvas:  { 
-scale: 2, 
-useCORS: true, 
-backgroundColor: '#ffffff', 
+margin: 10,
+filename: `comprovante_pix_${Date.now()}.pdf`,
+image: { type: 'jpeg', quality: 0.98 },
+html2canvas: {
+scale: 2,
+useCORS: true,
+backgroundColor: '#ffffff',
 logging: false,
 allowTaint: true
 },
-jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
 };
-
-// Verificar se html2pdf está carregado
 if (typeof html2pdf === 'undefined') {
 alert('Erro: Biblioteca PDF não carregada. Tente novamente.');
 element.style.display = 'none';
 return;
 }
-
 html2pdf().from(element).set(opt).save().then(() => {
 element.style.display = 'none';
 }).catch(err => {
 console.error('Erro ao gerar PDF:', err);
-// Tentar sem a imagem se falhar
 alert('Gerando PDF sem imagem...');
-// Remover temporariamente o logo e tentar novamente
 const logoDiv = element.querySelector('div[style*="text-align: center"]');
-if (logoDiv) {
-logoDiv.style.display = 'none';
-}
+if (logoDiv) logoDiv.style.display = 'none';
 html2pdf().from(element).set(opt).save().then(() => {
 element.style.display = 'none';
 if (logoDiv) logoDiv.style.display = 'block';
@@ -2049,7 +2326,7 @@ document.getElementById('compPagador').textContent = config.meuNome;
 document.getElementById('compPagadorCPF').textContent = 'CPF: ' + config.meuCPF;
 document.getElementById('compIdTransacao').textContent = gerarIDTransacao();
 document.getElementById('barcodeNumber').textContent = gerarCodigoBarras();
-const valor = document.getElementById('reviewValue').textContent.replace('R$ ', '').replace(',', '.');
+const valor = document.getElementById('reviewValue').textContent.replace('R$ ', '').replace('.', '').replace(',', '.');
 document.getElementById('pixCopiaCola').textContent = gerarPixCopiaCola(config.destNome, config.destCPF, valor);
 }
 function gerarQRCode() {
@@ -2088,168 +2365,31 @@ function selectPayment(el) {
 document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
 el.classList.add('selected');
 }
+function toggleExtratoSaldo() {
+const saldoEl = document.getElementById('extratoSaldoDisponivel');
+if (saldoEl) {
+saldoEl.classList.toggle('balance-hidden');
+}
+}
+function atualizarExtrato() {
+const agora = new Date();
+const horaStr = agora.toLocaleTimeString('pt-BR');
+document.getElementById('extratoHoraAtualizacao').textContent = horaStr;
+atualizarExtratoSaldo();
+}
 </script>
 <script>
-    // Registro do Service Worker para PWA
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-            navigator.serviceWorker.register('./sw.js')
-                .then(function (registration) {
-                    console.log('PWA registrado com sucesso:', registration.scope);
-                })
-                .catch(function (error) {
-                    console.log('Falha ao registrar o PWA:', error);
-                });
-        });
-    }
-</script>
-
-<script>
-/* PATCH EXTRATO/SALDO/PAGAMENTO */
-(function(){
-function moeda(v){return 'R$ '+Number(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
-function lerSaldo(){
- const el=document.getElementById('saldoConta');
- if(!el) return Number(config.accountBalance||0);
- return Number(el.textContent.replace(/[^0-9,]/g,'').replace('.','').replace(',','.'))||0;
+if ('serviceWorker' in navigator) {
+window.addEventListener('load', function () {
+navigator.serviceWorker.register('./sw.js')
+.then(function (registration) {
+console.log('PWA registrado com sucesso:', registration.scope);
+})
+.catch(function (error) {
+console.log('Falha ao registrar o PWA:', error);
+});
+});
 }
-function gravarSaldo(v){
- config.accountBalance=Number(v);
- const txt=moeda(v);
- ['saldoConta','mainBalanceAmount'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=txt;});
- const acc=document.getElementById('accountBalance'); if(acc) acc.textContent=txt;
- localStorage.setItem('santanderConfig',JSON.stringify(config));
-}
-window.renderizarExtrato=function(){
- const c=document.getElementById('extratoContent'); if(!c)return;
- c.innerHTML='';
- extratoData.forEach((x,i)=>{
-  const d=document.createElement('div'); d.className='extrato-item fade-in';
-  d.innerHTML=`<div class="extrato-item-header"><div class="extrato-item-title">${x.titulo}</div><div class="extrato-item-amount ${x.tipo}">${x.tipo==='credito'?'+':'-'} ${moeda(x.valor)}</div></div><div class="extrato-item-date">${x.data}</div>`;
-  c.appendChild(d);
- });
-}
-window.finalizarPIX=function(){
- const valor=Number(config.transferValue||0);
- if(!valor){alert('Informe o valor');return;}
- const saldo=lerSaldo();
- if(valor>saldo){alert('Saldo insuficiente');return;}
- gravarSaldo(saldo-valor);
- extratoData.unshift({titulo:'PIX enviado',valor:valor,tipo:'debito',data:'Hoje, '+new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}),editavel:false});
- localStorage.setItem('santanderExtrato',JSON.stringify(extratoData));
- renderizarExtrato();
- document.getElementById('processingOverlay')?.classList.remove('active');
- document.getElementById('simplesValor').textContent=moeda(valor);
- document.getElementById('simplesNome').textContent=config.destNome;
- document.getElementById('simplesCPF').textContent=config.destCPF;
- document.getElementById('simplesInstituicao').textContent=config.destInstituicao;
- showComprovanteSimples();
-}
-const oldLoad=window.carregarConfiguracoes;
-window.carregarConfiguracoes=function(){
- if(oldLoad) oldLoad();
- const ex=localStorage.getItem('santanderExtrato'); if(ex) extratoData=JSON.parse(ex);
- gravarSaldo(config.accountBalance||lerSaldo());
- renderizarExtrato();
- const n=document.getElementById('recipientName'); if(n)n.textContent=config.destNome;
- const cpf=document.getElementById('destinatarioCPF'); if(cpf)cpf.textContent=config.destCPF;
- const chave=document.getElementById('destinatarioChave'); if(chave)chave.textContent=config.destChave+' • '+config.destInstituicao;
-}
-})();
-</script>
-
-<style id="demo-extrato-comprovante-fix">
-/* Ajustes finais: interface de demonstração, sem validade bancária. */
-.extrato-screen{background:#f5f5f5!important;min-height:100vh!important;padding-bottom:80px}
-.extrato-header{height:94px!important;background:#d90000!important;color:#fff!important;padding:0 24px!important;display:flex!important;align-items:center!important;gap:18px!important;border:0!important}
-.extrato-header .back-btn{width:36px;height:36px;color:#fff!important;font-size:0!important;display:grid;place-items:center}
-.extrato-header .back-btn:before{content:'‹';font-size:40px;font-weight:300;line-height:1;transform:translateY(-2px)}
-.extrato-header h2{color:#fff!important;font-size:28px!important;font-weight:500!important;margin:0!important}
-.extrato-content{padding:0!important;background:#f5f5f5}
-.extrato-balance-card{background:#fff;padding:26px 24px 22px;border-bottom:1px solid #ddd}
-.extrato-balance-label{font-size:17px;color:#222;margin-bottom:9px}
-.extrato-balance-value{font-size:38px;font-weight:600;color:#151515;letter-spacing:-.5px}
-.extrato-limit{font-size:15px;color:#555;margin-top:14px}
-.extrato-limit b{font-weight:500;color:#222}
-.extrato-update{font-size:13px;color:#666;margin-top:17px;display:flex;align-items:center;justify-content:space-between}
-.extrato-update button{border:0;background:none;color:#b00000;font-size:14px;font-weight:600}
-.extrato-group-title{height:64px;background:#dcecf1;padding:0 24px;display:flex;align-items:center;font-size:18px;color:#222}
-.extrato-day-title{height:60px;background:#f5f5f5;padding:0 24px;display:flex;align-items:center;gap:13px;font-size:17px;color:#222;border-bottom:1px solid #e2e2e2}
-.extrato-day-title:before{content:'✓';width:26px;height:26px;border:1.5px solid #222;border-radius:4px;display:grid;place-items:center;font-size:16px}
-.extrato-row{background:#fff;min-height:96px;padding:17px 24px;display:grid;grid-template-columns:18px 1fr auto;gap:14px;align-items:center;border-bottom:1px solid #e6e6e6}
-.extrato-dot{width:14px;height:14px;border-radius:50%;background:#55b8c5;align-self:start;margin-top:8px}
-.extrato-dot.debito{background:#f08a00}
-.extrato-row-title{font-size:17px;color:#222;font-weight:500;line-height:1.25}
-.extrato-row-sub{font-size:15px;color:#777;margin-top:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.extrato-row-value{font-size:17px;font-weight:600;white-space:nowrap;color:#222}
-.extrato-row-value.debito{color:#222}
-.extrato-row-arrow{font-size:28px;color:#777;margin-left:2px}
-.comprovante-extra{margin:4px 20px 20px;padding-top:18px;border-top:1px solid #ddd}
-.comprovante-extra .comp-group{margin-bottom:16px}
-.comprovante-extra .comp-value{font-size:15px}
-</style>
-<script id="demo-extrato-comprovante-script">
-(function(){
-  const money=v=>Number(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
-  const getSaldo=()=>Number(config?.accountBalance||0);
-  function extratoDemo(){
-    const c=document.getElementById('extratoContent'); if(!c)return;
-    const saldo=getSaldo();
-    const limite=Number(config?.accountLimit||0);
-    let html=`<section class="extrato-balance-card">
-      <div class="extrato-balance-label">Saldo disponível</div>
-      <div class="extrato-balance-value balance-sensitive">${money(saldo)}</div>
-      <div class="extrato-limit">Saldo + Limite: <b>${money(saldo+limite)}</b></div>
-      <div class="extrato-update"><span>Saldo atualizado agora</span><button onclick="extratoDemo()">↻ Atualizar</button></div>
-    </section>
-    <div class="extrato-group-title">Lançamentos futuros <span style="margin-left:auto;font-size:28px">⌄</span></div>
-    <div class="extrato-day-title">Hoje</div>`;
-    (extratoData||[]).forEach(x=>{
-      const deb=x.tipo==='debito';
-      html+=`<div class="extrato-row">
-        <span class="extrato-dot ${deb?'debito':''}"></span>
-        <div><div class="extrato-row-title">${x.titulo}</div><div class="extrato-row-sub">${x.destinatario||x.descricao||x.data||''}</div></div>
-        <div style="display:flex;align-items:center;gap:5px"><span class="extrato-row-value ${deb?'debito':''}">${deb?'-':'+'} ${money(x.valor)}</span><span class="extrato-row-arrow">›</span></div>
-      </div>`;
-    });
-    c.innerHTML=html;
-  }
-  window.renderizarExtrato=extratoDemo;
-
-  // Mantém o saldo da tela inicial e da forma de pagamento sincronizados.
-  window.atualizarSaldoTelaPagamento=function(){
-    const s=getSaldo(), l=Number(config?.accountLimit||0);
-    const a=document.getElementById('accountBalance'), b=document.getElementById('accountLimit');
-    if(a)a.textContent=money(s); if(b)b.textContent=money(s+l);
-  };
-
-  const oldShowExtrato=window.showExtrato;
-  window.showExtrato=function(){ extratoDemo(); showScreen('extratoScreen'); };
-
-  // Adiciona botão de voltar também ao comprovante simples.
-  const h=document.querySelector('#comprovanteSimplesScreen .comprovante-header-vermelho');
-  if(h && !h.querySelector('.demo-back')){
-    const b=document.createElement('button'); b.className='close-btn-novo demo-back'; b.textContent='‹'; b.title='Voltar'; b.onclick=()=>showMain();
-    b.style.cssText='position:absolute;left:18px;top:8px;font-size:40px;font-weight:300'; h.style.position='relative'; h.insertBefore(b,h.firstChild);
-  }
-  const simple=document.querySelector('#comprovanteSimplesScreen .comprovante-bloco-detalhes');
-  if(simple && !simple.querySelector('.comprovante-demo-watermark')){
-    const extra=document.createElement('div'); extra.className='comprovante-extra'; extra.innerHTML=`
-      <div class="comp-group"><div class="comp-label">Dados do pagador</div><div class="comp-value">${config.meuNome||'—'}</div><div class="comp-label" style="margin-top:6px">CPF</div><div class="comp-value">${config.meuCPF||'—'}</div><div class="comp-label" style="margin-top:6px">Instituição</div><div class="comp-value">BCO SANTANDER (BRASIL) S.A.</div></div>
-      <div class="comp-group"><div class="comp-label">Chave</div><div class="comp-value">${config.destChave||'—'}</div></div>
-    `;
-    simple.appendChild(extra);
-  }
-  const complete=document.querySelector('#comprovanteCompletoScreen .completo-header');
-  const pdf=document.querySelector('#pdfTemplateContainer > div');
-  if(pdf && !pdf.querySelector('.pdf-demo-footer')){
-    const x=document.createElement('div');
-    x.className='pdf-demo-footer';
-    x.style.cssText='margin:22px 0 0;padding:8px 0 0;border-top:1px solid #ddd;text-align:center;color:#777;font-size:9px;letter-spacing:.2px';
-    pdf.appendChild(x);
-  }
-  document.addEventListener('DOMContentLoaded',()=>{atualizarSaldoTelaPagamento();extratoDemo();});
-})();
 </script>
 </body>
 </html>
