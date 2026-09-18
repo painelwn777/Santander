@@ -1892,11 +1892,35 @@ Atualizar
 <div class="face-id-circle"></div>
 <p class="processing-text">Processando...</p>
 </div>
-<style id="pdf-page2-fix">
-#pdfTemplateContainer > .pdf-footer-page2 { page-break-before: always !important; break-before: page !important; width:100% !important; }
+<style id="pdf-one-page-demo-fix">
+#pdfTemplateContainer{display:none;}
+#pdfTemplateContainer .pdf-page1{
+  width:190mm !important;
+  height:277mm !important;
+  min-height:277mm !important;
+  max-height:277mm !important;
+  box-sizing:border-box !important;
+  margin:0 !important;
+  padding:10mm 12mm 28mm !important;
+  background:#fff !important;
+  overflow:hidden !important;
+  position:relative !important;
+}
+#pdfTemplateContainer .pdf-page1 .pdf-demo-mark{
+  position:absolute !important; top:4mm !important; right:6mm !important;
+  font:700 7pt Arial,sans-serif !important; color:#999 !important;
+  letter-spacing:.4px !important;
+}
+#pdfTemplateContainer .pdf-page1 .pdf-attendimento{
+  position:absolute !important; left:12mm !important; right:12mm !important; bottom:8mm !important;
+  border-top:1px solid #ddd !important; padding-top:3mm !important;
+  text-align:center !important; font:8pt/1.45 Arial,sans-serif !important; color:#777 !important;
+}
+#pdfTemplateContainer .pdf-page1 .pdf-attendimento b{font-size:10pt !important;color:#333 !important;}
+#pdfTemplateContainer .pdf-page1 .pdf-demo-footer{font-size:7pt !important;color:#999 !important;margin-top:1mm !important;}
 </style>
 <div id="pdfTemplateContainer" style="display:none;">
-<div style="background: #ffffff; padding: 25px; font-family: Arial, sans-serif; color: #111; max-width: 400px; margin: 0 auto; font-size: 13px;">
+<div class="pdf-page1" style="background:#ffffff; padding:25px; font-family:Arial,sans-serif; color:#111; margin:0; font-size:13px;">
 <div style="text-align: center; margin-bottom: 10px; border: 0; outline: 0; box-shadow: none;">
 <img src="comprovante.png" alt="Santander" style="display: inline-block; width: 120px; height: auto; object-fit: contain;">
 </div>
@@ -1928,14 +1952,12 @@ Atualizar
 <div style="font-size: 13px; color: #111; margin-bottom: 12px;" id="pdfDataHoraTransacao">—</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Código de autenticação</div>
 <div style="font-size: 12px; font-family: monospace; color: #111; margin-bottom: 25px; word-break: break-all;" id="pdfCodigoAutenticacao">—</div>
+<div class="pdf-attendimento">
+  <b>Central de Atendimento Santander</b><br>
+  4004-3535 (Capitais e Regiões Metropolitanas) &nbsp; • &nbsp; 0800-702-3535 (Demais Localidades)<br>
+  SAC 0800-762-7777 &nbsp; • &nbsp; Ouvidoria 0800-726-0332
 </div>
-<div class="pdf-footer-page2" style="page-break-before: always; break-before: page; min-height: 245mm; box-sizing: border-box; padding: 28px 20px 20px; font-family: Arial, sans-serif; color: #666; text-align: center; font-size: 10px; line-height: 1.8; background:#fff;">
-<div style="margin-top: 55mm; border-top: 1px solid #ddd; padding-top: 18px;">
-<b style="font-size:16px;color:#222;">Central de Atendimento Santander</b><br>
-4004-3535 (Capitais e Regiões Metropolitanas)<br>
-0800-702-3535 (Demais Localidades)<br>
-SAC 0800-762-7777<br>
-Ouvidoria 0800-726-0332
+</div>
 </div>
 <script>
 let config = {
@@ -2315,18 +2337,20 @@ document.getElementById('pdfDataHoraTransacao').textContent = document.getElemen
 document.getElementById('pdfCodigoAutenticacao').textContent = document.getElementById('simplesAutenticacao').textContent;
 const element = document.getElementById('pdfTemplateContainer');
 element.style.display = 'block';
+element.style.width = '190mm';
+element.style.height = '277mm';
 const opt = {
-margin: 10,
+margin: 5,
 filename: `comprovante_pix_${Date.now()}.pdf`,
 image: { type: 'jpeg', quality: 0.98 },
 html2canvas: {
-scale: 2,
+scale: 1.5,
 useCORS: true,
 backgroundColor: '#ffffff',
 logging: false,
 allowTaint: true
 },
-pagebreak: { mode: ['css', 'legacy'] },
+pagebreak: { mode: [] },
 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
 };
 if (typeof html2pdf === 'undefined') {
