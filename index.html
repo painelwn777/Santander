@@ -15,8 +15,9 @@
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <meta name="apple-mobile-web-app-title" content="Santander">
 <title>Santander</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<!-- Substitua os scripts antigos por estes com o atributo 'defer' -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
 <style>
 * {
 margin: 0;
@@ -923,6 +924,15 @@ fill: none;
 stroke: #333;
 stroke-width: 2;
 }
+.extrato-lancamento-header > svg {
+width: 24px !important;
+height: 24px !important;
+min-width: 24px;
+max-width: 24px;
+fill: none;
+stroke: #333;
+stroke-width: 1.8;
+}
 .extrato-item {
 display: flex;
 align-items: center;
@@ -1160,8 +1170,8 @@ animation: fadeIn 0.4s ease-out;
 </style>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#111;font-family:Arial,Helvetica,sans-serif}
-.app-screen{display:none!important;min-height:100vh;background:#fff}
+body{margin:0;background:#fff;font-family:Arial,Helvetica,sans-serif;width:100%;max-width:none;overflow-x:hidden}
+.app-screen{display:none!important;min-height:100vh;background:#fff;width:100%;max-width:none;margin:0}
 .app-screen.active{display:block!important}
 .header{position:sticky;top:0;z-index:20;background:#d90000;color:#fff}
 .header-top{height:92px;display:flex;align-items:center;padding:18px 18px 8px;gap:10px}
@@ -1204,7 +1214,7 @@ body{margin:0;background:#111;font-family:Arial,Helvetica,sans-serif}
 .benefits{background:#e8f5f7;padding:24px 18px 100px}.benefit-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.benefit-grid article{background:#fff;border-radius:18px;overflow:hidden;position:relative;text-align:center;box-shadow:0 3px 12px #0001;padding-bottom:18px}.benefit-grid img{width:100%;height:125px;object-fit:cover}.benefit-grid h3{font-size:19px;margin:14px 10px 7px}.benefit-grid p{font-size:14px;line-height:1.4;color:#555;margin:0 10px 14px}.close-ad{position:absolute;right:8px;top:8px;border:0;border-radius:50%;width:34px;height:34px;background:#fff;font-size:23px}.outline{background:#fff;border:2px solid #d90000;color:#d90000;border-radius:22px;padding:8px 14px;font-weight:700}
 .other-bank-section{min-height:calc(100vh - 150px)}.other-card{display:flex;align-items:center;gap:15px;padding:18px;border-radius:17px;background:#fff;box-shadow:0 3px 13px #0001;margin-bottom:14px}.other-icon{width:48px;height:48px;border-radius:50%;background:#f2f2f2;display:grid;place-items:center;color:#d90000;font-size:24px}.other-card b,.other-card small{display:block}.other-card small{color:#666;margin-top:4px}.other-card em{margin-left:auto;font-size:28px;color:#d90000;font-style:normal}
 .bottom-nav{position:fixed!important;bottom:0;left:0;right:0;z-index:30;height:70px;background:#fff;border-top:1px solid #ddd;display:grid;grid-template-columns:repeat(4,1fr);padding-bottom:env(safe-area-inset-bottom)}.bottom-nav .nav-item{border:0;background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:#666;font-size:12px}.bottom-nav .nav-item svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}.bottom-nav .nav-item.active{color:#d90000;font-weight:700}
-@media(min-width:700px){.app-screen{max-width:430px;margin:auto}.bottom-nav{max-width:430px;left:50%;right:auto;transform:translateX(-50%)}}
+@media(min-width:700px){.app-screen{max-width:none!important;margin:0!important}.bottom-nav{max-width:none!important;left:0!important;right:0!important;transform:none!important}}
 .balance-sensitive.balance-hidden{filter:blur(9px);user-select:none}
 .balance-sensitive.balance-hidden *{filter:blur(9px)}
 </style>
@@ -1366,6 +1376,33 @@ stroke-width:1.6 !important;
 #mainScreen .bottom-nav .nav-item{font-size:11px!important}
 #mainScreen .bottom-nav .nav-item svg{width:22px!important;height:22px!important}
 #mainScreen{padding-bottom:64px!important}
+</style>
+
+<style id="modernizacao-visual">
+/* Modernização visual: mantém o padrão, cores e estrutura existentes */
+html{background:#fff;overflow-x:hidden}
+body{width:100%!important;max-width:none!important;margin:0!important;background:#f5f7f9!important;overflow-x:hidden}
+.header{background:linear-gradient(180deg,#ec0000 0%,#df0000 100%)!important;box-shadow:0 2px 10px rgba(0,0,0,.14)!important}
+.header-top{padding-left:20px!important;padding-right:20px!important}
+.header-icon{transition:transform .15s ease,background .15s ease!important}
+.header-icon:active{transform:scale(.94)!important}
+.quick-actions{gap:8px!important;padding:2px 4px 6px!important}
+.quick{font-weight:500!important}
+.quick-icon{box-shadow:0 4px 12px rgba(0,0,0,.12)!important;border:1px solid rgba(0,0,0,.04)!important}
+.quick:active .quick-icon{transform:scale(.95)!important}
+section,.section{background:transparent}
+.section-title{font-weight:700!important;letter-spacing:-.3px!important}
+.home-ad{border:1px solid rgba(0,0,0,.05)!important;box-shadow:0 7px 22px rgba(0,0,0,.10)!important;border-radius:20px!important}
+.home-ad img{border-radius:20px 20px 0 0!important}
+.account-card{border:1px solid rgba(0,0,0,.045)!important;box-shadow:0 6px 20px rgba(0,0,0,.08)!important;border-radius:20px!important}
+.account-icon{box-shadow:inset 0 0 0 1px rgba(0,0,0,.025)!important}
+.bottom-nav{height:74px!important;border-top:1px solid #e7e7e7!important;box-shadow:0 -4px 18px rgba(0,0,0,.07)!important}
+.bottom-nav .nav-item{font-size:12px!important;font-weight:500!important}
+.bottom-nav .nav-item.active{font-weight:700!important}
+@media(max-width:420px){
+ .header-top{height:88px!important}
+ .quick-icon{width:62px!important;height:62px!important}
+}
 </style>
 </head>
 <body>
@@ -1855,6 +1892,9 @@ Atualizar
 <div class="face-id-circle"></div>
 <p class="processing-text">Processando...</p>
 </div>
+<style id="pdf-page2-fix">
+#pdfTemplateContainer .pdf-footer-page2 { page-break-before: always !important; break-before: page !important; }
+</style>
 <div id="pdfTemplateContainer" style="display:none;">
 <div style="background: #ffffff; padding: 25px; font-family: Arial, sans-serif; color: #111; max-width: 400px; margin: 0 auto; font-size: 13px;">
 <div style="text-align: center; margin-bottom: 10px; border: 0; outline: 0; box-shadow: none;">
@@ -1888,7 +1928,7 @@ Atualizar
 <div style="font-size: 13px; color: #111; margin-bottom: 12px;" id="pdfDataHoraTransacao">—</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Código de autenticação</div>
 <div style="font-size: 12px; font-family: monospace; color: #111; margin-bottom: 25px; word-break: break-all;" id="pdfCodigoAutenticacao">—</div>
-<div style="border-top: 1px solid #ddd; padding-top: 15px; margin-top: 20px; font-size: 10px; color: #666; text-align: center; line-height: 1.4;">
+<div class="pdf-footer-page2" style="border-top: 1px solid #ddd; padding-top: 15px; margin-top: 20px; font-size: 10px; color: #666; text-align: center; line-height: 1.4; page-break-before: always; break-before: page;">
 <b>Central de Atendimento Santander</b><br>
 4004-3535 (Capitais e Regiões Metropolitanas)
 0800-702-3535 (Demais Localidades)
@@ -1946,6 +1986,7 @@ renderizarExtrato();
 initValorInput();
 sincronizarSaldoTelaInicial();
 atualizarTodasTelas();
+ativarEdicaoDiretaSaldo();
 });
 function formatarMoedaConfig(input) {
 let valor = input.value.replace(/\D/g, '');
@@ -1965,49 +2006,45 @@ return parseFloat(limpo) || 0;
 function formatarMoeda(valor) {
 return 'R$ ' + Number(valor || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
 }
+function ativarEdicaoDiretaSaldo() {
+const ids = ['mainBalanceAmount', 'saldoConta', 'extratoSaldoDisponivel'];
+ids.forEach(id => {
+  const el = document.getElementById(id);
+  if (!el || el.dataset.saldoDiretoAtivo) return;
+  el.dataset.saldoDiretoAtivo = '1';
+  el.setAttribute('contenteditable', 'true');
+  el.setAttribute('spellcheck', 'false');
+  el.style.cursor = 'text';
+  el.addEventListener('focus', function() {
+    const valor = Number(config.accountBalance || 0).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+    this.textContent = 'R$ ' + valor;
+    try { const range = document.createRange(); range.selectNodeContents(this); const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range); } catch(e) {}
+  });
+  el.addEventListener('blur', function() {
+    const valor = lerValorMoeda(this.textContent);
+    if (!isNaN(valor)) {
+      config.accountBalance = valor;
+      const campo = document.getElementById('configSaldo');
+      if (campo) campo.value = valor.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+      salvarDadosLocais();
+      atualizarTodasTelas();
+    }
+  });
+  el.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') { e.preventDefault(); this.blur(); }
+  });
+});
+}
+
 function sincronizarSaldoTelaInicial() {
-const saldoElement = document.getElementById('saldoConta');
-const limiteElement = document.getElementById('limiteConta');
-const mainBalance = document.getElementById('mainBalanceAmount');
-const mainLimite = document.getElementById('mainBalanceLimite');
-if (saldoElement) {
-const obsSaldo = new MutationObserver(() => {
-const novoSaldo = lerValorMoeda(saldoElement.textContent);
-config.accountBalance = novoSaldo;
-if (mainBalance) mainBalance.textContent = formatarMoeda(novoSaldo);
-atualizarTelaPagamento();
-atualizarExtratoSaldo();
-salvarDadosLocais();
-});
-obsSaldo.observe(saldoElement, { childList: true, characterData: true, subtree: true });
-}
-if (limiteElement) {
-const obsLimite = new MutationObserver(() => {
-const novoLimite = lerValorMoeda(limiteElement.textContent);
-config.accountLimit = novoLimite;
-if (mainLimite) mainLimite.textContent = formatarMoeda(config.accountBalance + novoLimite);
-atualizarTelaPagamento();
-atualizarExtratoSaldo();
-salvarDadosLocais();
-});
-obsLimite.observe(limiteElement, { childList: true, characterData: true, subtree: true });
-}
-if (mainBalance) {
-const obsMain = new MutationObserver(() => {
-const novoSaldo = lerValorMoeda(mainBalance.textContent);
-config.accountBalance = novoSaldo;
-if (saldoElement) saldoElement.textContent = formatarMoeda(novoSaldo);
-atualizarTelaPagamento();
-atualizarExtratoSaldo();
-salvarDadosLocais();
-});
-obsMain.observe(mainBalance, { childList: true, characterData: true, subtree: true });
-}
+// Correção de desempenho: não observar os mesmos elementos que a página atualiza.
+// Os MutationObservers anteriores criavam um ciclo de alterações no saldo e podiam travar o navegador.
+return;
 }
 function atualizarExtratoSaldo() {
 const extratoSaldo = document.getElementById('extratoSaldoDisponivel');
 const extratoLimite = document.getElementById('extratoSaldoLimite');
-if (extratoSaldo) extratoSaldo.textContent = formatarMoeda(config.accountBalance);
+if (extratoSaldo && document.activeElement !== extratoSaldo) extratoSaldo.textContent = formatarMoeda(config.accountBalance);
 if (extratoLimite) extratoLimite.textContent = formatarMoeda(config.accountBalance + config.accountLimit);
 }
 function atualizarTelaPagamento() {
@@ -2017,14 +2054,16 @@ if (accountBalance) accountBalance.textContent = formatarMoeda(config.accountBal
 if (accountLimit) accountLimit.textContent = formatarMoeda(config.accountBalance + config.accountLimit);
 }
 function atualizarTodasTelas() {
+const campoSaldoConfig = document.getElementById('configSaldo');
+if (campoSaldoConfig && document.activeElement !== campoSaldoConfig) campoSaldoConfig.value = Number(config.accountBalance || 0).toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 const mainBalance = document.getElementById('mainBalanceAmount');
 const mainLimite = document.getElementById('mainBalanceLimite');
 const saldoConta = document.getElementById('saldoConta');
 const limiteConta = document.getElementById('limiteConta');
 const accountNumber = document.getElementById('accountNumber');
-if (mainBalance) mainBalance.textContent = formatarMoeda(config.accountBalance);
+if (mainBalance && document.activeElement !== mainBalance) mainBalance.textContent = formatarMoeda(config.accountBalance);
 if (mainLimite) mainLimite.textContent = formatarMoeda(config.accountBalance + config.accountLimit);
-if (saldoConta) saldoConta.textContent = formatarMoeda(config.accountBalance);
+if (saldoConta && document.activeElement !== saldoConta) saldoConta.textContent = formatarMoeda(config.accountBalance);
 if (limiteConta) limiteConta.textContent = formatarMoeda(config.accountLimit);
 if (accountNumber) accountNumber.textContent = config.accountNumber;
 atualizarDadosDestinatario();
@@ -2287,6 +2326,7 @@ backgroundColor: '#ffffff',
 logging: false,
 allowTaint: true
 },
+pagebreak: { mode: ['css', 'legacy'] },
 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
 };
 if (typeof html2pdf === 'undefined') {
