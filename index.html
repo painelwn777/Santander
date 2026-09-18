@@ -1899,52 +1899,72 @@ position:relative !important;
 
 <!-- ===== TEMPLATE DO PDF CORRIGIDO ===== -->
 <div id="pdfTemplateContainer" style="display:none;">
-<div class="pdf-page1" style="background:#ffffff; padding:10px 25px 25px; font-family:Arial,sans-serif; color:#111; margin:0; font-size:13px;">
-<div style="text-align: center; margin-bottom: 8px; margin-top: -30px;">
-<img src="comprovante.png" crossorigin="anonymous" alt="Santander" style="max-width: 140px; height: auto; display: block; margin: 0 auto;">
+<div class="pdf-page1" style="background:#ffffff; padding:30px 35px 20px; font-family:Arial,sans-serif; color:#111; margin:0; font-size:13px;">
+
+<!-- LOGO SANTANDER -->
+<div style="text-align: center; margin-bottom: 12px; margin-top: 10px;">
+<img src="comprovante.png" crossorigin="anonymous" alt="Santander" style="max-width: 150px; height: auto; display: block; margin: 0 auto;">
 </div>
 
-<div style="font-size: 22px; font-weight: bold; color: #111; text-align: center; margin-bottom: 4px;">Comprovante do Pix</div>
-<div style="font-size: 12px; color: #555; text-align: center; margin-bottom: 20px;" id="pdfDataHoraSub">18/09/2026 - 11:03:58</div>
+<div style="font-size: 26px; font-weight: bold; color: #111; text-align: center; margin-bottom: 4px;">Comprovante do Pix</div>
+<div style="font-size: 12px; color: #555; text-align: center; margin-bottom: 15px;" id="pdfDataHoraSub">--</div>
 
-<div style="font-size: 11px; color: #666; margin-bottom: 3px; text-transform: uppercase;">Valor pago</div>
-<div style="font-size: 22px; font-weight: bold; color: #111; margin-bottom: 15px;" id="pdfValorPago">R$ 25,00</div>
+<hr style="border: none; border-top: 1px solid #ddd; margin-bottom: 18px;">
 
-<div style="font-size: 11px; color: #666; margin-bottom: 3px; text-transform: uppercase;">Forma de pagamento</div>
+<div style="font-size: 11px; color: #666; margin-bottom: 3px;">Valor pago</div>
+<div style="font-size: 22px; font-weight: bold; color: #111; margin-bottom: 18px;" id="pdfValorPago">R$ 0,00</div>
+
+<hr style="border: none; border-top: 1px solid #ddd; margin-bottom: 18px;">
+
+<div style="font-size: 11px; color: #666; margin-bottom: 3px;">Forma de pagamento</div>
 <div style="font-size: 13px; color: #111; margin-bottom: 18px;">Ag 3348 Cc 2055796-4</div>
 
-<div style="font-size: 11px; font-weight: bold; color: #333; margin-bottom: 6px; border-bottom: 1px solid #ddd; padding-bottom: 4px;">Dados do recebedor</div>
-<div style="font-size: 11px; color: #666; margin-bottom: 2px;">Para</div>
-<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 6px;" id="pdfRecebedorNome">Nome</div>
-<div style="font-size: 11px; color: #666; margin-bottom: 2px;">CPF</div>
-<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 6px;" id="pdfRecebedorCPF">***.000.000-**</div>
-<div style="font-size: 11px; color: #666; margin-bottom: 2px;">Chave</div>
-<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 6px;" id="pdfRecebedorChave">(00) 00000-0000</div>
-<div style="font-size: 11px; color: #666; margin-bottom: 2px;">Instituição</div>
-<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 18px;" id="pdfRecebedorInstituicao">Instituição</div>
+<hr style="border: none; border-top: 1px solid #ddd; margin-bottom: 18px;">
 
-<div style="font-size: 11px; font-weight: bold; color: #333; margin-bottom: 6px; border-bottom: 1px solid #ddd; padding-bottom: 4px;">Dados do pagador</div>
-<div style="font-size: 11px; color: #666; margin-bottom: 2px;">De</div>
-<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 6px;" id="pdfPagadorNome">Nome</div>
+<div style="font-size: 11px; font-weight: bold; color: #333; margin-bottom: 8px;">Dados do recebedor</div>
+<div style="font-size: 11px; color: #666; margin-bottom: 2px;">Para</div>
+<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 8px;" id="pdfRecebedorNome">--</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">CPF</div>
-<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 6px;" id="pdfPagadorCPF">***.000.000-**</div>
+<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 8px;" id="pdfRecebedorCPF">--</div>
+<div style="font-size: 11px; color: #666; margin-bottom: 2px;">Chave</div>
+<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 8px;" id="pdfRecebedorChave">--</div>
+<div style="font-size: 11px; color: #666; margin-bottom: 2px;">Instituição</div>
+<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 18px;" id="pdfRecebedorInstituicao">--</div>
+
+<hr style="border: none; border-top: 1px solid #ddd; margin-bottom: 18px;">
+
+<div style="font-size: 11px; font-weight: bold; color: #333; margin-bottom: 8px;">Dados do pagador</div>
+<div style="font-size: 11px; color: #666; margin-bottom: 2px;">De</div>
+<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 8px;" id="pdfPagadorNome">--</div>
+<div style="font-size: 11px; color: #666; margin-bottom: 2px;">CPF</div>
+<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 8px;" id="pdfPagadorCPF">--</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Instituição</div>
 <div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 18px;">BCO SANTANDER (BRASIL) S.A.</div>
 
+<hr style="border: none; border-top: 1px solid #ddd; margin-bottom: 18px;">
+
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">ID/Transação</div>
-<div style="font-size: 12px; font-family: monospace; color: #111; margin-bottom: 12px; word-break: break-all;" id="pdfIdTransacao">—</div>
-
+<div style="font-size: 12px; font-family: monospace; color: #111; margin-bottom: 12px; word-break: break-all;" id="pdfIdTransacao">--</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Data e hora da transação</div>
-<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 12px;" id="pdfDataHoraTransacao">—</div>
-
+<div style="font-size: 13px; font-weight: bold; color: #111; margin-bottom: 12px;" id="pdfDataHoraTransacao">--</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Código de autenticação</div>
-<div style="font-size: 12px; font-family: monospace; color: #111; margin-bottom: 25px; word-break: break-all;" id="pdfCodigoAutenticacao">—</div>
+<div style="font-size: 12px; font-family: monospace; color: #111; margin-bottom: 25px; word-break: break-all;" id="pdfCodigoAutenticacao">--</div>
 
-<!-- RODAPÉ CENTRAL DE ATENDIMENTO -->
-<div style="border-top: 1px solid #ddd; padding-top: 12px; text-align: center; font-size: 9px; color: #777; line-height: 1.5;">
-<b style="font-size: 11px; color: #333;">Central de Atendimento Santander</b><br>
-4004-3535 (Capitais e Regiões Metropolitanas) • 0800-702-3535 (Demais Localidades)<br>
-SAC 0800-762-7777 • Ouvidoria 0800-726-0332
+<hr style="border: none; border-top: 1px solid #ddd; margin-bottom: 15px;">
+
+<!-- RODAPÉ COM PAGINAÇÃO -->
+<div style="display: flex; justify-content: space-between; font-size: 11px; color: #666; margin-bottom: 25px;">
+<span>Comprovante do Pix</span>
+<span>1/2</span>
+</div>
+
+<!-- RODAPÉ CENTRAL DE ATENDIMENTO - IGUAL À FOTO -->
+<div style="border-top: 1px solid #ddd; padding-top: 15px; text-align: center; font-size: 10px; color: #777; line-height: 1.8;">
+<div style="font-size: 12px; font-weight: bold; color: #333; margin-bottom: 8px;">Central de Atendimento Santander</div>
+<div>4004-3535 (Capitais e Regiões Metropolitanas)</div>
+<div>0800-702-3535 (Demais Localidades)</div>
+<div>SAC 0800-762-7777</div>
+<div>Ouvidoria 0800-726-0332</div>
 </div>
 </div>
 </div>
