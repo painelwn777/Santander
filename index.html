@@ -1893,7 +1893,7 @@ Atualizar
 <p class="processing-text">Processando...</p>
 </div>
 <style id="pdf-page2-fix">
-#pdfTemplateContainer .pdf-footer-page2 { page-break-before: always !important; break-before: page !important; }
+#pdfTemplateContainer > .pdf-footer-page2 { page-break-before: always !important; break-before: page !important; width:100% !important; }
 </style>
 <div id="pdfTemplateContainer" style="display:none;">
 <div style="background: #ffffff; padding: 25px; font-family: Arial, sans-serif; color: #111; max-width: 400px; margin: 0 auto; font-size: 13px;">
@@ -1928,11 +1928,13 @@ Atualizar
 <div style="font-size: 13px; color: #111; margin-bottom: 12px;" id="pdfDataHoraTransacao">—</div>
 <div style="font-size: 11px; color: #666; margin-bottom: 2px;">Código de autenticação</div>
 <div style="font-size: 12px; font-family: monospace; color: #111; margin-bottom: 25px; word-break: break-all;" id="pdfCodigoAutenticacao">—</div>
-<div class="pdf-footer-page2" style="border-top: 1px solid #ddd; padding-top: 15px; margin-top: 20px; font-size: 10px; color: #666; text-align: center; line-height: 1.4; page-break-before: always; break-before: page;">
-<b>Central de Atendimento Santander</b><br>
-4004-3535 (Capitais e Regiões Metropolitanas)
-0800-702-3535 (Demais Localidades)
-SAC 0800-762-7777
+</div>
+<div class="pdf-footer-page2" style="page-break-before: always; break-before: page; min-height: 245mm; box-sizing: border-box; padding: 28px 20px 20px; font-family: Arial, sans-serif; color: #666; text-align: center; font-size: 10px; line-height: 1.8; background:#fff;">
+<div style="margin-top: 55mm; border-top: 1px solid #ddd; padding-top: 18px;">
+<b style="font-size:16px;color:#222;">Central de Atendimento Santander</b><br>
+4004-3535 (Capitais e Regiões Metropolitanas)<br>
+0800-702-3535 (Demais Localidades)<br>
+SAC 0800-762-7777<br>
 Ouvidoria 0800-726-0332
 </div>
 </div>
